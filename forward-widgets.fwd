@@ -11,6 +11,15 @@
       "version": "1.0.0",
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdb.js"
+    },
+    {
+      "id": "forward.imdb",
+      "title": "IMDb 工具集",
+      "description": "IMDb 榜單與放映日曆工具+時間分類",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.11",
+      "author": "huangxd",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdbtime.js"
     }
   ]
 }
