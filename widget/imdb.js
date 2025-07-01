@@ -1,68 +1,70 @@
-export const WidgetMetadata = {
-  id: "forward.imdb",
-  title: "IMDb 工具集",
+WidgetMetadata={
+  id: "imdb.calendar",
+  title: "IMDb 上映日历",
   version: "1.0.0",
   requiredVersion: "0.0.1",
-  description: "IMDb 榜單與放映日曆工具",
+  description: "解析 IMDb 不同地区上映时间表，支持提取 IMDb ID",
   author: "Forward",
-  site: "https://www.imdb.com",
+  site: "https://www.imdb.com/calendar/",
   modules: [
     {
-      id: "imdb_calendar",
-      title: "IMDb 上映日曆",
-      functionName: "loadIMDbCalendar",
-      cacheDuration: 3600,
+      title: "IMDb 地区上映日历",
+      requiresWebView: false,
+      functionName: "loadImdbCalendarItems",
+      cacheDuration: 86400,
       params: [
         {
           name: "region",
-          type: "select",
-          default: "US",
-          options: [
-            { label: "美國", value: "US" },
-            { label: "英國", value: "GB" },
-            { label: "加拿大", value: "CA" },
-            { label: "日本", value: "JP" },
-            { label: "韓國", value: "KR" },
-            { label: "台灣", value: "TW" },
-            { label: "法國", value: "FR" },
-            { label: "德國", value: "DE" },
-            { label: "印度", value: "IN" },
-            { label: "澳洲", value: "AU" }
-          ]
+          title: "地区代码",
+          type: "enumeration",
+          enumOptions: [
+            { title: "美国", value: "US" },
+            { title: "英国", value: "GB" },
+            { title: "日本", value: "JP" },
+            { title: "韩国", value: "KR" },
+            { title: "台湾", value: "TW" },
+            { title: "中国大陆", value: "CN" },
+            { title: "香港", value: "HK" },
+            { title: "法国", value: "FR" },
+            { title: "德国", value: "DE" },
+            { title: "印度", value: "IN" },
+          ],
+          description: "根据 IMDb 地区上映列表抓取 IMDb ID（如 US、JP 等）",
         }
       ]
     }
   ]
 };
-export async function loadIMDbCalendar({ region = "US" }) {
+
+async function loadImdbCalendarItems(params = {}) {
+  const region = params.region || "US";
   const url = `https://www.imdb.com/calendar/?region=${region}`;
-  const html = await fetch(url).then(res => res.text());
 
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, "text/html");
+  try {
+    const response = await Widget.http.get(url, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/114.0.0.0 Safari/537.36",
+        "Cache-Control": "no-cache",
+      },
+    });
 
-  const result = [];
+    const doc = Widget.dom.parse(response.data);
+    const links = Widget.dom.select(doc, 'a[href^="/title/tt"]');
 
-  const releaseSections = doc.querySelectorAll("section.ipc-page-section");
+    const imdbIds = Array.from(new Set(
+      links.map(el => {
+        const href = el.getAttribute?.("href") || Widget.dom.attr(el, "href");
+        const match = href.match(/\/title\/(tt\d+)/);
+        return match ? match[1] : null;
+      }).filter(Boolean)
+    ));
 
-  for (const section of releaseSections) {
-    const date = section.querySelector("h3")?.textContent?.trim();
-
-    const items = section.querySelectorAll("ul > li > a");
-
-    for (const a of items) {
-      const title = a.textContent?.trim();
-      const href = a.getAttribute("href");
-      const imdbIdMatch = href?.match(/\/title\/(tt\d+)/);
-      if (imdbIdMatch) {
-        result.push({
-          title,
-          date,
-          imdb_id: imdbIdMatch[1]
-        });
-      }
-    }
+    return imdbIds.map(id => ({
+      id,
+      type: "imdb",
+    }));
+  } catch (error) {
+    console.error("IMDb 上映日历抓取失败:", error);
+    throw error;
   }
-
-  return result;
 }
