@@ -53,9 +53,10 @@ WidgetMetadata ={
             { "title": "BS朝日", "value": "BS朝日" },
             { "title": "KKTV", "value": "KKTV" },
             { "title": "friDay影音", "value": "friDay" },
-            { "title": "LINE TV", "value": "LINE TV" },
             { "title": "iQIYI", "value": "iQIYI" },
-            { "title": "WeTV", "value": "WeTV" }
+            { "title": "WeTV", "value": "WeTV" },
+            { "title": "Mango TV", "value": "Mango TV" },
+            { "title": "Tencent Video", "value": "Tencent Video" }
           ]
         }
       ]
