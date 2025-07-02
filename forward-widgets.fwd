@@ -22,13 +22,13 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdbtime.js"
     },
     {
-      "id": "IMDbTVMeterFiltered",
-      "title": "IMDb Interest 清單依地區篩選",
-      "description": "依地區篩選 IMDb Interest 清單",
+      "id": "trakt.douban",
+      "title": "Trakt 想看清單（對接豆瓣)",
+      "description": "從 Trakt 想看清單讀取 IMDb ID，並對應到豆瓣作品資料",
       "requiredVersion": "1.0.1",
       "version": "0.0.1",
       "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDBpopTV.js"
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/traktdouban.js"
     }
   ]
 }
