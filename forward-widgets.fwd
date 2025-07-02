@@ -22,13 +22,13 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdbtime.js"
     },
     {
-      "id": "TraktDoubanWatchlist",
-      "title": "Trakt + Douban 整合想看清單",
-      "description": "整合 Trakt 與 Douban 的 Watchlist，無需 API Key，自動轉為 TMDB 項目",
+      "id": "TraktWatchlist",
+      "title": "Trakt 想看清單",
+      "description": "Trakt 想看清單",
       "requiredVersion": "1.0.0",
       "version": "0.0.1",
       "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TraktDoubanWatchlist.js"
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/traktwathlist.js"
     }
   ]
 }
