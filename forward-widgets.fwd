@@ -22,7 +22,7 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdbtime.js"
     },
     {
-      "id": "imdb.trakt",
+      "id": "forward.trakt.watchlist.nokey",
       "title": "Trakt Watchlist",
       "description": "通过解析 Trakt Watchlist 页面获取 IMDb ID，不依赖 TMDB API Key，通过硬编码平台映射筛选播放平台。",
       "requiredVersion": "0.0.1",
