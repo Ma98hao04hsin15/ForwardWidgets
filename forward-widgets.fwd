@@ -23,30 +23,12 @@
     },
     {
       "id": "IMDbTVMeter",
-      "title": "IMDb 熱門電視排行榜",
-      "description": "從 IMDb TV Meter 頁面抓取熱門電視節目，無需 API Key",
-      "requiredVersion": "1.0.1",
-      "version": "0.0.1",
-      "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbTVMeter.js"
-    },
-    {
-      "id": "IMDbTVMeter",
-      "title": "每日追劇日曆",
-      "description": "TMDB依地區/平台篩選今日播出電視劇",
-      "requiredVersion": "1.0.1",
-      "version": "0.0.1",
-      "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/Daily.js"
-    },
-    {
-      "id": "IMDbTVMeter",
       "title": "日劇每日追劇日曆",
       "description": "TMDB依地區/平台篩選今日播出電視劇",
       "requiredVersion": "1.0.1",
       "version": "0.0.1",
       "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/JPdramaDaily.js"
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/JP-Drama.js"
     }
   ]
 }
