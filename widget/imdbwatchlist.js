@@ -1,85 +1,130 @@
-// ForwardWidgets 模組定義
+const puppeteer = require('puppeteer');
+const { fetchTmdbInfoByImdb, PlatformMapping } = require('./forward.tmdb.fetchByImdb');
+
 const WidgetMetadata = {
-  id: "imdb.watchlist",
-  title: "IMDb Watchlist",
-  description: "解析 IMDb 用戶 Watchlist 頁面，抽取影片列表（無需 API Key）",
+  id: "forward.imdb.watchlist.tmdb",
+  title: "IMDb Watchlist + TMDB平台過濾",
   version: "1.0.0",
+  description: "抓取 IMDb Watchlist，轉為 TMDB 詳細資料並支援平台過濾，無需 API Key",
   author: "Forward",
   site: "https://www.imdb.com",
   modules: [
     {
       id: "default",
-      title: "IMDb Watchlist",
+      title: "IMDb Watchlist + TMDB平台過濾",
+      functionName: "loadEnrichedWatchlist",
       requiresWebView: false,
-      functionName: "loadWatchlist",
-      cacheDuration: 3600, // 秒，1小時快取
+      cacheDuration: 3600,
       params: [
         {
           name: "user_id",
           title: "IMDb 用戶 ID",
           type: "string",
-          required: true,
-          description: "IMDb 用戶名稱或ID，如 'ur12345678'"
+          required: true
+        },
+        {
+          name: "platforms",
+          title: "播放平台（可多選）",
+          type: "multi-select",
+          options: Object.entries(PlatformMapping).map(([key, value]) => ({
+            title: value,
+            value: key
+          }))
+        },
+        {
+          name: "min_year",
+          title: "最小年份",
+          type: "number"
+        },
+        {
+          name: "max_year",
+          title: "最大年份",
+          type: "number"
         }
       ]
     }
   ]
 };
 
-// 對應的函數 loadWatchlist（Node.js / 支援 cheerio）
-const cheerio = require('cheerio');
-
-async function loadWatchlist(params) {
-  const { user_id } = params;
-  if (!user_id) {
-    throw new Error("請提供有效的 IMDb 用戶 ID");
-  }
-
+async function loadImdbWatchlist(user_id) {
   const url = `https://www.imdb.com/user/${user_id}/watchlist`;
 
-  const res = await fetch(url, {
-    headers: {
-      "Accept-Language": "en-US,en;q=0.9",
-      "User-Agent": "Mozilla/5.0 (compatible; ForwardWidget/1.0)"
-    }
-  });
+  const browser = await puppeteer.launch({ headless: "new" });
+  const page = await browser.newPage();
+  await page.setUserAgent('Mozilla/5.0');
 
-  if (!res.ok) {
-    throw new Error(`無法取得 IMDb Watchlist，HTTP狀態: ${res.status}`);
+  try {
+    await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
+    await page.waitForSelector('.lister-list .lister-item', { timeout: 15000 });
+  } catch (err) {
+    await browser.close();
+    throw new Error("無法載入 IMDb Watchlist 頁面，請確認用戶 ID 或網路狀況。");
   }
 
-  const html = await res.text();
-  const $ = cheerio.load(html);
-
-  const items = [];
-
-  $(".lister-list .lister-item").each((_, elem) => {
-    const el = $(elem);
-
-    const link = el.find(".lister-item-header a").attr("href") || "";
-    const imdbIdMatch = link.match(/\/title\/(tt\d+)/);
-    const imdbId = imdbIdMatch ? imdbIdMatch[1] : null;
-
-    const title = el.find(".lister-item-header a").text().trim();
-
-    const yearText = el.find(".lister-item-year").text().trim();
-    const yearMatch = yearText.match(/\d{4}/);
-    const year = yearMatch ? parseInt(yearMatch[0], 10) : null;
-
-    const poster = el.find(".lister-item-image img").attr("loadlate") || el.find(".lister-item-image img").attr("src") || null;
-
-    if (imdbId) {
-      items.push({
-        imdbId,
-        title,
-        year,
-        poster
-      });
-    }
+  const items = await page.evaluate(() => {
+    const results = [];
+    document.querySelectorAll('.lister-list .lister-item').forEach(el => {
+      const a = el.querySelector('.lister-item-header a');
+      const href = a?.href || "";
+      const imdbIdMatch = href.match(/\/title\/(tt\d+)/);
+      const imdbId = imdbIdMatch?.[1] || null;
+      const title = a?.textContent.trim() || null;
+      const yearText = el.querySelector('.lister-item-year')?.textContent || "";
+      const yearMatch = yearText.match(/\d{4}/);
+      const year = yearMatch ? parseInt(yearMatch[0], 10) : null;
+      const poster = el.querySelector('.lister-item-image img')?.getAttribute('loadlate') ||
+                     el.querySelector('.lister-item-image img')?.src || null;
+      if (imdbId) {
+        results.push({ imdbId, title, year, poster });
+      }
+    });
+    return results;
   });
 
+  await browser.close();
+  return items;
+}
+
+async function loadEnrichedWatchlist(params) {
+  const { user_id, platforms = [], min_year, max_year } = params;
+  if (!user_id) throw new Error("請提供 IMDb 用戶 ID");
+
+  const imdbItems = await loadImdbWatchlist(user_id);
+
+  const enriched = [];
+  for (const item of imdbItems) {
+    const tmdb = await fetchTmdbInfoByImdb(item.imdbId);
+    if (!tmdb) continue;
+
+    if (min_year && tmdb.year && tmdb.year < min_year) continue;
+    if (max_year && tmdb.year && tmdb.year > max_year) continue;
+    if (platforms.length > 0 && tmdb.platforms) {
+      const matched = tmdb.platforms.some(p =>
+        platforms.some(filter => p.toLowerCase() === filter.toLowerCase())
+      );
+      if (!matched) continue;
+    }
+
+    enriched.push({
+      imdbId: item.imdbId,
+      title: item.title,
+      year: item.year,
+      poster: item.poster,
+      tmdbId: tmdb.id,
+      tmdbType: tmdb.type,
+      tmdbTitle: tmdb.title,
+      platforms: tmdb.platforms,
+      region: tmdb.region
+    });
+  }
+
   return {
-    total: items.length,
-    items
+    total: enriched.length,
+    items: enriched
   };
 }
+
+module.exports = {
+  WidgetMetadata,
+  loadEnrichedWatchlist
+};
