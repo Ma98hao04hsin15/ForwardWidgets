@@ -52,6 +52,7 @@ WidgetMetadata ={
             { "title": "WOWOW", "value": "WOWOW" },
             { "title": "BS朝日", "value": "BS朝日" },
             { "title": "KKTV", "value": "KKTV" },
+            { "title": "公視", "value": "公視" },
             { "title": "friDay影音", "value": "friDay" },
             { "title": "iQIYI", "value": "iQIYI" },
             { "title": "WeTV", "value": "WeTV" },
