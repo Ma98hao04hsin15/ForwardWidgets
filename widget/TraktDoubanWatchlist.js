@@ -1,3 +1,4 @@
+// === 1. Metadata 定義 ===
 WidgetMetadata = {
   id: "TraktWatchlist",
   title: "Trakt Watchlist",
@@ -25,12 +26,12 @@ WidgetMetadata = {
   ]
 };
 
+// === 2. 主函數 ===
 async function loadTraktWatchlist(params) {
   const { trakt_user } = params;
 
   const watchlistUrl = `https://trakt.tv/users/${trakt_user}/watchlist`;
   const html = await (await fetch(watchlistUrl)).text();
-
   const items = extractTraktItems(html, "Trakt Watchlist");
 
   const results = [];
@@ -62,8 +63,10 @@ async function loadTraktWatchlist(params) {
   }
 
   return results;
+}
 
-  function extractTraktItems(html, source) {
+// === 3. Trakt 頁面解析函數 ===
+function extractTraktItems(html, source) {
   const matches = [...html.matchAll(/data-type="(movie|show)".+?data-title="([^"]+)".+?data-year="(\d{4})"/g)];
   return matches.map(m => ({
     source,
@@ -71,9 +74,4 @@ async function loadTraktWatchlist(params) {
     title: m[2],
     year: m[3],
   }));
-  }
-  
 }
-
-
-
