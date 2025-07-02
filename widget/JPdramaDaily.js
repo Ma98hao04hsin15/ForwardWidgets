@@ -1,5 +1,6 @@
-WidgetMetadata = {
-  id: "tmdb.japan.tv",
+// ==WidgetMetadata==
+const WidgetMetadata = {
+  id: "forward.tmdb.japan.tv",
   title: "日劇播放平台",
   version: "1.0.0",
   requiredVersion: "0.0.1",
@@ -8,7 +9,9 @@ WidgetMetadata = {
   site: "https://www.themoviedb.org/",
   modules: [
     {
+      name: "japan_tv_by_platform",
       title: "日劇平台篩選",
+      type: "list",
       functionName: "loadJapaneseTVByPlatform",
       cacheDuration: 3600,
       params: [
@@ -42,16 +45,21 @@ WidgetMetadata = {
     }
   ]
 };
+// ==/WidgetMetadata==
 
-// === 資料載入函數 ===
+// ==loadJapaneseTVByPlatform==
 async function loadJapaneseTVByPlatform({ platform, year }) {
-  const url = `https://api.themoviedb.org/3/discover/tv?with_networks=${platform}&first_air_date_year=${year}&sort_by=popularity.desc&language=zh-TW&region=JP`;
-  const res = await fetch(`https://tmdb.apps.qudram.com/3/discover/tv?with_networks=${platform}&first_air_date_year=${year}&sort_by=popularity.desc&language=zh-TW&region=JP`);
+  const url = `https://tmdb.apps.qudram.com/3/discover/tv?with_networks=${platform}&first_air_date_year=${year}&sort_by=popularity.desc&language=zh-TW&region=JP`;
+  const res = await fetch(url);
   const json = await res.json();
+
   return json.results.map(item => ({
     title: item.name,
     subtitle: `${item.first_air_date || "未知年份"}｜評分 ${item.vote_average}`,
-    image: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
+    image: item.poster_path
+      ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+      : undefined,
     link: `https://www.themoviedb.org/tv/${item.id}`
   }));
 }
+// ==/loadJapaneseTVByPlatform==
