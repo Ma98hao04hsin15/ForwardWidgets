@@ -1,70 +1,218 @@
-WidgetMetadata ={
-  "id": "daily.tvshows",
-  "title": "每日追劇日曆",
-  "version": "1.0.0",
-  "requiredVersion": "0.0.1",
-  "description": "每日更新今日播出的電視劇集，支援依平台與地區篩選，無需 API Key",
-  "author": "Forward",
-  "site": "https://www.themoviedb.org/",
-  "modules": [
-    {
-      "title": "每日追劇清單",
-      "functionName": "loadTodayAiringWithPlatform",
-      "cacheDuration": 3600,
-      "params": [
+WidgetMetadata = {
+  id: "forward.tmdb",
+  title: "TMDB",
+  version: "1.0.1",
+  requiredVersion: "0.0.1",
+  description: "获取 TMDB 的榜单数据",
+  author: "Forward",
+  site: "https://github.com/InchStudio/ForwardWidgets",
+  modules: [
         {
-          "name": "region",
-          "title": "地區",
-          "type": "select",
-          "default": "TW",
-          "options": [
-            { "title": "台灣", "value": "TW" },
-            { "title": "美國", "value": "US" },
-            { "title": "日本", "value": "JP" },
-            { "title": "韓國", "value": "KR" }
-          ]
+          name: "with_origin_country",
+          title: "国家",
+          type: "input",
+          belongTo: {
+            paramName: "with_genres",
+            value: ["10764"],
+          },
+          value: "CN",
+          placeholders: [
+            {
+              title: "中国",
+              value: "CN",
+            },
+            {
+              title: "美国",
+              value: "US",
+            },
+            {
+              title: "台灣",
+              value: "TW",
+            },
+            {
+              title: "日本",
+              value: "JP",
+            },
+            {
+              title: "韩国",
+              value: "KR",
+            },
+          ],
         },
         {
-          "name": "platform_filter",
-          "title": "播放平台篩選",
-          "type": "select",
-          "default": "",
-          "options": [
-            { "title": "全部", "value": "" },
-            { "title": "Netflix", "value": "Netflix" },
-            { "title": "Disney+", "value": "Disney+" },
-            { "title": "HBO", "value": "HBO" },
-            { "title": "HBO Max", "value": "HBO Max" },
-            { "title": "Amazon Prime", "value": "Amazon" },
-            { "title": "Apple TV+", "value": "Apple TV+" },
-            { "title": "Hulu", "value": "Hulu" },
-            { "title": "Paramount+", "value": "Paramount+" },
-            { "title": "Peacock", "value": "Peacock" },
-            { "title": "tvN", "value": "tvN" },
-            { "title": "KBS2", "value": "KBS2" },
-            { "title": "MBC", "value": "MBC" },
-            { "title": "SBS", "value": "SBS" },
-            { "title": "JTBC", "value": "JTBC" },
-            { "title": "ENA", "value": "ENA" },
-            { "title": "Tokyo MX", "value": "Tokyo MX" },
-            { "title": "TBS", "value": "TBS" },
-            { "title": "NHK", "value": "NHK" },
-            { "title": "WOWOW", "value": "WOWOW" },
-            { "title": "BS朝日", "value": "BS朝日" },
-            { "title": "KKTV", "value": "KKTV" },
-            { "title": "公視", "value": "公視" },
-            { "title": "friDay影音", "value": "friDay" },
-            { "title": "iQIYI", "value": "iQIYI" },
-            { "title": "WeTV", "value": "WeTV" },
-            { "title": "Mango TV", "value": "Mango TV" },
-            { "title": "Tencent Video", "value": "Tencent Video" }
-          ]
-        }
-      ]
-    }
-  ]
-}
-// === 主函數：載入今日播出資料 ===
+          name: "page",
+          title: "页码",
+          type: "page"
+        },
+        {
+          name: "language",
+          title: "语言",
+          type: "language",
+          value: "zh-CN",
+        },
+      ],
+    },
+    {
+      id: "networks",
+      title: "播出平台",
+      functionName: "networks",
+      params: [
+        {
+          name: "with_networks",
+          title: "播出平台",
+          type: "enumeration",
+          enumOptions: [
+            {
+              title: "Netflix",
+              value: "213",
+            },
+            {
+              title: "Disney+",
+              value: "2739",
+            },
+            {
+              title: "Apple TV+",
+              value: "2552",
+            },
+            {
+              title: "HBO Max",
+              value: "3186",
+            },
+            {
+              title: "Hulu",
+              value: "453",
+            },
+            {
+              title: "HBO",
+              value: "49",
+            },
+            {
+              title: "Prime Video",
+              value: "1024", 
+            },
+            {
+              title: "Paramount+",
+              value: "4330", 
+            },
+            {
+              title: "Peacock",
+              value: "3353", 
+            },
+            {
+              title: "NHK",
+              value: "236", 
+            },
+            {
+              title: "TBS",
+              value: "317", 
+            },
+            {
+              title: "Fuji TV",
+              value: "2368", 
+            },
+            {
+              title: "NTV",
+              value: "195", 
+            },
+            {
+              title: "TV Asahi",
+              value: "231", 
+            },
+            {
+              title: "TV Tokyo",
+              value: "269", 
+            },
+            {
+              title: "WOWOW",
+              value: "273", 
+            },
+            {
+              title: "AbemaTV",
+              value: "2449", 
+            },
+            {
+              title: "U-NEXT",
+              value: "2405", 
+            },
+            {
+              title: "tvN",
+              value: "866", 
+            },
+            {
+              title: "KBS1",
+              value: "830", 
+            },
+            {
+              title: "KBS2",
+              value: "1113", 
+            },
+            {
+              title: "MBC",
+              value: "38", 
+            },
+            {
+              title: "SBS",
+              value: "36", 
+            },
+            {
+              title: "JTBC",
+              value: "97", 
+            },
+            {
+              title: "ENA",
+              value: "1928", 
+            },
+            {
+              title: "Channel A",
+              value: "2274", 
+            },
+            {
+              title: "OCN",
+              value: "1409", 
+            },
+            {
+              title: "PTS",
+              value: "837", 
+            },
+            {
+              title: "BS朝日",
+              value: "", 
+            },
+            {
+              title: "iQIYI",
+              value: "1330", 
+            },
+            {
+              title: "Tencent Video",
+              value: "2007", 
+            },
+            {
+              title: "Mango TV",
+              value: "1631", 
+            },
+            {
+              title: "Youk",
+              value: "1419", 
+            },
+          ],
+        },
+        {
+          name: "page",
+          title: "页码",
+          type: "page"
+        },
+        {
+          name: "language",
+          title: "语言",
+          type: "language",
+          value: "zh-CN",
+        },
+      ],
+    },
+  ],
+};
+
+
 async function loadTodayAiringWithPlatform({ region = "TW", platform_filter = "" }) {
   const url = `https://www.themoviedb.org/tv/on-the-air?region=${region}`;
   const html = await (await fetch(url)).text();
