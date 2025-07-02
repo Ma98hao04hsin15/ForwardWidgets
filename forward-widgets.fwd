@@ -23,8 +23,8 @@
     },
     {
       "id": "IMDbTVMeterFiltered",
-      "title": "IMDb 热门 TV 榜",
-      "description": "从 IMDb 热门 TV 榜抓取节目并按 TMDB 播出平台与地区筛选，无需 API Key",
+      "title": "IMDb Interest 清單依地區篩選",
+      "description": "依地區篩選 IMDb Interest 清單",
       "requiredVersion": "1.0.1",
       "version": "0.0.1",
       "author": "Joy",
