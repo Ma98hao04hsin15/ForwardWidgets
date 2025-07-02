@@ -22,22 +22,13 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdbtime.js"
     },
     {
-      "id": "TraktWatchlist",
-      "title": "Trakt 想看清單",
-      "description": "Trakt 想看清單",
+      "id": "IMDbTVMeterFiltered",
+      "title": "IMDb 热门 TV 榜",
+      "description": "从 IMDb 热门 TV 榜抓取节目并按 TMDB 播出平台与地区筛选，无需 API Key",
       "requiredVersion": "1.0.0",
       "version": "0.0.1",
       "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/traktwathlist.js"
-    },
-    {
-      "id": "Traktlist",
-      "title": "Trakt 清單",
-      "description": "Trakt 清單",
-      "requiredVersion": "1.0.0",
-      "version": "0.0.1",
-      "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/traktlist.js"
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDBpopTV.js"
     }
   ]
 }
