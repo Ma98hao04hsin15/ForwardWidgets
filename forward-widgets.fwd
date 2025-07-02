@@ -22,13 +22,13 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdbtime.js"
     },
     {
-      "id": "trakt.douban",
-      "title": "Trakt 想看清單（對接豆瓣)",
-      "description": "從 Trakt 想看清單讀取 IMDb ID，並對應到豆瓣作品資料",
+      "id": "IMDbTVMeter",
+      "title": "IMDb 熱門電視排行榜",
+      "description": "從 IMDb TV Meter 頁面抓取熱門電視節目，無需 API Key",
       "requiredVersion": "1.0.1",
       "version": "0.0.1",
       "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/traktdouban.js"
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbTVMeter.js"
     }
   ]
 }
