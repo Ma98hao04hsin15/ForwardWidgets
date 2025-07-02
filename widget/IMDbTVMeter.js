@@ -1,4 +1,4 @@
-WidgetMetadata = {
+const WidgetMetadata = {
   id: "IMDbTVMeter",
   title: "IMDb 熱門電視排行榜",
   description: "從 IMDb TV Meter 頁面抓取熱門電視節目，無需 API Key，支持年份篩選",
@@ -16,64 +16,66 @@ WidgetMetadata = {
 };
 
 /**
- * 取得並解析 IMDb TV Meter 頁面熱門電視節目
- * @param {Object} params - 參數物件
- * @param {string} params.year - 篩選年份（選填）
- * @returns {Promise<{data:Array}>} - 返回節目列表
+ * 使用正則解析 IMDb TV Meter 頁面 HTML，取出節目清單
  */
 async function loadIMDbTVMeter(params) {
   const yearFilter = params?.year?.trim();
-
   const url = "https://www.imdb.com/chart/tvmeter/";
 
   const res = await fetch(url);
   if (!res.ok) throw new Error("無法取得 IMDb TV Meter 頁面");
-
   const html = await res.text();
 
-  // 環境若支援 DOMParser 則用它解析
-  let doc;
-  if (typeof DOMParser !== "undefined") {
-    const parser = new DOMParser();
-    doc = parser.parseFromString(html, "text/html");
-  } else {
-    // 若無 DOMParser (例如 Node.js 環境) 可用簡單正則或其他套件替代，這裡不展開
-    throw new Error("目前環境不支援 DOMParser，無法解析 HTML");
-  }
+  // 找到 tbody.lister-list 裡的所有 <tr>，用正則抓出節目信息
+  // 一個 tr 範例大致包含：
+  // <tr>...<td class="posterColumn"><a href="/title/tt1234567/"> <img src="..."></a></td>
+  // <td class="titleColumn">
+  //   1.
+  //   <a href="/title/tt1234567/">節目名稱</a>
+  //   <span class="secondaryInfo">(2023)</span>
+  // </td>
+  // <td class="imdbRating"><strong title="7.5 based on 12345 user ratings">7.5</strong></td>
+  // </tr>
 
-  // 抓取熱門節目表格的所有列
-  const rows = [...doc.querySelectorAll(".lister-list tr")];
+  // 先用正則匹配所有 <tr>...</tr>
+  const trRegex = /<tr>([\s\S]*?)<\/tr>/g;
+  let match;
+  const items = [];
 
-  let items = rows.map(row => {
-    const linkElem = row.querySelector("td.titleColumn a");
-    const title = linkElem?.textContent?.trim() ?? "";
-    const href = linkElem?.getAttribute("href") ?? "";
-    // href 格式: /title/tt1234567/
-    const imdbIdMatch = href.match(/\/title\/(tt\d+)\//);
+  while ((match = trRegex.exec(html)) !== null) {
+    const trHtml = match[1];
+
+    // 用正則抽取 IMDb ID
+    const imdbIdMatch = trHtml.match(/href="\/title\/(tt\d+)\//);
     const imdbId = imdbIdMatch ? imdbIdMatch[1] : null;
+    if (!imdbId) continue; // 沒ID跳過
 
-    const yearElem = row.querySelector("td.titleColumn span.secondaryInfo");
-    let year = yearElem?.textContent?.replace(/[()]/g, "") ?? "";
+    // 抽出標題
+    const titleMatch = trHtml.match(/<a href="\/title\/tt\d+\/"[^>]*>([^<]+)<\/a>/);
+    const title = titleMatch ? titleMatch[1].trim() : "";
 
-    const ratingElem = row.querySelector("td.imdbRating strong");
-    const rating = ratingElem?.textContent ?? null;
+    // 抽出年份
+    const yearMatch = trHtml.match(/<span class="secondaryInfo">\((\d{4})\)<\/span>/);
+    const year = yearMatch ? yearMatch[1] : "";
 
-    const posterElem = row.querySelector("td.posterColumn img");
-    // 海報圖 URL 可能是縮圖，可視需求改為更高畫質 URL
-    const poster = posterElem?.getAttribute("src") ?? null;
+    // 抽出評分
+    const ratingMatch = trHtml.match(/<td class="imdbRating">[\s\S]*?<strong[^>]*>([\d.]+)<\/strong>/);
+    const rating = ratingMatch ? ratingMatch[1] : null;
 
-    return {
+    // 抽出海報 URL
+    const posterMatch = trHtml.match(/<td class="posterColumn">[\s\S]*?<img[^>]+src="([^"]+)"/);
+    const poster = posterMatch ? posterMatch[1] : null;
+
+    // 年份篩選
+    if (yearFilter && year !== yearFilter) continue;
+
+    items.push({
       imdbId,
       title,
       year,
       rating,
       poster,
-    };
-  });
-
-  // 篩選年份（如果有設定）
-  if (yearFilter) {
-    items = items.filter(i => i.year === yearFilter);
+    });
   }
 
   return { data: items };
