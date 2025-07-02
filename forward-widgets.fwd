@@ -18,17 +18,17 @@
       "description": "IMDb 榜單與放映日曆工具+時間分類",
       "requiredVersion": "0.0.1",
       "version": "1.0.11",
-      "author": "huangxd",
+      "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdbtime.js"
     },
     {
-      "id": "forward.trakt.watchlist.nokey",
-      "title": "Trakt Watchlist",
-      "description": "通过解析 Trakt Watchlist 页面获取 IMDb ID，不依赖 TMDB API Key，通过硬编码平台映射筛选播放平台。",
+      "id": "imdb.watchlist",
+      "title": "IMDB Watchlist",
+      "description": "解析 IMDb 用戶 Watchlist 頁面，抽取影片列表（無需 API Key）",
       "requiredVersion": "0.0.1",
       "version": "1.0.11",
-      "author": "huangxd",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/trakt.js"
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdbwatchlist.js"
     }
   ]
 }
