@@ -38,7 +38,7 @@ WidgetMetadata={
 
 async function loadImdbCalendarItems(params = {}) {
   const region = params.region || "US";
-  const url = `https://www.imdb.com/calendar/?region=${region}`;
+  const url = `https://trakt.tv/users/joy98ma0415/lists/want?region=${region}`;
 
   try {
     const response = await Widget.http.get(url, {
