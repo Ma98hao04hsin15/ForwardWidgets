@@ -1,77 +1,57 @@
-// === 1. Metadata 定義 ===
 WidgetMetadata = {
   id: "TraktWatchlist",
   title: "Trakt Watchlist",
   version: "1.0.0",
   requiredVersion: "0.0.1",
-  description: "從 Trakt 抓取使用者 Watchlist，轉換為 TMDB 項目顯示（無需 API Key）",
+  description: "从 Trakt 用户 Watchlist 页面抓取影片数据，无需 API Key",
   author: "Forward",
-  site: "https://github.com/InchStudio/ForwardWidgets",
+  site: "https://trakt.tv",
   modules: [
     {
-      id: "watchlist",
-      title: "Trakt 想看清單",
+      id: "traktWatchlist",
+      title: "Trakt 想看清单",
       requiresWebView: false,
       functionName: "loadTraktWatchlist",
       cacheDuration: 3600,
       params: [
         {
-          name: "trakt_user",
-          title: "Trakt 使用者名稱",
+          name: "user_name",
+          title: "用户名",
           type: "input",
+          default: "joy98ma0415",
           required: true,
+          description: "Trakt 用户名"
         }
       ]
     }
   ]
 };
 
-// === 2. 主函數 ===
-async function loadTraktWatchlist(params) {
-  const { trakt_user } = params;
+/**
+ * 从 Trakt 用户 Watchlist 页面抓取想看清单
+ * @param {Object} params - 函数参数
+ * @param {string} params.user_name - Trakt 用户名
+ * @returns {Promise<Array>} 影片列表
+ */
+async function loadTraktWatchlist({ user_name }) {
+  const url = `https://trakt.tv/users/${user_name}/watchlist?sort=rank,asc`;
 
-  const watchlistUrl = `https://trakt.tv/users/${trakt_user}/watchlist`;
-  const html = await (await fetch(watchlistUrl)).text();
-  const items = extractTraktItems(html, "Trakt Watchlist");
+  // fetchText 是 Forward 框架內建的簡單 fetch 文本函數
+  const html = await fetchText(url);
 
-  const results = [];
+  // 使用正則從 HTML 中擷取影片資訊
+  const items = [];
+  const regex = /<div class=".*?grid-item.*?".*?data-type="(movie|show)".*?data-title="(.*?)".*?data-year="(\d{4})".*?data-slug="(.*?)".*?<img.*?src="(.*?)"/gs;
 
-  for (const item of items) {
-    const query = encodeURIComponent(`${item.title} ${item.year}`);
-    const searchUrl = `https://www.themoviedb.org/search?query=${query}`;
-    const searchHtml = await (await fetch(searchUrl)).text();
-
-    const match = [...searchHtml.matchAll(/href="\/(movie|tv)\/(\d+)-[^"]+"/g)][0];
-    if (!match) continue;
-
-    const type = match[1];
-    const tmdbId = match[2];
-    const detailUrl = `https://www.themoviedb.org/${type}/${tmdbId}`;
-    const detailHtml = await (await fetch(detailUrl)).text();
-
-    const posterMatch = detailHtml.match(/<img class="poster lazyload.+?data-src="([^"]+)"/);
-    const poster = posterMatch ? `https://www.themoviedb.org${posterMatch[1]}` : "";
-
-    results.push({
-      title: `${item.title} (${item.year})`,
-      description: "來源：Trakt Watchlist",
-      type,
-      tmdb_id: tmdbId,
-      url: detailUrl,
-      poster,
+  let match;
+  while ((match = regex.exec(html)) !== null) {
+    const [, type, title, year, slug, image] = match;
+    items.push({
+      title: `${title} (${year})`,
+      image,
+      url: `https://trakt.tv/${type}s/${slug}`
     });
   }
 
-  return results;
-}
-
-// === 3. Trakt 頁面解析函數 ===
-function extractTraktItems(html, source) {
-  const matches = [...html.matchAll(/data-type="(movie|show)".+?data-title="([^"]+)".+?data-year="(\d{4})"/g)];
-  return matches.map(m => ({
-    source,
-    type: m[1],
-    title: m[2],
-    year: m[3],
-  }));
+  return items;
 }
