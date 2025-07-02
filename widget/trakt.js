@@ -1,4 +1,5 @@
 WidgetMetadata.modules.push({
+  id: "imdb.trakt",
   title: "Trakt高级筛选（年份/类型/平台）",
   requiresWebView: false,
   functionName: "loadWatchlistByAdvancedFilter",
