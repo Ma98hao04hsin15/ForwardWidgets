@@ -31,13 +31,13 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdbwatchlist.js"
     },
     {
-      "id": "Trakt",
-      "title": "Trakt我看&Trakt个性化推荐",
-      "description": "解析Trakt数据并支持播放平台筛选功能（无需 API Key）",
-      "requiredVersion": "1.0.12",
+      "id": "TraktWatchlistTMDB",
+      "title": "Trakt Watchlist × TMDB平台篩選",
+      "description": "解析 Trakt Watchlist 並整合 TMDB 平台篩選，支援電影與影集，自定義地區/年份/平台。",
+      "requiredVersion": "1.0.0",
       "version": "0.0.1",
       "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/trakt.js"
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdb_traktwatchlist.js"
     }
   ]
 }
