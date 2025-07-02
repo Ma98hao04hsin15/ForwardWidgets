@@ -1,70 +1,118 @@
-WidgetMetadata={
-  id: "imdb.calendar",
-  title: "IMDb 上映日历",
-  version: "1.0.0",
-  requiredVersion: "0.0.1",
-  description: "解析 IMDb 不同地区上映时间表，支持提取 IMDb ID",
-  author: "Forward",
-  site: "https://trakt.tv/users/joy98ma0415/lists/want?sort=rank,asc",
+// traktFavoritesNoApi.js
+
+export const WidgetMetadata = {
+  id: "Trakt",
+  title: "Trakt我看&Trakt个性化推荐",
+  version: "1.0.1",
   modules: [
     {
-      title: "IMDb 地区上映日历",
-      requiresWebView: false,
-      functionName: "loadImdbCalendarItems",
-      cacheDuration: 86400,
+      id: "favorites",
+      title: "Trakt Favorites（可地區篩選，無API Key）",
+      functionName: "loadTraktFavorites",
       params: [
         {
+          name: "user_name",
+          type: "input",
+          title: "Trakt 使用者名稱",
+          default: "joy98ma0415"
+        },
+        {
           name: "region",
-          title: "地区代码",
-          type: "enumeration",
-          enumOptions: [
-            { title: "美国", value: "US" },
-            { title: "英国", value: "GB" },
-            { title: "日本", value: "JP" },
-            { title: "韩国", value: "KR" },
-            { title: "台湾", value: "TW" },
-            { title: "中国大陆", value: "CN" },
-            { title: "香港", value: "HK" },
-            { title: "法国", value: "FR" },
-            { title: "德国", value: "DE" },
-            { title: "印度", value: "IN" },
-          ],
-          description: "根据 IMDb 地区上映列表抓取 IMDb ID（如 US、JP 等）",
+          type: "select",
+          title: "地區篩選",
+          options: [
+            { title: "全部", value: "" },
+            { title: "日劇", value: "JP" },
+            { title: "韓劇", value: "KR" },
+            { title: "美劇", value: "US" },
+            { title: "英劇", value: "GB" },
+            { title: "台劇", value: "TW" },
+            { title: "陸劇", value: "CN" }
+          ]
         }
-      ]
+      ],
+      cacheDuration: 3600
     }
   ]
 };
 
-async function loadImdbCalendarItems(params = {}) {
-  const region = params.region || "US";
-  const url = `https://trakt.tv/users/joy98ma0415/lists/want?region=${region}`;
+async function fetchHtml(url) {
+  const res = await fetch(url, {
+    headers: {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    }
+  });
+  return await res.text();
+}
 
+async function imdbIdToTmdbId(imdbId, mediaType = "tv") {
+  const queryUrl = `https://www.themoviedb.org/search?query=${imdbId}`;
+  const html = await fetchHtml(queryUrl);
+  const regex = new RegExp(`href="/${mediaType}/(\\d+)"`, "g");
+  const match = regex.exec(html);
+  if (!match) return null;
+  return match[1];
+}
+
+async function fetchTmdbDetailsById(id, mediaType = "tv") {
+  if (!id) return null;
+  const url = `https://www.themoviedb.org/${mediaType}/${id}`;
+  const html = await fetchHtml(url);
+  const jsonMatch = html.match(/<script id="__NEXT_DATA__" type="application\/json">(.+?)<\/script>/);
+  if (!jsonMatch) return null;
   try {
-    const response = await Widget.http.get(url, {
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/114.0.0.0 Safari/537.36",
-        "Cache-Control": "no-cache",
-      },
-    });
-
-    const doc = Widget.dom.parse(response.data);
-    const links = Widget.dom.select(doc, 'a[href^="/title/tt"]');
-
-    const imdbIds = Array.from(new Set(
-      links.map(el => {
-        const href = el.getAttribute?.("href") || Widget.dom.attr(el, "href");
-        const match = href.match(/\/title\/(tt\d+)/);
-        return match ? match[1] : null;
-      }).filter(Boolean)
-    ));
-
-    return imdbIds.map(id => ({
-      id,
-      type: "imdb",
-    }));
-  } catch (error) {
-    console.error("IMDb 上映日历抓取失败:", error);
-    throw error;
+    const jsonData = JSON.parse(jsonMatch[1]);
+    const mediaData = jsonData.props.pageProps.tv || jsonData.props.pageProps.movie;
+    if (!mediaData) return null;
+    const origin_country = mediaData.origin_country || (mediaData.production_countries ? mediaData.production_countries.map(c => c.iso_3166_1) : []);
+    const title = mediaData.name || mediaData.title || "";
+    const release_date = mediaData.first_air_date || mediaData.release_date || "";
+    const poster_path = mediaData.poster_path || "";
+    return {
+      origin_country,
+      title,
+      release_date,
+      poster_path
+    };
+  } catch {
+    return null;
   }
+}
+
+export async function loadTraktFavorites(params) {
+  const { user_name, region } = params;
+  const traktUrl = `https://trakt.tv/users/${user_name}/favorites?sort=rank,asc`;
+  const traktHtml = await fetchHtml(traktUrl);
+  const imdbIds = [...traktHtml.matchAll(/www.imdb.com\/title\/(tt\d+)/g)].map(m => m[1]);
+  const uniqueImdbIds = [...new Set(imdbIds)];
+  const results = [];
+
+  for (const imdbId of uniqueImdbIds) {
+    // 嘗試先用 TV 取得 TMDB ID
+    let tmdbId = await imdbIdToTmdbId(imdbId, "tv");
+    let details = await fetchTmdbDetailsById(tmdbId, "tv");
+
+    if (!details) {
+      // TV 沒有就嘗試 Movie
+      tmdbId = await imdbIdToTmdbId(imdbId, "movie");
+      details = await fetchTmdbDetailsById(tmdbId, "movie");
+    }
+
+    if (!details) continue;
+
+    const origin = details.origin_country?.[0] || "";
+
+    if (region && region !== "" && origin !== region) continue;
+
+    results.push({
+      title: details.title,
+      subtitle: `地區：${origin || "未知"}｜年份：${details.release_date ? details.release_date.slice(0, 4) : "未知"}`,
+      poster: details.poster_path
+        ? `https://www.themoviedb.org/t/p/w300_and_h450_face${details.poster_path}`
+        : "",
+      url: `https://www.imdb.com/title/${imdbId}`
+    });
+  }
+
+  return results;
 }
