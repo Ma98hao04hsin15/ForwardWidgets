@@ -1,70 +1,118 @@
-const WidgetMetadata = {
-  id: "trakt",
-  title: "Trakt我看&个性化推荐",
-  version: "1.0.11",
-  requiredVersion: "0.0.1",
-  description: "抓取 Trakt 想看、在看、看过、片单与推荐数据",
-  author: "huangxd",
+// traktFavoritesNoApi.js
+
+export const WidgetMetadata = {
+  id: "Trakt",
+  title: "Trakt我看&Trakt个性化推荐",
+  version: "1.0.1",
   modules: [
     {
-      title: "Trakt 我看",
-      requiresWebView: false,
-      functionName: "loadInterestItems",
-      cacheDuration: 3600,
+      id: "favorites",
+      title: "Trakt Favorites（可地區篩選，無API Key）",
+      functionName: "loadTraktFavorites",
       params: [
-        { name: "user_name", title: "Trakt 用户名", type: "input", description: "必填" },
         {
-          name: "status",
-          title: "状态",
-          type: "enum",
-          enumOptions: [
-            { title: "想看", value: "watchlist" },
-            { title: "在看", value: "progress" },
-            { title: "看过", value: "history" },
-            { title: "随机想看", value: "random_watchlist" },
-          ],
+          name: "user_name",
+          type: "input",
+          title: "Trakt 使用者名稱",
+          default: "joy98ma0415"
         },
-        { name: "page", title: "页码", type: "page" }
+        {
+          name: "region",
+          type: "select",
+          title: "地區篩選",
+          options: [
+            { title: "全部", value: "" },
+            { title: "日劇", value: "JP" },
+            { title: "韓劇", value: "KR" },
+            { title: "美劇", value: "US" },
+            { title: "英劇", value: "GB" },
+            { title: "台劇", value: "TW" },
+            { title: "陸劇", value: "CN" }
+          ]
+        }
       ],
-    },
-    {
-      title: "Trakt 推荐",
-      requiresWebView: false,
-      functionName: "loadSuggestionItems",
-      cacheDuration: 3600,
-      params: [
-        { name: "cookie", title: "Trakt Cookie", type: "input", description: "用户登录后 Cookie" },
-        { name: "page", title: "页码", type: "page" }
-      ],
+      cacheDuration: 3600
     }
   ]
 };
 
-async function fetchTraktData(url, headers = {}, status, minNum, maxNum, random=false, order="") {
-  // 发请求、解析 & 提取 imdb id
-  // 代码与原 trakt.js 基本一致
+async function fetchHtml(url) {
+  const res = await fetch(url, {
+    headers: {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    }
+  });
+  return await res.text();
 }
 
-async function loadInterestItems(params = {}) {
-  const user = params.user_name || "";
-  const status = params.status || "watchlist";
-  const page = params.page || 1;
-  if (!user) throw new Error("请填写Trakt用户名");
-  const count = 20;
-  const size = status === "watchlist" ? 6 : 3;
-  const minNum = ((page - 1) % size) * count + 1;
-  const maxNum = minNum + count - 1;
-  const traktPage = Math.floor((page - 1) / size) + 1;
-  const random = status === "random_watchlist";
-  const url = `https://trakt.tv/users/${user}/${status.replace("random_", "")}?page=${traktPage}`;
-  return fetchTraktData(url, {}, status.replace("random_", "watchlist"), minNum, maxNum, random);
+async function imdbIdToTmdbId(imdbId, mediaType = "tv") {
+  const queryUrl = `https://www.themoviedb.org/search?query=${imdbId}`;
+  const html = await fetchHtml(queryUrl);
+  const regex = new RegExp(`href="/${mediaType}/(\\d+)"`, "g");
+  const match = regex.exec(html);
+  if (!match) return null;
+  return match[1];
 }
 
-async function loadSuggestionItems(params = {}) {
-  const cookie = params.cookie || "";
-  const page = params.page || 1;
-  if (!cookie) throw new Error("请填入登录后的 Trakt Cookie");
-  const count = 20, min = (page-1)*count+1, max = page*count;
-  const url = `https://trakt.tv/recommendations/movies`; // 或 /shows，视你的需求
-  return fetchTraktData(url, { Cookie: cookie }, "", min, max);
+async function fetchTmdbDetailsById(id, mediaType = "tv") {
+  if (!id) return null;
+  const url = `https://www.themoviedb.org/${mediaType}/${id}`;
+  const html = await fetchHtml(url);
+  const jsonMatch = html.match(/<script id="__NEXT_DATA__" type="application\/json">(.+?)<\/script>/);
+  if (!jsonMatch) return null;
+  try {
+    const jsonData = JSON.parse(jsonMatch[1]);
+    const mediaData = jsonData.props.pageProps.tv || jsonData.props.pageProps.movie;
+    if (!mediaData) return null;
+    const origin_country = mediaData.origin_country || (mediaData.production_countries ? mediaData.production_countries.map(c => c.iso_3166_1) : []);
+    const title = mediaData.name || mediaData.title || "";
+    const release_date = mediaData.first_air_date || mediaData.release_date || "";
+    const poster_path = mediaData.poster_path || "";
+    return {
+      origin_country,
+      title,
+      release_date,
+      poster_path
+    };
+  } catch {
+    return null;
+  }
+}
+
+export async function loadTraktFavorites(params) {
+  const { user_name, region } = params;
+  const traktUrl = `https://trakt.tv/users/${user_name}/favorites?sort=rank,asc`;
+  const traktHtml = await fetchHtml(traktUrl);
+  const imdbIds = [...traktHtml.matchAll(/www.imdb.com\/title\/(tt\d+)/g)].map(m => m[1]);
+  const uniqueImdbIds = [...new Set(imdbIds)];
+  const results = [];
+
+  for (const imdbId of uniqueImdbIds) {
+    // 嘗試先用 TV 取得 TMDB ID
+    let tmdbId = await imdbIdToTmdbId(imdbId, "tv");
+    let details = await fetchTmdbDetailsById(tmdbId, "tv");
+
+    if (!details) {
+      // TV 沒有就嘗試 Movie
+      tmdbId = await imdbIdToTmdbId(imdbId, "movie");
+      details = await fetchTmdbDetailsById(tmdbId, "movie");
+    }
+
+    if (!details) continue;
+
+    const origin = details.origin_country?.[0] || "";
+
+    if (region && region !== "" && origin !== region) continue;
+
+    results.push({
+      title: details.title,
+      subtitle: `地區：${origin || "未知"}｜年份：${details.release_date ? details.release_date.slice(0, 4) : "未知"}`,
+      poster: details.poster_path
+        ? `https://www.themoviedb.org/t/p/w300_and_h450_face${details.poster_path}`
+        : "",
+      url: `https://www.imdb.com/title/${imdbId}`
+    });
+  }
+
+  return results;
 }
