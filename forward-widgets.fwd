@@ -29,6 +29,15 @@
       "version": "0.0.1",
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdbwatchlist.js"
+    },
+    {
+      "id": "Trakt",
+      "title": "Trakt我看&Trakt个性化推荐",
+      "description": "解析Trakt数据并支持播放平台筛选功能（无需 API Key）",
+      "requiredVersion": "1.0.12",
+      "version": "0.0.1",
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/trakt.js"
     }
   ]
 }
