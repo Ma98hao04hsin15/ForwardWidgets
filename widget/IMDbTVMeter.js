@@ -1,4 +1,4 @@
-const WidgetMetadata = {
+WidgetMetadata = {
   id: "IMDbTVMeter",
   title: "IMDb 熱門電視排行榜",
   description: "從 IMDb TV Meter 頁面抓取熱門電視節目，無需 API Key，支持年份篩選",
