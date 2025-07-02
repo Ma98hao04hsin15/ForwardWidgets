@@ -1,85 +1,79 @@
-// IMDb Watchlist Widget
-WidgetMetadata = {
-    id: "imdb.watchlist",
-    title: "IMDb 用户 Watchlist",
-    modules: [
+const WidgetMetadata = {
+  id: "imdb.watchlist",
+  title: "IMDb 用户 Watchlist",
+  version: "1.0.0",
+  author: "ChatGPT",
+  description: "解析 IMDb 用户 Watchlist 页面，抓取所有 IMDb ID 列表。",
+  site: "https://www.imdb.com",
+  modules: [
+    {
+      title: "IMDb Watchlist 解析",
+      requiresWebView: false,
+      functionName: "loadWatchlistItems",
+      cacheDuration: 1800, // 30分钟缓存
+      params: [
         {
-            title: "IMDb Watchlist",
-            requiresWebView: false,
-            functionName: "loadImdbWatchlistItems",
-            cacheDuration: 3600,
-            params: [
-                {
-                    name: "user_id",
-                    title: "IMDb 用户ID",
-                    type: "input",
-                    description: "请输入IMDb用户ID，如 ur123456789",
-                },
-                {
-                    name: "page",
-                    title: "页码",
-                    type: "page",
-                },
-            ],
+          name: "user_id",
+          title: "IMDb 用户 ID",
+          type: "string",
+          placeholder: "ur123456789",
+          required: true,
         },
-    ],
-    version: "1.0.0",
-    requiredVersion: "0.0.1",
-    description: "通过解析IMDb用户Watchlist网页，获取影片IMDb ID列表",
-    author: "yourname",
-    site: "https://github.com/yourrepo"
+      ],
+    },
+  ],
 };
 
-/**
- * 解析 IMDb Watchlist HTML 页面，提取 IMDb ID
- * @param {string} html 页面源码
- * @returns {string[]} IMDb ID数组
- */
-function extractImdbIdsFromWatchlistHtml(html) {
-    const doc = Widget.dom.parse(html);
-    // IMDb Watchlist 里的每个影片条目一般在 div.lister-item-header > a[href^="/title/tt"]
-    const linkElements = Widget.dom.select(doc, 'div.lister-item-header a[href^="/title/tt"]');
-    const imdbIds = [];
-    linkElements.forEach(el => {
-        const href = Widget.dom.attr(el, 'href');
-        if (href) {
-            const match = href.match(/\/title\/(tt\d+)/);
-            if (match) {
-                imdbIds.push(match[1]);
-            }
-        }
+async function loadWatchlistItems({ user_id }) {
+  if (!user_id) {
+    throw new Error("请提供 IMDb 用户 ID，例如 ur204635540");
+  }
+
+  // IMDb Watchlist URL 格式
+  const url = `https://www.imdb.com/user/${user_id}/watchlist/?ref_=nv_usr_wl_all_0`;
+
+  try {
+    const res = await fetch(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0 Safari/537.36",
+      },
     });
-    return [...new Set(imdbIds)]; // 去重
-}
-
-/**
- * 加载IMDb Watchlist数据
- * @param {object} params 参数对象，包含 user_id 和 page
- * @returns {Promise<object[]>} 返回 IMDb ID数组，格式：[{id:"ttxxxxxx", type:"imdb"}, ...]
- */
-async function loadImdbWatchlistItems(params = {}) {
-    try {
-        const userId = params.user_id || "";
-        const page = params.page || 1;
-        if (!userId) {
-            throw new Error("必须提供IMDb用户ID");
-        }
-        // IMDb Watchlist分页，每页100条，page从1开始
-        // Watchlist URL格式：https://www.imdb.com/user/{userId}/watchlist?sort=rank&mode=detail&page=1
-        const url = `https://www.imdb.com/user/${userId}/watchlist?sort=rank&mode=detail&page=${page}`;
-
-        const response = await Widget.http.get(url, {
-            headers: {
-                "User-Agent":
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",
-            },
-        });
-
-        const imdbIds = extractImdbIdsFromWatchlistHtml(response.data);
-
-        return imdbIds.map(id => ({ id, type: "imdb" }));
-    } catch (error) {
-        console.error("IMDb Watchlist 解析失败:", error);
-        throw error;
+    if (!res.ok) {
+      throw new Error(`请求失败，状态码：${res.status}`);
     }
+
+    const html = await res.text();
+
+    // 用正则匹配所有 /title/tt1234567/ 链接
+    const imdbIdSet = new Set();
+    const regex = /\/title\/(tt\d{7,8})\//g;
+    let match;
+    while ((match = regex.exec(html)) !== null) {
+      imdbIdSet.add(match[1]);
+    }
+
+    const imdbIds = Array.from(imdbIdSet);
+
+    // 返回符合 ForwardWidgets 期待格式的条目
+    // 这里只返回 ID，UI 可以根据 ID 进一步请求详情
+    const items = imdbIds.map((id) => ({
+      imdb_id: id,
+      title: `IMDb ID: ${id}`, // 这里可以先简单显示 ID
+      url: `https://www.imdb.com/title/${id}/`,
+    }));
+
+    return {
+      total: items.length,
+      items,
+    };
+  } catch (error) {
+    return {
+      total: 0,
+      items: [],
+      error: error.message,
+    };
+  }
 }
+
+export { WidgetMetadata, loadWatchlistItems };
