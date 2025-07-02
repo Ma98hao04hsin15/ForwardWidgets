@@ -1,4 +1,4 @@
-const WidgetMetadata = {
+WidgetMetadata = {
   id: "imdb.calendar",
   title: "IMDb 上映日历",
   version: "1.1.0",
