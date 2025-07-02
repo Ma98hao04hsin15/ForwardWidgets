@@ -29,6 +29,15 @@
       "version": "0.0.1",
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/traktwathlist.js"
+    },
+    {
+      "id": "Traktlist",
+      "title": "Trakt 清單",
+      "description": "Trakt 清單",
+      "requiredVersion": "1.0.0",
+      "version": "0.0.1",
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/traktlist.js"
     }
   ]
 }
