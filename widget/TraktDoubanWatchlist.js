@@ -1,57 +1,119 @@
-WidgetMetadata = {
-  id: "TraktWatchlist",
-  title: "Trakt Watchlist",
+const WidgetMetadata = {
+  id: "douban",
+  title: "豆瓣我看&豆瓣个性化推荐",
   version: "1.0.0",
   requiredVersion: "0.0.1",
-  description: "从 Trakt 用户 Watchlist 页面抓取影片数据，无需 API Key",
+  description: "抓取豆瓣用户的想看、在看、看过清单，支持随机抽取想看内容",
   author: "Forward",
-  site: "https://trakt.tv",
+  site: "https://github.com/InchStudio/ForwardWidgets",
   modules: [
     {
-      id: "traktWatchlist",
-      title: "Trakt 想看清单",
+      title: "豆瓣我看",
       requiresWebView: false,
-      functionName: "loadTraktWatchlist",
+      functionName: "loadInterestItems",
       cacheDuration: 3600,
       params: [
         {
-          name: "user_name",
-          title: "用户名",
+          name: "user_id",
+          title: "用户ID",
           type: "input",
-          default: "joy98ma0415",
-          required: true,
-          description: "Trakt 用户名"
-        }
-      ]
+          description: "未填写情况下接口不可用",
+        },
+        {
+          name: "status",
+          title: "状态",
+          type: "enumeration",
+          enumOptions: [
+            {
+              title: "想看",
+              value: "mark",
+            },
+            {
+              title: "在看",
+              value: "doing",
+            },
+            {
+              title: "看过",
+              value: "done",
+            },
+            {
+              title: "随机想看(从想看列表中无序抽取9个影片)",
+              value: "random_mark",
+            },
+          ],
+        },
+        {
+          name: "page",
+          title: "页码",
+          type: "page"
+        },
+      ],
     }
   ]
 };
 
-/**
- * 从 Trakt 用户 Watchlist 页面抓取想看清单
- * @param {Object} params - 函数参数
- * @param {string} params.user_name - Trakt 用户名
- * @returns {Promise<Array>} 影片列表
- */
-async function loadTraktWatchlist({ user_name }) {
-  const url = `https://trakt.tv/users/${user_name}/watchlist?sort=rank,asc`;
+async function loadInterestItems(params = {}) {
+  const userId = params.user_id;
+  let status = params.status || "mark";
+  const page = params.page || 1;
 
-  // fetchText 是 Forward 框架內建的簡單 fetch 文本函數
-  const html = await fetchText(url);
-
-  // 使用正則從 HTML 中擷取影片資訊
-  const items = [];
-  const regex = /<div class=".*?grid-item.*?".*?data-type="(movie|show)".*?data-title="(.*?)".*?data-year="(\d{4})".*?data-slug="(.*?)".*?<img.*?src="(.*?)"/gs;
-
-  let match;
-  while ((match = regex.exec(html)) !== null) {
-    const [, type, title, year, slug, image] = match;
-    items.push({
-      title: `${title} (${year})`,
-      image,
-      url: `https://trakt.tv/${type}s/${slug}`
-    });
+  if (!userId) {
+    throw new Error("必须提供豆瓣用户ID");
   }
 
-  return items;
+  const statusMap = {
+    mark: "wish",
+    doing: "do",
+    done: "collect",
+    random_mark: "wish"
+  };
+
+  const path = statusMap[status];
+  const start = (page - 1) * 20;
+  const url = `https://www.douban.com/people/${userId}/${path}?start=${start}`;
+
+  const response = await Widget.http.get(url, {
+    headers: {
+      "User-Agent":
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    },
+  });
+
+  const doc = Widget.dom.parse(response.data);
+  const items = Widget.dom.select(doc, "div.item");
+
+  let results = [];
+
+  for (const item of items) {
+    const linkEl = Widget.dom.select(item, "div.info a")[0];
+    const title = Widget.dom.text(linkEl);
+    const href = Widget.dom.attr(linkEl, "href");
+
+    // 優先使用 IMDb ID，如果有的話
+    const imdbMatch = href.match(/imdb\.com\/title\/(tt\d+)/);
+    if (imdbMatch) {
+      results.push({
+        id: imdbMatch[1],
+        type: "imdb",
+        title,
+      });
+    } else if (href.includes("movie.douban.com/subject/")) {
+      // 否則用豆瓣 ID
+      const doubanMatch = href.match(/subject\/(\d+)/);
+      if (doubanMatch) {
+        results.push({
+          id: doubanMatch[1],
+          type: "douban",
+          title,
+        });
+      }
+    }
+  }
+
+  // 隨機模式只返回 9 部作品
+  if (status === "random_mark") {
+    results = results.sort(() => 0.5 - Math.random()).slice(0, 9);
+  }
+
+  return results;
 }
