@@ -31,13 +31,13 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdbwatchlist.js"
     },
     {
-      "id": "TraktWatchlistTMDB",
-      "title": "Trakt Watchlist × TMDB平台篩選",
-      "description": "解析 Trakt Watchlist 並整合 TMDB 平台篩選，支援電影與影集，自定義地區/年份/平台。",
+      "id": "TraktDoubanWatchlist",
+      "title": "Trakt + Douban 整合想看清單",
+      "description": "整合 Trakt 與 Douban 的 Watchlist，無需 API Key，自動轉為 TMDB 項目",
       "requiredVersion": "1.0.0",
       "version": "0.0.1",
       "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdb_traktwatchlist.js"
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TraktDoubanWatchlist.js"
     }
   ]
 }
