@@ -250,3 +250,62 @@ async function loadTodayAiringWithPlatform({ region = "TW", platform_filter = ""
 
   return items;
 }
+
+async function list(params = {}) {
+  let url = params.url;
+
+  // append ?view=grid
+  if (!url.includes("view=grid")) {
+    if (url.includes("?")) {
+      url = url + "&view=grid";
+    } else {
+      url = url + "?view=grid";
+    }
+  }
+
+  console.log("请求片单页面:", url);
+  // 发送请求获取片单页面
+  const response = await Widget.http.get(url, {
+    headers: {
+      Referer: `https://www.themoviedb.org/`,
+      "User-Agent":
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    },
+  });
+
+  if (!response || !response.data) {
+    throw new Error("获取片单数据失败");
+  }
+
+
+  console.log("片单页面数据长度:", response.data.length);
+  console.log("开始解析");
+
+  // 解析 HTML 得到文档 ID
+  const $ = Widget.html.load(response.data);
+  if (!$ || $ === null) {
+    throw new Error("解析 HTML 失败");
+  }
+
+  //        // 获取所有视频项，得到元素ID数组
+  const coverElements = $(".block.aspect-poster");
+
+  console.log("items:", coverElements);
+
+  let tmdbIds = [];
+  for (const itemId of coverElements) {
+    const $item = $(itemId);
+    const link = $item.attr("href");
+    if (!link) {
+      continue;
+    }
+    const match = link.match(/^\/(movie|tv)\/([^\/-]+)-/)
+    const type = match?.[1];
+    const id = match?.[2];
+    if (id && type) {
+      tmdbIds.push({ id: `${type}.${id}`, type: 'tmdb' });
+    }
+  }
+
+  return tmdbIds;
+}
