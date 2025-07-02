@@ -29,6 +29,15 @@
       "version": "0.0.1",
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbTVMeter.js"
+    },
+    {
+      "id": "IMDbTVMeter",
+      "title": "每日追劇日曆",
+      "description": "TMDB依地區/平台篩選今日播出電視劇",
+      "requiredVersion": "1.0.1",
+      "version": "0.0.1",
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/Daily.js"
     }
   ]
 }
