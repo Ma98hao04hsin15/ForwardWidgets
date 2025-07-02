@@ -22,11 +22,11 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdbtime.js"
     },
     {
-      "id": "forward.imdb.watchlist.tmdb",
-      "title": "IMDb Watchlist + TMDB平台過濾",
-      "description": "解析 IMDb 用戶 Watchlist 頁面，抽取影片列表（無需 API Key）",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.11",
+      "id": "IMDbWatchlist",
+      "title": "IMDb Watchlist × TMDB 整合",
+      "description": "通过解析 IMDb Watchlist 获取影片，并结合 TMDB 显示播放平台与评分",
+      "requiredVersion": "1.0.0",
+      "version": "0.0.1",
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdbwatchlist.js"
     }
