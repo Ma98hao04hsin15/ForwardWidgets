@@ -43,7 +43,6 @@ WidgetMetadata.modules.push({
         { title: "Paramount+", value: "531" },
         { title: "Starz", value: "2833" },
         { title: "Peacock", value: "3867" },
-        { title: "YouTube Premium", value: "3318" },
         { title: "BBC", value: "32" },
         { title: "Showtime", value: "71" },
         { title: "Crave", value: "364" },
