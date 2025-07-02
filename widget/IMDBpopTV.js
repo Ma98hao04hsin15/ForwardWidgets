@@ -1,100 +1,104 @@
 WidgetMetadata = {
-  id: "IMDbInterestByRegion",
-  title: "IMDb Interest 清單依地區篩選",
+  id: "IMDbTVMeterFiltered",
+  title: "IMDb TV排行榜 (平台×地區 篩選)",
+  version: "1.0.1",
+  requiredVersion: "0.0.1",
+  description: "從 IMDb TV排行榜抓取資料，透過 TMDB 取得播放平台與製作地區資訊進行篩選，無需 API Key。",
+  author: "Forward",
   modules: [
     {
-      title: "依地區篩選 IMDb Interest 清單",
+      title: "IMDb TV排行榜（可篩選）",
+      functionName: "loadIMDbTVMeterWithFilter",
       requiresWebView: false,
-      functionName: "loadInterestByRegion",
       cacheDuration: 3600,
       params: [
         {
-          name: "interest_url",
-          title: "IMDb Interest List URL",
-          type: "input",
-          description:
-            "輸入 IMDb Interest List 的完整網址，例如：https://www.imdb.com/interest/in0000209/",
-          required: true,
+          name: "region_filter",
+          title: "製作地區",
+          type: "select",
+          default: "US",
+          options: [
+            { title: "🇺🇸 美國", value: "US" },
+            { title: "🇰🇷 韓國", value: "KR" },
+            { title: "🇯🇵 日本", value: "JP" },
+            { title: "🇬🇧 英國", value: "GB" },
+            { title: "🇹🇼 台灣", value: "TW" },
+            { title: "🇨🇳 中國", value: "CN" }
+          ]
         },
         {
-          name: "region",
-          title: "地區篩選 (Country)",
+          name: "platform_filter",
+          title: "播放平台",
           type: "select",
-          description: "請選擇想篩選的影片製作國家",
-          required: false,
+          default: "Netflix",
           options: [
-            { title: "不限", value: "" },
-            { title: "美國 (US)", value: "US" },
-            { title: "日本 (JP)", value: "JP" },
-            { title: "韓國 (KR)", value: "KR" },
-            { title: "英國 (GB)", value: "GB" },
-            { title: "加拿大 (CA)", value: "CA" },
-            { title: "中國 (CN)", value: "CN" },
-            { title: "法國 (FR)", value: "FR" },
-            { title: "德國 (DE)", value: "DE" },
-            { title: "澳洲 (AU)", value: "AU" },
-            // 你可以繼續補充
-          ],
-        },
-      ],
-    },
-  ],
+            { title: "Netflix", value: "Netflix" },
+            { title: "Disney+", value: "Disney+" },
+            { title: "HBO Max", value: "HBO Max" },
+            { title: "Amazon Prime", value: "Amazon Prime Video" },
+            { title: "Apple TV+", value: "Apple TV+" },
+            { title: "Viu", value: "Viu" },
+            { title: "iQIYI", value: "iQIYI" }
+          ]
+        }
+      ]
+    }
+  ]
 };
 
-async function fetchHtml(url) {
-  const res = await fetch(url, { headers: { "Accept-Language": "en-US,en" } });
-  if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
-  return await res.text();
-}
-
-async function parseInterestList(html) {
-  const regex = /\/title\/(tt\d{7,8})\//g;
-  const ids = new Set();
-  let m;
-  while ((m = regex.exec(html)) !== null) {
-    ids.add(m[1]);
-  }
-  return Array.from(ids);
-}
-
-async function fetchTitleRegion(imdbId) {
-  const url = `https://www.imdb.com/title/${imdbId}/`;
-  const html = await fetchHtml(url);
-  const regionRegex = /\/search\/title\?country_of_origin=([A-Z]{2})"/g;
-  const regions = new Set();
-  let m;
-  while ((m = regionRegex.exec(html)) !== null) {
-    regions.add(m[1]);
-  }
-  return Array.from(regions);
-}
-
-async function loadInterestByRegion(params) {
-  const { interest_url, region } = params;
-  if (!interest_url) throw new Error("請輸入 Interest List URL");
-
-  const html = await fetchHtml(interest_url);
-  const imdbIds = await parseInterestList(html);
+async function loadIMDbTVMeterWithFilter({ region_filter = "US", platform_filter = "Netflix" }) {
+  const imdbIDs = await fetchIMDbTVMeterList();
 
   const results = [];
-  const limit = 30;
-  for (let i = 0; i < Math.min(imdbIds.length, limit); i++) {
-    const id = imdbIds[i];
-    try {
-      const regions = await fetchTitleRegion(id);
-      if (!region || regions.includes(region.toUpperCase())) {
-        results.push({
-          id,
-          regions,
-          url: `https://www.imdb.com/title/${id}/`,
-        });
-      }
-    } catch (e) {
-      console.warn(`抓取影片 ${id} 地區失敗:`, e.message);
+  for (const imdbID of imdbIDs) {
+    const tmdbInfo = await getTMDBInfoFromIMDbID(imdbID);
+    if (!tmdbInfo) continue;
+
+    const tvDetails = await getTVDetails(tmdbInfo.id);
+    if (!tvDetails) continue;
+
+    const regionMatch = tvDetails.origin_country?.includes(region_filter);
+    const providers = tvDetails["watch/providers"]?.results?.[region_filter]?.flatrate || [];
+    const platformMatch = providers.some(p =>
+      p.provider_name.toLowerCase().includes(platform_filter.toLowerCase())
+    );
+
+    if (regionMatch && platformMatch) {
+      results.push({
+        title: tvDetails.name,
+        description: tvDetails.overview,
+        image: `https://image.tmdb.org/t/p/w500${tvDetails.poster_path}`,
+        link: `https://www.imdb.com/title/${imdbID}/`,
+        data: {
+          地區: tvDetails.origin_country.join(", "),
+          播放平台: providers.map(p => p.provider_name).join(", ")
+        }
+      });
     }
   }
 
   return results;
 }
 
-export { WidgetMetadata, loadInterestByRegion };
+// ========== 工具函數區 ==========
+
+async function fetchIMDbTVMeterList() {
+  const res = await fetch("https://www.imdb.com/chart/tvmeter/");
+  const html = await res.text();
+  const imdbIds = [...html.matchAll(/\/title\/(tt\d+)\//g)].map(match => match[1]);
+  return [...new Set(imdbIds)];
+}
+
+async function getTMDBInfoFromIMDbID(imdbID) {
+  const url = `https://api.themoviedb.org/3/find/${imdbID}?external_source=imdb_id&language=zh-TW`;
+  const res = await fetch(url);
+  const data = await res.json();
+  return data.tv_results?.[0];
+}
+
+async function getTVDetails(tvId) {
+  const url = `https://api.themoviedb.org/3/tv/${tvId}?append_to_response=watch/providers&language=zh-TW`;
+  const res = await fetch(url);
+  if (!res.ok) return null;
+  return await res.json();
+}
