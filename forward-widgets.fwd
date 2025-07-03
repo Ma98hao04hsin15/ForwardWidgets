@@ -47,6 +47,15 @@
       "version": "0.0.1",
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbWatchlist.js"
+    },
+    {
+      "id": "imdb.network.tv",
+      "title": "播放平台熱播影集",
+      "description": "從 IMDb 熱門榜單分析影集播放平台，依平台分類顯示熱播影集，無需 API Key，並附上平台 icon",
+      "requiredVersion": "1.0.1",
+      "version": "0.0.1",
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/DramaDaily.js"
     }
   ]
 }
