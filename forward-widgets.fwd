@@ -38,6 +38,15 @@
       "version": "1.0.4",
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdb.js"
+    },
+    {
+      "id": "forward.tmdb",
+      "title": "TMDB network",
+      "description": "获取 TMDB 播放平台榜單",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.4",
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdbnetwork.js"
     }
   ]
 }
