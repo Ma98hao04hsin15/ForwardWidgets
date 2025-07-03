@@ -38,6 +38,15 @@
       "version": "0.0.1",
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbmoviemeter.js"
+    },
+    {
+      "id": "IMDbWatchlist",
+      "title": "IMDb Watchlist",
+      "description": "通过抓取 IMDb 用户 Watchlist 页面解析 IMDb ID，无需 API Key",
+      "requiredVersion": "1.0.1",
+      "version": "0.0.1",
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbWatchlist.js"
     }
   ]
 }
