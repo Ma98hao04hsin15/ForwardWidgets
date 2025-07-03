@@ -22,40 +22,13 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdbtime.js"
     },
     {
-      "id": "IMDbTopTV",
-      "title": "IMDb Top 250 電視節目",
-      "description": "從 IMDb Top 250 TV 榜單擷取資料，無需 API Key",
-      "requiredVersion": "1.0.1",
+      "id": "forward.imdb.regionlist",
+      "title": "IMDb 地区榜单",
+      "description": "根据地区和类型从 IMDb 获取榜单数据",
+      "requiredVersion": "1.1.0",
       "version": "0.0.1",
       "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbTopTV.js"
-    },
-    {
-      "id": "imdb.moviemeter",
-      "title": "IMDb 熱門電影排行榜",
-      "description": "解析 IMDb 熱門電影排行榜，支援依年份篩選，無需 API Key",
-      "requiredVersion": "1.0.1",
-      "version": "0.0.1",
-      "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbmoviemeter.js"
-    },
-    {
-      "id": "IMDbWatchlist",
-      "title": "IMDb Watchlist",
-      "description": "通过抓取 IMDb 用户 Watchlist 页面解析 IMDb ID，无需 API Key",
-      "requiredVersion": "1.0.1",
-      "version": "0.0.1",
-      "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbWatchlist.js"
-    },
-    {
-      "id": "imdb.network.tv",
-      "title": "播放平台熱播影集",
-      "description": "從 IMDb 熱門榜單分析影集播放平台，依平台分類顯示熱播影集，無需 API Key，並附上平台 icon",
-      "requiredVersion": "1.0.1",
-      "version": "0.0.1",
-      "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/DramaDaily.js"
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdbcountry.js"
     },
     {
       "id": "forward.tmdb",
