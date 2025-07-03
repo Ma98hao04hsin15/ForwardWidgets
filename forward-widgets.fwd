@@ -29,6 +29,15 @@
       "version": "0.0.1",
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbTopTV.js"
+    },
+    {
+      "id": "imdb.moviemeter",
+      "title": "IMDb 熱門電影排行榜",
+      "description": "解析 IMDb 熱門電影排行榜，支援依年份篩選，無需 API Key",
+      "requiredVersion": "1.0.1",
+      "version": "0.0.1",
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbmoviemeter.js"
     }
   ]
 }
