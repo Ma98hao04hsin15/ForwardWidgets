@@ -101,23 +101,36 @@ WidgetMetadata = {
         },
       ],
     },
-    {
+{
   id: "upcoming",
   title: "即将上映",
   functionName: "upcoming",
   params: [
     {
-      name: "language",
-      title: "语言",
-      type: "language",
-      value: "zh-CN",
-    },
-    {
       name: "page",
       title: "页码",
       type: "page"
+    },
+    {
+      name: "language",
+      title: "语言",
+      type: "language",
+      value: "zh-CN"
+    },
+    {
+      name: "region",
+      title: "地区",
+      type: "input",
+      value: "CN",
+      placeholders: [
+        { title: "中国", value: "CN" },
+        { title: "美国", value: "US" },
+        { title: "日本", value: "JP" },
+        { title: "韩国", value: "KR" },
+        { title: "英国", value: "GB" }
+      ]
     }
-  ],
+  ]
 },
 {
   id: "upcomingTv",
