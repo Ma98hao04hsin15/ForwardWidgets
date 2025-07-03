@@ -102,6 +102,42 @@ WidgetMetadata = {
       ],
     },
     {
+  id: "upcoming",
+  title: "即将上映",
+  functionName: "upcoming",
+  params: [
+    {
+      name: "language",
+      title: "语言",
+      type: "language",
+      value: "zh-CN",
+    },
+    {
+      name: "page",
+      title: "页码",
+      type: "page"
+    }
+  ],
+},
+{
+  id: "upcomingTv",
+  title: "即将播出剧集",
+  functionName: "upcomingTv",
+  params: [
+    {
+      name: "language",
+      title: "语言",
+      type: "language",
+      value: "zh-CN",
+    },
+    {
+      name: "page",
+      title: "页码",
+      type: "page"
+    }
+  ],
+},
+    {
       id: "topRated",
       title: "高分内容",
       functionName: "topRated",
@@ -451,6 +487,25 @@ async function popular(params) {
   }
   delete params.type;
   return await fetchData(api, params, type);
+}
+
+async function upcoming(params) {
+  const api = "movie/upcoming";
+  return await fetchData(api, params, "movie");
+}
+
+async function upcomingTv(params) {
+  const today = new Date().toISOString().split("T")[0];
+
+  const discoverParams = {
+    ...params,
+    sort_by: "first_air_date.asc",
+    "first_air_date.gte": today,
+    include_null_first_air_dates: false,
+  };
+
+  const api = "discover/tv";
+  return await fetchData(api, discoverParams, "tv");
 }
 
 async function topRated(params) {
