@@ -1,8 +1,8 @@
 WidgetMetadata = {
   id: "forward.tmdb",
   title: "TMDB",
-  version: "1.0.0",
-  requiredVersion: "0.0.11",
+  version: "1.0.4",
+  requiredVersion: "0.0.1",
   description: "获取 TMDB 的榜单数据",
   author: "Joy",
   site: "https://github.com/Ma98hao04hsin15/ForwardWidgets",
