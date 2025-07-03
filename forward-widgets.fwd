@@ -31,11 +31,11 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdbnetwork.js"
     },
     {
-      "id": "forward.tmdb",
-      "title": "TMDB upcoming",
-      "description": "获取 TMDB 即將上映的榜单数据",
+      "id": "forward.combined.media.lists",
+      "title": "TMDB平台筛选模块",
+      "description": "TMDB平台筛选模块",
       "requiredVersion": "0.0.1",
-      "version": "1.0.4",
+      "version": "1.2.7",
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdbupcoming.js"
     }
