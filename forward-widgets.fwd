@@ -32,12 +32,12 @@
     },
     {
       "id": "forward.tmdb",
-      "title": "TMDB",
-      "description": "获取 TMDB 的榜单数据(加入即將上映電影/劇集)",
+      "title": "TMDB upcoming",
+      "description": "获取 TMDB 即將上映的榜单数据",
       "requiredVersion": "0.0.1",
       "version": "1.0.4",
       "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdb.js"
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdbupcoming.js"
     }
   ]
 }
