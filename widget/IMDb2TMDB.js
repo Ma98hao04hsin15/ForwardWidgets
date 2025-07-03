@@ -16,11 +16,11 @@ WidgetMetadata = {
           name: "url",
           title: "列表地址",
           type: "input",
-          description: "TMDB 片单地址",
+          description: "IMDb 片单地址",
           placeholders: [
             {
-              title: "奥斯卡金像奖",
-              value: "https://www.themoviedb.org/list/8512095-2025-oscar-nominations-for-best-picture-97th-academy-awards",
+              title: "Most popular TV shows",
+              value: "https://www.imdb.com/chart/tvmeter/?ref_=nv_tvv_mptv",
             }
           ],
         }
