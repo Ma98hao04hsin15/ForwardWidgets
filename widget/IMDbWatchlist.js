@@ -32,7 +32,7 @@ WidgetMetadata = {
 async function loadImdbWatchlist(params = {}) {
   try {
     const userId = params.user_id || "";
-    const page = params.page || 1;
+    const page = Math.max(parseInt(params.page || "1", 10), 1);
     const count = 100;
     const minNum = (page - 1) * count + 1;
     const maxNum = page * count;
@@ -41,7 +41,7 @@ async function loadImdbWatchlist(params = {}) {
       throw new Error("必须提供 IMDb 用户 ID");
     }
 
-    const url = https://www.imdb.com/user/${userId}/watchlist;
+    const url = `https://www.imdb.com/user/${userId}/watchlist`;
 
     const response = await Widget.http.get(url, {
       headers: {
@@ -54,7 +54,7 @@ async function loadImdbWatchlist(params = {}) {
     });
 
     const doc = Widget.dom.parse(response.data);
-    const elements = Widget.dom.select(doc, 'a[href^="/title/tt"]');
+    const elements = Widget.dom.select(doc, '.lister-item-header a[href^="/title/tt"]');
 
     if (!elements || elements.length === 0) {
       throw new Error("未找到任何 IMDb ID");
