@@ -3,7 +3,7 @@ WidgetMetadata = {
   title: "TMDB",
   version: "1.0.0",
   requiredVersion: "0.0.1",
-  description: "获取 TMDB 的榜单数据",
+  description: "获取 IMDb 的榜单数据",
   author: "Forward",
   site: "https://github.com/InchStudio/ForwardWidgets",
   modules: [
