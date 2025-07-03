@@ -128,6 +128,13 @@ async function fetchData(api, params, forceMediaType) {
     throw error;
   }
 }
+
+async function networks(params) {
+  let api = `discover/tv`;
+  delete params.type;
+  return await fetchData(api, params);
+}
+
 async function list(params = {}) {
   let url = params.url;
 
@@ -186,8 +193,4 @@ async function list(params = {}) {
 
   return tmdbIds;
 }
-async function networks(params) {
-  let api = `discover/tv`;
-  delete params.type;
-  return await fetchData(api, params);
-}
+
