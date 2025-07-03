@@ -4,7 +4,7 @@ WidgetMetadata = {
   version: "1.0.0",
   requiredVersion: "0.0.1",
   description: "通过抓取 IMDb 用户 Watchlist 页面解析 IMDb ID，无需 API Key",
-  author: "huangxd",
+  author: "Joy",
   site: "https://github.com/joy51744/ForwardWidgets",
   modules: [
     {
