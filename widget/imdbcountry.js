@@ -1,5 +1,5 @@
 WidgetMetadata = {
-  id: "forward.tmdb",
+  id: "forward.imdb",
   title: "TMDB",
   version: "1.0.0",
   requiredVersion: "0.0.1",
