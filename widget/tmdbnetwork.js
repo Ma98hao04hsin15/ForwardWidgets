@@ -1,17 +1,68 @@
-WidgetMetadata = {
-  id: "forward.tmdb",
-  title: "TMDB upcoming",
-  version: "1.0.1",
-  requiredVersion: "0.0.1",
-  description: "获取 TMDB 即將上映的榜单数据",
-  author: "Forward",
-  site: "https://github.com/InchStudio/ForwardWidgets",
-  modules: [
-  {
-  id: "upcoming",
-  title: "即将上映",
-  functionName: "upcoming",
+WidgetMetadata = 
+{
+  id: "networks",
+  title: "播出平台",
+  functionName: "networks",
   params: [
+    {
+      name: "with_networks",
+      title: "播出平台",
+      type: "enumeration",
+      enumOptions: [
+        // 🇺🇸 美國平台
+        { title: "Netflix", value: "213" },
+        { title: "HBO", value: "49" },
+        { title: "HBO Max", value: "3186" },
+        { title: "Hulu", value: "453" },
+        { title: "Disney+", value: "2739" },
+        { title: "Apple TV+", value: "2552" },
+        { title: "Amazon Prime Video", value: "1024" },
+        { title: "Peacock", value: "3353" },
+        { title: "Paramount+", value: "2076" },
+        { title: "CBS", value: "16" },
+        { title: "NBC", value: "6" },
+        { title: "ABC", value: "2" },
+        { title: "FOX", value: "19" },
+        { title: "Showtime", value: "67" },
+        { title: "The CW", value: "71" },
+        { title: "FX", value: "88" },
+        { title: "AMC", value: "174" },
+        { title: "Starz", value: "318" },
+
+        // 🇯🇵 日本平台
+        { title: "NHK", value: "372" },
+        { title: "TBS", value: "343" },
+        { title: "TV Tokyo", value: "315" },
+        { title: "Fuji TV", value: "350" },
+        { title: "Nippon TV", value: "367" },
+        { title: "WOWOW", value: "370" },
+        { title: "BS-TBS", value: "4227" },
+        { title: "BS Fuji", value: "4245" },
+        { title: "dTV", value: "4683" },
+        { title: "TV Asahi", value: "371" },
+
+        // 🇰🇷 韓國平台
+        { title: "tvN", value: "4430" },
+        { title: "JTBC", value: "4341" },
+        { title: "KBS2", value: "4353" },
+        { title: "KBS1", value: "4352" },
+        { title: "MBC", value: "4361" },
+        { title: "SBS", value: "4351" },
+        { title: "ENA", value: "1952" },
+        { title: "OCN", value: "4215" },
+        { title: "TVING", value: "8592" },
+        { title: "wavve", value: "8404" },
+        { title: "Coupang Play", value: "10380" },
+        { title: "Channel A", value: "8049" },
+
+        // 🇨🇳 中國平台
+        { title: "爱奇艺", value: "3235" },
+        { title: "腾讯视频", value: "1981" },
+        { title: "优酷", value: "3154" },
+        { title: "哔哩哔哩", value: "6176" },
+        { title: "芒果TV", value: "6178" }
+      ]
+    },
     {
       name: "page",
       title: "页码",
@@ -22,41 +73,10 @@ WidgetMetadata = {
       title: "语言",
       type: "language",
       value: "zh-CN"
-    },
-    {
-      name: "region",
-      title: "地区",
-      type: "input",
-      value: "CN",
-      placeholders: [
-        { title: "中国", value: "CN" },
-        { title: "美国", value: "US" },
-        { title: "日本", value: "JP" },
-        { title: "韩国", value: "KR" },
-        { title: "英国", value: "GB" }
-      ]
     }
   ]
-},
-{
-  id: "upcomingTv",
-  title: "即将播出剧集",
-  functionName: "upcomingTv",
-  params: [
-    {
-      name: "language",
-      title: "语言",
-      type: "language",
-      value: "zh-CN",
-    },
-    {
-      name: "page",
-      title: "页码",
-      type: "page"
-    }
-  ],
-},
-  ],
+}
+
 };
 
 // 基础获取TMDB数据方法
