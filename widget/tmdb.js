@@ -316,31 +316,44 @@ WidgetMetadata = {
       title: "播出平台",
       functionName: "networks",
       params: [
-        {
-          name: "with_networks",
-          title: "播出平台",
-          type: "enumeration",
-          enumOptions: [
-            {
-              title: "Netflix",
-              value: "213",
-            },
-            {
-              title: "Disney+",
-              value: "2739",
-            },
-            {
-              title: "Apple TV+",
-              value: "2552",
-            },
-            {
-              title: "HBO Max",
-              value: "3186",
-            },
-            {
-              title: "Hulu",
-              value: "453",
-            },
+        // 🌐 国际流媒体平台
+        { title: "Netflix", value: "213" },
+        { title: "Disney+", value: "2739" },
+        { title: "Apple TV+", value: "2552" },
+        { title: "HBO Max", value: "3186" },
+        { title: "Hulu", value: "453" },
+        { title: "Amazon Prime Video", value: "1024" },
+        { title: "Paramount+", value: "2076" },
+        { title: "Peacock", value: "3353" },
+
+        // 🇺🇸 美国电视台/平台
+        { title: "NBC", value: "6" },
+        { title: "CBS", value: "16" },
+        { title: "ABC", value: "2" },
+        { title: "FOX", value: "19" },
+        { title: "The CW", value: "71" },
+        { title: "AMC", value: "174" },
+        { title: "FX", value: "88" },
+        { title: "Showtime", value: "67" },
+
+        // 🇯🇵 日本电视台/平台
+        { title: "NHK", value: "2629" },
+        { title: "TBS", value: "297" },
+        { title: "TV Tokyo", value: "310" },
+        { title: "Fuji TV", value: "307" },
+        { title: "Nippon TV", value: "308" },
+        { title: "WOWOW", value: "334" },
+
+        // 🇰🇷 韩国电视台/平台
+        { title: "tvN", value: "4521" },
+        { title: "JTBC", value: "4341" },
+        { title: "KBS2", value: "3562" },
+        { title: "MBC", value: "3563" },
+        { title: "SBS", value: "3564" },
+        { title: "ENA", value: "1795" },
+        { title: "TVING", value: "5024" },
+        { title: "Coupang Play", value: "5912" },
+        { title: "Wavve", value: "4503" }
           ],
         },
         {
