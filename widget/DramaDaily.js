@@ -1,4 +1,4 @@
-const WidgetMetadata = {
+export const WidgetMetadata = {
   id: "imdb.network.tv",
   title: "播放平台熱播影集",
   version: "1.0.1",
@@ -10,7 +10,7 @@ const WidgetMetadata = {
     {
       title: "播放平台影集",
       functionName: "loadIMDbTVByNetwork",
-      cacheDuration: 21600,
+      cacheDuration: 21600, // 6 小時快取
       params: [
         {
           name: "network",
@@ -23,19 +23,17 @@ const WidgetMetadata = {
   ]
 };
 
-async function loadIMDbTVByNetwork({ network }) {
+export async function loadIMDbTVByNetwork({ network }) {
   const url = "https://www.imdb.com/chart/tvmeter/";
   const res = await fetch(url);
   const html = await res.text();
 
-  // 解析主榜單頁面上的影集 IMDb ID 和標題
   const items = [...html.matchAll(/<a href="\/title\/(tt\d+)\/[^>]*>([^<]+)<\/a>/g)].map(match => {
     const id = match[1];
     const title = match[2];
     return { id, title };
   });
 
-  // 播放平台關鍵字判斷
   const platformKeywords = {
     "Netflix": ["Netflix"],
     "HBO": ["HBO", "Max"],
@@ -45,7 +43,6 @@ async function loadIMDbTVByNetwork({ network }) {
     "Hulu": ["Hulu"]
   };
 
-  // 播放平台對應圖示
   const platformIcons = {
     "Netflix": "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg",
     "HBO": "https://upload.wikimedia.org/wikipedia/commons/1/17/HBO_Max_Logo.svg",
@@ -60,7 +57,6 @@ async function loadIMDbTVByNetwork({ network }) {
 
   const filteredItems = [];
 
-  // 避免過多請求，只分析前 30 筆
   for (let i = 0; i < Math.min(items.length, 30); i++) {
     const { id, title } = items[i];
     const detailUrl = `https://www.imdb.com/title/${id}/`;
@@ -79,9 +75,11 @@ async function loadIMDbTVByNetwork({ network }) {
         });
       }
     } catch (err) {
-      // 失敗就略過
+      // 忽略錯誤
     }
   }
 
   return filteredItems;
 }
+
+export default WidgetMetadata;
