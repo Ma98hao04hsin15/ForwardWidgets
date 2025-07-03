@@ -134,89 +134,6 @@ WidgetMetadata = {
         },
       ],
     },
-    {
-      id: "categories",
-      title: "分类",
-      functionName: "categories",
-      params: [
-        {
-          name: "with_genres",
-          title: "分类",
-          type: "enumeration",
-          enumOptions: [
-            {
-              title: "合家欢",
-              value: "10751",
-            },
-            {
-              title: "动画",
-              value: "16",
-            },
-            {
-              title: "喜剧",
-              value: "35",
-            },
-            {
-              title: "犯罪",
-              value: "80",
-            },
-            {
-              title: "纪录",
-              value: "99",
-            },
-            {
-              title: "剧情",
-              value: "18",
-            },
-            {
-              title: "悬疑",
-              value: "9648",
-            },
-            {
-              title: "西部",
-              value: "37",
-            },
-            {
-              title: "儿童",
-              value: "10762",
-            },
-            {
-              title: "科幻",
-              value: "878",
-            },
-            {
-              title: "动作",
-              value: "28",
-            },
-            {
-              title: "惊悚",
-              value: "53",
-            },
-            {
-              title: "真人秀",
-              value: "10764",
-            },
-          ],
-        },
-        {
-          name: "type",
-          title: "类型",
-          type: "enumeration",
-          belongTo: {
-            paramName: "with_genres",
-            value: ["16", "35", "80", "99", "18", "878", "9648", "37", "10751"],
-          },
-          enumOptions: [
-            {
-              title: "电影",
-              value: "movie",
-            },
-            {
-              title: "剧集",
-              value: "tv",
-            },
-          ],
-        },
         {
           name: "with_origin_country",
           title: "国家",
@@ -311,6 +228,186 @@ WidgetMetadata = {
             {
               title: "CBS",
               value: "16",
+            },
+            {
+              title: "NBC",
+              value: "6",
+            },
+            {
+              title: "ABC",
+              value: "2",
+            },
+            {
+              title: "FOX",
+              value: "19",
+            },
+            {
+              title: "Showtime",
+              value: "67",
+            },
+            {
+              title: "The CW",
+              value: "71",
+            },
+            {
+              title: "FX",
+              value: "88",
+            },
+            {
+              title: "AMC",
+              value: "174",
+            },
+            {
+              title: "Starz",
+              value: "318",
+            },
+            {
+              title: "NHK",
+              value: "372",
+            },
+            {
+              title: "TBS",
+              value: "343",
+            },
+            {
+              title: "TV Tokyo",
+              value: "315",
+            },
+            {
+              title: "Fuji TV",
+              value: "350",
+            },
+            {
+              title: "Nippon TV",
+              value: "367",
+            },
+            {
+              title: "WOWOW",
+              value: "370",
+            },
+            {
+              title: "BS-TBS",
+              value: "4227",
+            },
+            {
+              title: "BS Fuji",
+              value: "4245",
+            },
+            {
+              title: "dTV",
+              value: "4683",
+            },
+            {
+              title: "TV Asahi",
+              value: "371",
+            },
+            {
+              title: "tvN",
+              value: "4430",
+            },
+            {
+              title: "JTBC",
+              value: "4341",
+            },
+            {
+              title: "KBS2",
+              value: "4353",
+            },
+            {
+              title: "KBS1",
+              value: "4352",
+            },
+            {
+              title: "MBC",
+              value: "4361",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
+            },
+            {
+              title: "",
+              value: "",
             }
           ],
         },
