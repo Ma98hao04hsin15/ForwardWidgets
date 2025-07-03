@@ -1,7 +1,7 @@
 WidgetMetadata = {
   id: "forward.tmdb",
   title: "TMDB",
-  version: "1.0.1",
+  version: "1.0.0",
   requiredVersion: "0.0.11",
   description: "获取 TMDB 的榜单数据",
   author: "Joy",
