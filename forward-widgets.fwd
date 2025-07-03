@@ -23,8 +23,8 @@
     },
     {
       "id": "forward.tmdb",
-      "title": "TMDB upcoming",
-      "description": "获取 TMDB 即將上映的榜单数据",
+      "title": "TMDB平台筛选模块",
+      "description": "获取 TMDB 平台筛选模块",
       "requiredVersion": "0.0.1",
       "version": "1.0.4",
       "author": "Joy",
@@ -32,8 +32,8 @@
     },
     {
       "id": "forward.tmdb",
-      "title": "TMDB平台筛选模块",
-      "description": "TMDB平台筛选模块",
+      "title": "TMDB upcoming",
+      "description": "获取 TMDB 即將上映的榜单数据",
       "requiredVersion": "0.0.1",
       "version": "1.0.4",
       "author": "Joy",
