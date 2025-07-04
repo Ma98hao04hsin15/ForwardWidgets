@@ -67,83 +67,83 @@ WidgetMetadata = {
             },
             {
               title: "NHK",
-              value: "290",
+              value: "2334",
             },
             {
               title: "TBS",
-              value: "291",
+              value: "160",
             },
             {
               title: "NTV",
-              value: "292",
+              value: "57",
             },
             {
               title: "Fuji TV",
-              value: "293",
+              value: "1",
             },
             {
               title: "TV Asahi",
-              value: "294",
+              value: "103",
             },
             {
               title: "TV Tokyo",
-              value: "295",
+              value: "98",
+            },
+            {
+              title: "BS TV Tokyo",
+              value: "3471",
             },
             {
               title: "WOWOW",
-              value: "300",
-            },
-            {
-              title: "BS NTV",
-              value: "4756",
+              value: "172",
             },
             {
               title: "Kansai TV",
-              value: "5311",
+              value: "1163",
             },
             {
               title: "U-NEXT",
-              value: "5725",
+              value: "3869",
             },
             {
               title: "Paravi",
-              value: "5726",
+              value: "3879",
             },
             {
               title: "tvN",
-              value: "443",
+              value: "866",
             },
             {
               title: "SBS",
-              value: "3186",
+              value: "156",
             },
             {
               title: "MBC",
-              value: "330",
+              value: "97",
             },
             {
               title: "KBS1",
-              value: "332",
+              value: "829",
             },
             {
               title: "KBS2",
-              value: "333",
+              value: "342",
             },
             {
               title: "JTBC",
-              value: "3565",
+              value: "885",
             },
             {
               title: "Coupang Play",
-              value: "5904",
+              value: "5169",
             },
             {
               title: "Wavve",
-              value: "5734",
+              value: "3357",
             },
             {
               title: "TVING",
-              value: "5864",
+              value: "3897",
             },
             {
               title: "爱奇艺",
