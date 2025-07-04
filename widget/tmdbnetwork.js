@@ -364,7 +364,7 @@ WidgetMetadata = {
             {
               title: "芒果TV",
               value: "6178",
-            }
+            },
           ],
         },
         {
