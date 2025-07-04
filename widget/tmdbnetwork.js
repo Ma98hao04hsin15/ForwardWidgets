@@ -61,6 +61,110 @@ WidgetMetadata = {
               title: "NBC",
               value: "6",
             },
+            {
+              title: "ABC",
+              value: "2",
+            },
+            {
+              title: "NHK",
+              value: "290",
+            },
+            {
+              title: "TBS",
+              value: "291",
+            },
+            {
+              title: "NTV",
+              value: "292",
+            },
+            {
+              title: "Fuji TV",
+              value: "293",
+            },
+            {
+              title: "TV Asahi",
+              value: "294",
+            },
+            {
+              title: "TV Tokyo",
+              value: "295",
+            },
+            {
+              title: "WOWOW",
+              value: "300",
+            },
+            {
+              title: "BS NTV",
+              value: "4756",
+            },
+            {
+              title: "Kansai TV",
+              value: "5311",
+            },
+            {
+              title: "U-NEXT",
+              value: "5725",
+            },
+            {
+              title: "Paravi",
+              value: "5726",
+            },
+            {
+              title: "tvN",
+              value: "443",
+            },
+            {
+              title: "SBS",
+              value: "3186",
+            },
+            {
+              title: "MBC",
+              value: "330",
+            },
+            {
+              title: "KBS1",
+              value: "332",
+            },
+            {
+              title: "KBS2",
+              value: "333",
+            },
+            {
+              title: "JTBC",
+              value: "3565",
+            },
+            {
+              title: "Coupang Play",
+              value: "5904",
+            },
+            {
+              title: "Wavve",
+              value: "5734",
+            },
+            {
+              title: "TVING",
+              value: "5864",
+            },
+            {
+              title: "爱奇艺",
+              value: "3235",
+            },
+            {
+              title: "腾讯视频",
+              value: "1981",
+            },
+            {
+              title: "优酷",
+              value: "3154",
+            },
+            {
+              title: "哔哩哔哩",
+              value: "6176",
+            },
+            {
+              title: "芒果TV",
+              value: "6178",
+            },
           ],
         },
         {
