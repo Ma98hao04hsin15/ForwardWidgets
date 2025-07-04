@@ -266,6 +266,10 @@ WidgetMetadata = {
               value: "372",
             },
             {
+              title: "NTV",
+              value: "42",
+            },
+            {
               title: "TBS",
               value: "343",
             },
@@ -322,92 +326,44 @@ WidgetMetadata = {
               value: "4361",
             },
             {
-              title: "",
-              value: "",
+              title: "SBS",
+              value: "4351",
             },
             {
-              title: "",
-              value: "",
+              title: "ENA",
+              value: "1952",
             },
             {
-              title: "",
-              value: "",
+              title: "OCN",
+              value: "4251",
             },
             {
-              title: "",
-              value: "",
+              title: "TVING",
+              value: "8592",
             },
             {
-              title: "",
-              value: "",
+              title: "wavve",
+              value: "8404",
             },
             {
-              title: "",
-              value: "",
+              title: "爱奇艺",
+              value: "3235",
             },
             {
-              title: "",
-              value: "",
+              title: "腾讯视频",
+              value: "1981",
             },
             {
-              title: "",
-              value: "",
+              title: "优酷",
+              value: "3154",
             },
             {
-              title: "",
-              value: "",
+              title: "哔哩哔哩",
+              value: "6176",
             },
             {
-              title: "",
-              value: "",
-            },
-            {
-              title: "",
-              value: "",
-            },
-            {
-              title: "",
-              value: "",
-            },
-            {
-              title: "",
-              value: "",
-            },
-            {
-              title: "",
-              value: "",
-            },
-            {
-              title: "",
-              value: "",
-            },
-            {
-              title: "",
-              value: "",
-            },
-            {
-              title: "",
-              value: "",
-            },
-            {
-              title: "",
-              value: "",
-            },
-            {
-              title: "",
-              value: "",
-            },
-            {
-              title: "",
-              value: "",
-            },
-            {
-              title: "",
-              value: "",
-            },
-            {
-              title: "",
-              value: "",
+              title: "芒果TV",
+              value: "6178",
             }
           ],
         },
