@@ -37,6 +37,10 @@ WidgetMetadata = {
               title: "Hulu",
               value: "453",
             },
+            {
+              title: "Amazon Prime Video",
+              value: "1024",
+            },
           ],
         },
         {
