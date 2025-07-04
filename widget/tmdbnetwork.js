@@ -41,6 +41,26 @@ WidgetMetadata = {
               title: "Amazon Prime Video",
               value: "1024",
             },
+            {
+              title: "Peacock",
+              value: "3353",
+            },
+            {
+              title: "Paramount+",
+              value: "4330",
+            },
+            {
+              title: "AMC",
+              value: "174",
+            },
+            {
+              title: "CBS",
+              value: "16",
+            },
+            {
+              title: "NBC",
+              value: "6",
+            },
           ],
         },
         {
