@@ -66,5 +66,14 @@
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBList.js"
     },
+    {
+      "id": "tmdb",
+      "title": "TMDB Top250",
+      "description": "從 TMDB 網頁解析Top250",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/Top250.js"
+    },
   ]
 }
