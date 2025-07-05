@@ -1,6 +1,7 @@
 // 豆瓣片单组件
 WidgetMetadata = {
     {
+  id: "forward.imdb",
   title: "IMDb 列表",
   functionName: "loadImdbItems",
   params: [
