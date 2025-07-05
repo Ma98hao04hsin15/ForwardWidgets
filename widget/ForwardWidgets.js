@@ -1,16 +1,10 @@
-// =============UserScript=============
-// @name         影视聚合查询组件
-// @version      1.2.7
-// @description  聚合查询豆瓣/TMDB/IMDB/BGM影视数据
-// @author       阿米诺斯
-// =============UserScript=============
 WidgetMetadata = {
   id: "forward.combined.media.lists",
   title: "影视榜单",
-  description: "聚合豆瓣、TMDB、IMDB和Bangumi的影视动画榜单",
-  author: "阿米诺斯",
-  site: "https://github.com/quantumultxx/FW-Widgets",
-  version: "1.2.7",
+  description: "基于Forw​​ardWidget架构导入豆瓣相关影视模块",
+  author: "乔伊",
+  site: "https://github.com/joy51744/FW-Widgets",
+  version: "1.0.0",
   requiredVersion: "0.0.1",
   detailCacheDuration: 60,
   modules: [
@@ -84,14 +78,14 @@ WidgetMetadata = {
           type: "input", 
           description: "输入豆瓣片单或榜单地址 (subject_collection 或 doulist)",
           placeholders: [
-            { title: "一周电影口碑榜", 
-              value: "https://m.douban.com/subject_collection/movie_weekly_best" },
-            { title: "一周华语口碑剧集榜", 
-              value: "https://m.douban.com/subject_collection/tv_chinese_best_weekly" },
-            { title: "一周全球口碑剧集榜", 
-              value: "https://m.douban.com/subject_collection/tv_global_best_weekly" },
-            { title: "第97届奥斯卡 (2025)", 
-              value: "https://m.douban.com/subject_collection/EC7I7ZDRA?type=rank" }
+            { title: "历届奥斯卡最佳动画短片及提名", 
+              value: "https://www.douban.com/doulist/510983/" },
+            { title: "柏林电影节片单", 
+              value: "https://www.douban.com/doulist/161004180/" },
+            { title: "电影学院本科生必看100部", 
+              value: "https://www.douban.com/doulist/108673/" },
+            { title: "北京电影学院硕士要看的100部电影", 
+              value: "https://www.douban.com/doulist/42564/" }
           ]
         },
         { name: "page", title: "页码", type: "page" },
