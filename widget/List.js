@@ -1,7 +1,7 @@
 // 豆瓣片单组件
 WidgetMetadata = {
-  id: "douban.imdb",
-  title: "豆瓣/IMDb",
+  id: "douban",
+  title: "豆瓣",
   modules: [
     {
       title: "片单",
@@ -34,7 +34,7 @@ WidgetMetadata = {
           name: "limit",
           title: "每页数量",
           type: "constant",
-          value: "20",
+          value: "1000",
         },
       ],
     },
@@ -143,7 +143,7 @@ async function loadDefaultList(params = {}) {
   }
 
   const start = params.start || 0;
-  const limit = params.limit || 20;
+  const limit = params.limit || 1000;
   //        // 构建片单页面 URL
   const pageUrl = `https://www.douban.com/doulist/${listId}/?start=${start}&limit=${limit}`;
 
@@ -221,7 +221,7 @@ async function loadSubjectCollection(params = {}) {
   }
 
   const start = params.start || 0;
-  const limit = params.limit || 20;
+  const limit = params.limit || 1000;
   let pageUrl = `https://m.douban.com/rexxar/api/v2/subject_collection/${listId}/items?start=${start}&count=${limit}&updated_at&items_only=1&type_tag&for_mobile=1`;
   if (params.type) {
     pageUrl += `&type=${params.type}`;
@@ -240,7 +240,7 @@ async function loadRecommendShows(params = {}) {
 
 async function loadRecommendItems(params = {}, type = "movie") {
   const start = params.start || 0;
-  const limit = params.limit || 20;
+  const limit = params.limit || 1000;
   const category = params.category || "";
   const categoryType = params.type || "";
   let url = `https://m.douban.com/rexxar/api/v2/subject/recent_hot/${type}?start=${start}&limit=${limit}&category=${category}&type=${categoryType}`;
