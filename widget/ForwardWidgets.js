@@ -1,14 +1,8 @@
-// =============UserScript=============
-// @name         影视聚合查询组件
-// @version      1.2.7
-// @description  聚合查询豆瓣/TMDB/IMDB/BGM影视数据
-// @author       阿米诺斯
-// =============UserScript=============
 WidgetMetadata = {
   id: "forward.combined.media.lists",
-  title: "影视榜单",
-  description: "聚合豆瓣、TMDB、IMDB和Bangumi的影视动画榜单",
-  author: "阿米诺斯",
+  title: "Forw​​ardWidget豆瓣影视榜单",
+  description: "基于Forw​​ardWidget架构导入豆瓣影视模块",
+  author: "乔伊",
   site: "https://github.com/quantumultxx/FW-Widgets",
   version: "1.2.7",
   requiredVersion: "0.0.1",
@@ -84,8 +78,8 @@ WidgetMetadata = {
           type: "input", 
           description: "输入豆瓣片单或榜单地址 (subject_collection 或 doulist)",
           placeholders: [
-            { title: "一周电影口碑榜", 
-              value: "https://m.douban.com/subject_collection/movie_weekly_best" },
+            { title: "2024年上半年高分电影Top50", 
+              value: "https://m.douban.com/subject_collection/EC446NAZA?type=rank" },
             { title: "一周华语口碑剧集榜", 
               value: "https://m.douban.com/subject_collection/tv_chinese_best_weekly" },
             { title: "一周全球口碑剧集榜", 
