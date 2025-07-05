@@ -25,12 +25,12 @@ WidgetMetadata = {
           placeholders: [
             { title: "2024年上半年高分电影Top50", 
               value: "https://m.douban.com/subject_collection/EC446NAZA?type=rank" },
-            { title: "一周华语口碑剧集榜", 
-              value: "https://m.douban.com/subject_collection/tv_chinese_best_weekly" },
-            { title: "一周全球口碑剧集榜", 
-              value: "https://m.douban.com/subject_collection/tv_global_best_weekly" },
-            { title: "第97届奥斯卡 (2025)", 
-              value: "https://m.douban.com/subject_collection/EC7I7ZDRA?type=rank" }
+            { title: "冷门悬疑加片Top20", 
+              value: "https://m.douban.com/subject_collection/ECKQN7THI?type=rank" },
+            { title: "2025年7月定档热门电影推荐", 
+              value: "https://m.douban.com/subject_collection/ECEY7ZCTY?type=rank" },
+            { title: "2025年定档热门电影推荐", 
+              value: "https://m.douban.com/subject_collection/ECQA7W5SQ?type=rank" }
           ]
         },
         { name: "page", title: "页码", type: "page" },
