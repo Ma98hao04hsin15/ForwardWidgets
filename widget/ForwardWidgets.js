@@ -9,6 +9,63 @@ WidgetMetadata = {
   detailCacheDuration: 60,
   modules: [
     // =============豆瓣模块=============
+        // --- 🔥 实时热点 ---
+    {
+      title: "豆瓣电影实时热榜",
+      description: "来自豆瓣的当前热门电影榜单",
+      requiresWebView: false,
+      functionName: "loadDoubanItemsFromApi",
+      cacheDuration: 3600,
+      params: [
+        { name: "url", 
+          title: "🔗 列表地址", 
+          type: "constant", 
+          value: "https://m.douban.com/rexxar/api/v2/subject_collection/movie_real_time_hotest/items" },
+        { name: "type", 
+          title: "🎭 类型", 
+          type: "constant", 
+          value: "movie" },
+        { name: "page", title: "页码", type: "page" },
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+      ]
+    },
+    {
+      title: "豆瓣剧集实时热榜",
+      description: "来自豆瓣的当前热门剧集榜单",
+      requiresWebView: false,
+      functionName: "loadDoubanItemsFromApi",
+      cacheDuration: 3600,
+      params: [
+        { name: "url", 
+          title: "🔗 列表地址", 
+          type: "constant", 
+          value: "https://m.douban.com/rexxar/api/v2/subject_collection/tv_real_time_hotest/items" },
+        { name: "type", 
+          title: "🎭 类型", 
+          type: "constant", 
+          value: "tv" },
+        { name: "page", title: "页码", type: "page" },
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+      ]
+    },
+
+    // --- 🏆 精选榜单 ---
+    {
+      title: "豆瓣 Top 250 电影",
+      description: "豆瓣评分最高的 250 部电影",
+      requiresWebView: false,
+      functionName: "loadDoubanCardItems",
+      cacheDuration: 3600,
+      params: [
+        { name: "url", 
+          title: "🔗 列表地址", 
+          type: "constant", 
+          value: "https://m.douban.com/subject_collection/movie_top250" },
+        { name: "page", title: "页码", type: "page" },
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+      ]
+    },
+    
     // --- 🏆 豆瓣自定义片单 ---
     {
       title: "豆瓣自定义片单",
