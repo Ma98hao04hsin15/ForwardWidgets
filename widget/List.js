@@ -1,7 +1,7 @@
 // 豆瓣片单组件
 WidgetMetadata = {
-  id: "douban/IMDb",
-  title: "豆瓣/IMDb",
+  id: "douban",
+  title: "豆瓣",
   modules: [
     {
       title: "片单",
@@ -57,18 +57,7 @@ WidgetMetadata = {
         },
       ],
     },
-        {
-          name: "start",
-          title: "开始",
-          type: "count",
-        },
-        {
-          name: "limit",
-          title: "每页数量",
-          type: "constant",
-          value: "20",
-        },	
-	],
+  ],
 },
   ],
   version: "1.0.0",
