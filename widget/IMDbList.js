@@ -27,8 +27,7 @@ WidgetMetadata = {
   description: "解析IMDb片单，获取视频信息",
   author: "Joy",
   site: "https://github.com/Ma98hao04hsin15/ForwardWidgets"
-};
-async function loadImdbItems(params = {}) {
+};async function loadImdbItems(params = {}) {
   const url = params.url;
   if (!url || !url.includes("imdb.com")) {
     throw new Error("无效的 IMDb 链接");
@@ -51,7 +50,6 @@ async function loadImdbItems(params = {}) {
     throw new Error("IMDb 页面解析失败");
   }
 
-  // 选取所有包含影片链接的元素
   const linkElements = Widget.dom.select(docId, 'a[href*="/title/tt"]');
   const imdbSet = new Set();
 
@@ -68,87 +66,10 @@ async function loadImdbItems(params = {}) {
     type: "imdb"
   }));
 
+  console.log("IMDb ID 数量:", imdbIds.length);
   return imdbIds;
 }
 
-// 解析豆瓣片单
-async function loadCardItems(params = {}) {
-  try {
-    console.log("开始解析豆瓣片单...");
-    console.log("参数:", params);
-    // 获取片单 URL
-    const url = params.url;
-    if (!url) {
-      console.error("缺少片单 URL");
-      throw new Error("缺少片单 URL");
-    }
-    // 验证 URL 格式
-    if (url.includes("douban.com/doulist/")) {
-      return loadDefaultList(params);
-    } else if (url.includes("douban.com/subject_collection/")) {
-      return loadSubjectCollection(params);
-    }
-  } catch (error) {
-    console.error("解析豆瓣片单失败:", error);
-    throw error;
-  }
-}
-
-async function loadDefaultList(params = {}) {
-  const url = params.url;
-  // 提取片单 ID
-  const listId = url.match(/doulist\/(\d+)/)?.[1];
-  console.debug("片单 ID:", listId);
-  if (!listId) {
-    console.error("无法获取片单 ID");
-    throw new Error("无法获取片单 ID");
-  }
-
-  const start = params.start || 0;
-  const limit = params.limit || 20;
-  //        // 构建片单页面 URL
-  const pageUrl = `https://www.douban.com/doulist/${listId}/?start=${start}&limit=${limit}`;
-
-  console.log("请求片单页面:", pageUrl);
-  // 发送请求获取片单页面
-  const response = await Widget.http.get(pageUrl, {
-    headers: {
-      Referer: `https://movie.douban.com/explore`,
-      "User-Agent":
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-    },
-  });
-
-  if (!response || !response.data) {
-    throw new Error("获取片单数据失败");
-  }
-
-  console.log("片单页面数据长度:", response.data.length);
-  console.log("开始解析");
-
-  // 解析 HTML 得到文档 ID
-  const docId = Widget.dom.parse(response.data);
-  if (docId < 0) {
-    throw new Error("解析 HTML 失败");
-  }
-  console.log("解析成功:", docId);
-
-  //        // 获取所有视频项，得到元素ID数组
-  const videoElementIds = Widget.dom.select(docId, ".doulist-item .title a");
-
-  console.log("items:", videoElementIds);
-
-  let doubanIds = [];
-  for (const itemId of videoElementIds) {
-    const link = await Widget.dom.attr(itemId, "href");
-    const id = link.match(/subject\/(\d+)/)?.[1];
-    if (id) {
-      doubanIds.push({ id: id, type: "douban" });
-    }
-  }
-
-  return doubanIds;
-}
 
 async function loadItemsFromApi(params = {}) {
   const url = params.url;
