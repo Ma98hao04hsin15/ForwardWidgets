@@ -82,8 +82,8 @@ WidgetMetadata = {
               value: "https://m.douban.com/subject_collection/ECMY73FGQ?type=rank" },
             { title: "2025年07月定档热门电影推荐", 
               value: "https://m.douban.com/subject_collection/ECEY7ZCTY?type=rank" },
-            { title: "一周全球口碑剧集榜", 
-              value: "https://m.douban.com/subject_collection/tv_global_best_weekly" },
+            { title: "2024年上半年高分电影Top50", 
+              value: "https://m.douban.com/subject_collection/EC446NAZA?type=rank" },
             { title: "北京电影学院硕士要看的100部电影", 
               value: "https://www.douban.com/doulist/42564/" }
           ]
