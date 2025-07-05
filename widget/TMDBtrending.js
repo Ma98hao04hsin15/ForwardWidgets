@@ -7,13 +7,12 @@ WidgetMetadata = {
   author: "special",
   site: "https://github.com/InchStudio/ForwardWidgets",
   modules: [
-
     {
       id: "trending",
       title: "趋势",
       functionName: "trending",
       params: [
-        {
+      {
           name: "time_window",
           title: "时间窗口",
           type: "enumeration",
@@ -26,6 +25,13 @@ WidgetMetadata = {
               title: "本周",
               value: "week",
             },
+          ],
+        },
+        {
+          name: "type",
+          title: "接口",
+          type: "enumeration",
+          enumOptions: [
             {
               title: "电影",
               value: "movie",
@@ -33,9 +39,10 @@ WidgetMetadata = {
             {
               title: "剧集",
               value: "tv",
-            },            
+            },
           ],
         },
+      ],
         {
           name: "language",
           title: "语言",
