@@ -59,7 +59,7 @@
     },
     {
       "id": "forward.tmdb",
-      "title": "TMDB",
+      "title": "TMDB 片单",
       "description": "获取 TMDB 的片单数据",
       "requiredVersion": "0.0.1",
       "version": "1.0.4",
