@@ -54,11 +54,11 @@ WidgetMetadata = {
             {
               title: "用户自建列表",
               value: "https://www.imdb.com/list/ls055592025/"
-            }
-          ]
-        }
-      ]
-    }
+            },
+          ],
+        },
+      ],
+    },
   ],
   version: "1.0.0",
   requiredVersion: "0.0.1",
