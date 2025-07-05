@@ -48,5 +48,14 @@
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/List.js"
     },
+    {
+      "id": "forward.imdb",
+      "title": "IMDb片單",
+      "description": "获取 IMDb 的片单数据",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.4",
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbList.js"
+    },
   ]
 }
