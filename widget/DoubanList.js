@@ -1,7 +1,7 @@
 WidgetMetadata = {
   id: "forward.combined.media.lists",
-  title: "Forw​​ardWidget豆瓣影视榜单",
-  description: "基于Forw​​ardWidget架构导入豆瓣影视模块",
+  title: "影视榜单",
+  description: "基于Forw​​ardWidget架构导入豆瓣相关影视模块",
   author: "乔伊",
   site: "https://github.com/joy51744/FW-Widgets",
   version: "1.0.0",
@@ -9,6 +9,46 @@ WidgetMetadata = {
   detailCacheDuration: 60,
   modules: [
     // =============豆瓣模块=============
+    // --- 🔥 实时热点 ---
+    {
+      title: "豆瓣电影实时热榜",
+      description: "来自豆瓣的当前热门电影榜单",
+      requiresWebView: false,
+      functionName: "loadDoubanItemsFromApi",
+      cacheDuration: 3600,
+      params: [
+        { name: "url", 
+          title: "🔗 列表地址", 
+          type: "constant", 
+          value: "https://m.douban.com/rexxar/api/v2/subject_collection/movie_real_time_hotest/items" },
+        { name: "type", 
+          title: "🎭 类型", 
+          type: "constant", 
+          value: "movie" },
+        { name: "page", title: "页码", type: "page" },
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+      ]
+    },
+    {
+      title: "豆瓣剧集实时热榜",
+      description: "来自豆瓣的当前热门剧集榜单",
+      requiresWebView: false,
+      functionName: "loadDoubanItemsFromApi",
+      cacheDuration: 3600,
+      params: [
+        { name: "url", 
+          title: "🔗 列表地址", 
+          type: "constant", 
+          value: "https://m.douban.com/rexxar/api/v2/subject_collection/tv_real_time_hotest/items" },
+        { name: "type", 
+          title: "🎭 类型", 
+          type: "constant", 
+          value: "tv" },
+        { name: "page", title: "页码", type: "page" },
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+      ]
+    },
+
     // --- 🏆 精选榜单 ---
     {
       title: "豆瓣 Top 250 电影",
@@ -38,14 +78,558 @@ WidgetMetadata = {
           type: "input", 
           description: "输入豆瓣片单或榜单地址 (subject_collection 或 doulist)",
           placeholders: [
-            { title: "电影学院本科生必看100部", 
-              value: "https://www.douban.com/doulist/108673/" },
-            { title: "北京电影学院硕士要看的100部电影", 
-              value: "https://www.douban.com/doulist/42564/" },
-            { title: "柏林电影节片单", 
-              value: "https://www.douban.com/doulist/161004180/" },
+            { title: "一周电影口碑榜", 
+              value: "https://m.douban.com/subject_collection/movie_weekly_best" },
+            { title: "一周华语口碑剧集榜", 
+              value: "https://m.douban.com/subject_collection/tv_chinese_best_weekly" },
+            { title: "一周全球口碑剧集榜", 
+              value: "https://m.douban.com/subject_collection/tv_global_best_weekly" },
             { title: "第97届奥斯卡 (2025)", 
               value: "https://m.douban.com/subject_collection/EC7I7ZDRA?type=rank" }
+          ]
+        },
+        { name: "page", title: "页码", type: "page" },
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+      ]
+    },
+
+    // --- 🎬 探索发现 ---
+    {
+      title: "豆瓣电影推荐",
+      description: "按分类、地区、类型标签浏览豆瓣推荐电影",
+      requiresWebView: false,
+      functionName: "loadDoubanRecommendMovies",
+      cacheDuration: 3600,
+      params: [
+        {
+          name: "category", 
+          title: "🏷️ 分类", 
+          type: "enumeration",
+          enumOptions: [ 
+            { title: "全部", value: "全部" }, 
+            { title: "热门电影", value: "热门" }, 
+            { title: "最新电影", value: "最新" }, 
+            { title: "豆瓣高分", value: "豆瓣高分" }, 
+            { title: "冷门佳片", value: "冷门佳片" } 
+          ],
+        },
+        {
+          name: "type", 
+          title: "🌍 地区", 
+          type: "enumeration",
+          value: "全部",
+          belongTo: {
+            paramName: "category",
+            value: ["热门","最新","豆瓣高分","冷门佳片"],
+          },
+          enumOptions: [ 
+            { title: "全部", value: "全部" }, 
+            { title: "华语", value: "华语" }, 
+            { title: "欧美", value: "欧美" }, 
+            { title: "韩国", value: "韩国" }, 
+            { title: "日本", value: "日本" } 
+          ],
+        },
+        {
+          name: "tags", 
+          title: "🎭 类型", 
+          type: "enumeration",
+          value: "",
+          belongTo: {
+            paramName: "category",
+            value: ["全部"],
+          },
+          enumOptions: [
+            { title: "全部", value: "" },
+            { title: "动作", value: "动作" },
+            { title: "科幻", value: "科幻" },
+            { title: "灾难", value: "灾难" },
+            { title: "爱情", value: "爱情" },
+            { title: "喜剧", value: "喜剧" },
+            { title: "悬疑", value: "悬疑" },
+            { title: "犯罪", value: "犯罪" },
+            { title: "冒险", value: "冒险" },
+            { title: "奇幻", value: "奇幻" },
+            { title: "战争", value: "战争" },
+            { title: "历史", value: "历史" },
+            { title: "武侠", value: "武侠" },
+            { title: "惊悚", value: "惊悚" },
+            { title: "恐怖", value: "恐怖" },
+            { title: "情色", value: "情色" },
+            { title: "动画", value: "动画" },
+            { title: "剧情", value: "剧情" },
+            { title: "西部", value: "西部" },
+            { title: "家庭", value: "家庭" },
+            { title: "儿童", value: "儿童" },
+            { title: "音乐", value: "音乐" },
+            { title: "运动", value: "运动" },
+            { title: "古装", value: "古装" },
+            { title: "歌舞", value: "歌舞" },
+            { title: "传记", value: "传记" },
+            { title: "短片", value: "短片" },
+            { title: "纪录片", value: "纪录片" }
+          ]
+        },
+        {
+          name: "sort_by",
+          title: "🔢 排序",
+          type: "enumeration",
+          value: "T",
+          enumOptions: [
+            { title: "综合排序", value: "T" },
+            { title: "近期热度", value: "U" },
+            { title: "首映时间", value: "R" },
+            { title: "高分优选", value: "S" }
+          ]
+        },
+        { name: "page", title: "页码", type: "page" },
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+      ]
+    },
+    {
+      title: "豆瓣剧集推荐",
+      description: "按分类、类型浏览豆瓣推荐剧集",
+      requiresWebView: false,
+      functionName: "loadDoubanRecommendShows",
+      cacheDuration: 3600,
+      params: [
+        {
+          name: "type", 
+          title: "🎭 类型", 
+          type: "enumeration",
+          enumOptions: [
+            { title: "综合", value: "tv" }, 
+            { title: "国产剧", value: "tv_domestic" }, 
+            { title: "欧美剧", value: "tv_american" }, 
+            { title: "日剧", value: "tv_japanese" }, 
+            { title: "韩剧", value: "tv_korean" }, 
+            { title: "动画", value: "tv_animation" }, 
+            { title: "纪录片", value: "tv_documentary" } 
+          ],
+          value: "tv"
+        },
+        { name: "page", title: "页码", type: "page" },
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+      ]
+    },
+
+    // =============TMDB模块=============
+    // --- 当前与趋势模块 ---
+    {
+        title: "TMDB 正在热映",
+        description: "当前影院或流媒体上映的电影/剧集",
+        requiresWebView: false,
+        functionName: "tmdbNowPlaying",
+        cacheDuration: 3600,
+        params: [
+            { 
+                name: "type", 
+                title: "🎭类型", 
+                type: "enumeration", 
+                enumOptions: [
+                    { title: "电影", value: "movie" },
+                    { title: "剧集", value: "tv" }
+                ], 
+                value: "movie" 
+            },
+            { name: "page", title: "页码", type: "page" },
+            { name: "language", title: "语言", type: "language", value: "zh-CN" }
+        ]
+    },
+    {
+        title: "TMDB 本日热门",
+        description: "今日热门电影与剧集",
+        requiresWebView: false,
+        functionName: "tmdbTrending",
+        cacheDuration: 900,
+        params: [
+            { name: "time_window", 
+              title: "时间", 
+              type: "constant", 
+              value: "day" },
+            { name: "language", title: "语言", type: "constant", value: "zh-CN" },
+            { name: "page", title: "页码", type: "page" }
+        ]
+    },
+    {
+        title: "TMDB 本周热门",
+        description: "本周热门电影与剧集",
+        requiresWebView: false,
+        functionName: "tmdbTrending",
+        cacheDuration: 900,
+        params: [
+            { name: "time_window", 
+              title: "时间", 
+              type: "constant", 
+              value: "week" },
+            { name: "language", title: "语言", type: "constant", value: "zh-CN" },
+            { name: "page", title: "页码", type: "page" }
+        ]
+    },
+
+    // --- 常规发现模块 ---
+    {
+        title: "TMDB 高分内容",
+        description: "高分电影或剧集 (按用户评分排序)",
+        requiresWebView: false,
+        functionName: "tmdbTopRated",
+        cacheDuration: 3600,
+        params: [
+            { 
+                name: "type", 
+                title: "🎭类型", 
+                type: "enumeration", 
+                enumOptions: [
+                    { title: "电影", value: "movie" },
+                    { title: "剧集", value: "tv" }
+                ], 
+                value: "movie" 
+            },
+            { name: "language", title: "语言", type: "language", value: "zh-CN" },
+            { name: "page", title: "页码", type: "page" }
+        ]
+    },
+
+    // --- 平台筛选模块---
+    {
+        title: "TMDB 播出平台",
+        description: "按播出平台和内容类型筛选剧集内容",
+        requiresWebView: false,
+        functionName: "tmdbDiscoverByNetwork",
+        cacheDuration: 3600,
+        params: [
+            {
+                name: "with_networks",
+                title: "播出平台",
+                type: "enumeration",
+                description: "选择一个平台以查看其剧集内容",
+                value: "",
+                belongTo: {
+                  paramName: "air_status",
+                  value: ["released","upcoming"],
+                },
+                enumOptions: [
+                    { title: "全部", value: "" },
+                    { title: "Tencent", value: "2007" },
+                    { title: "iQiyi", value: "1330" },
+                    { title: "Youku", value: "1419" },
+                    { title: "Bilibili", value: "1605" },
+                    { title: "MGTV", value: "1631" },
+                    { title: "Netflix", value: "213" },
+                    { title: "Disney+", value: "2739" },
+                    { title: "HBO", value: "49" },
+                    { title: "HBO Max", value: "3186" },
+                    { title: "Apple TV+", value: "2552" },
+                    { title: "Hulu", value: "453" },
+                    { title: "Amazon Prime Video", value: "1024" },
+                    { title: "FOX", value: "19" },
+                    { title: "Paramount", value: "576" },
+                    { title: "Paramount+", value: "4330" },
+                    { title: "TV Tokyo", value: "94" },
+                    { title: "BBC One", value: "332" },
+                    { title: "BBC Two", value: "295" },
+                    { title: "NBC", value: "6" },
+                    { title: "AMC+", value: "174" },
+                    { title: "We TV", value: "3732" },
+                    { title: "Viu TV", value: "2146" },
+                    { title: "TVB", value: "48" }
+                ]
+            },
+            {
+                name: "with_genres",
+                title: "🎭内容类型",
+                type: "enumeration",
+                description: "选择要筛选的内容类型",
+                value: "",
+                belongTo: {
+                  paramName: "air_status",
+                  value: ["released","upcoming"],
+                },
+                enumOptions: [
+                    { title: "全部类型", value: "" },
+                    { title: "犯罪", value: "80" },
+                    { title: "动画", value: "16" },
+                    { title: "喜剧", value: "35" },
+                    { title: "剧情", value: "18" },
+                    { title: "家庭", value: "10751" },
+                    { title: "儿童", value: "10762" },
+                    { title: "悬疑", value: "9648" },
+                    { title: "真人秀", value: "10764" },
+                    { title: "脱口秀", value: "10767" },
+                    { title: "肥皂剧", value: "10766" },
+                    { title: "纪录片", value: "99" },
+                    { title: "动作与冒险", value: "10759" },
+                    { title: "科幻与奇幻", value: "10765" },
+                    { title: "战争与政治", value: "10768" }
+                ]
+            },
+            {
+                name: "air_status",
+                title: "上映状态",
+                type: "enumeration",
+                description: "默认已上映",
+                value: "released",
+                enumOptions: [
+                    { title: "已上映", value: "released" },
+                    { title: "未上映", value: "upcoming" }
+                ]
+            },
+            {
+                name: "sort_by",
+                title: "🔢 排序方式",
+                type: "enumeration",
+                description: "选择内容排序方式,默认上映时间↓",
+                value: "first_air_date.desc",
+                enumOptions: [
+                    { title: "上映时间↓", value: "first_air_date.desc" },
+                    { title: "上映时间↑", value: "first_air_date.asc" },
+                    { title: "人气最高", value: "popularity.desc" },
+                    { title: "评分最高", value: "vote_average.desc" },
+                    { title: "最多投票", value: "vote_count.desc" }
+                ]
+            },
+            { name: "page", title: "页码", type: "page" },
+            { name: "language", title: "语言", type: "language", value: "zh-CN" }
+        ]
+    },
+    // --- 出品公司模块 ---
+    {
+      id: "companies",
+      title: "TMDB 出品公司",
+      functionName: "tmdbCompanies",
+      cacheDuration: 3600,
+      params: [
+        {
+          name: "with_companies",
+          title: "出品公司",
+          type: "enumeration",
+          value: "",
+          description: "选择一个公司以查看其剧集内容",
+          belongTo: {
+            paramName: "air_status",
+            value: ["released","upcoming"],
+          },
+          enumOptions: [
+            { title: "全部", value: "" },
+            { title: "Disney", value: "2" },
+            { title: "Warner Bros", value: "174" },
+            { title: "Columbia", value: "5" },
+            { title: "Sony", value: "34" },
+            { title: "Universal", value: "33" },
+            { title: "Paramount", value: "4" },
+            { title: "20th Century", value: "25" },
+            { title: "Marvel", value: "420" },
+            { title: "Toho", value: "882" },
+            { title: "中国电影集团公司", value: "14714" },
+            { title: "BBC", value: "3324" },
+            { title: "印度", value: "1569" },
+            { title: "A24", value: "41077" },
+            { title: "Blumhouse", value: "3172" },
+            { title: "Working Title Films", value: "10163" }
+          ]
+        },
+        {
+          name: "with_genres",
+          title: "🎭内容类型",
+          type: "enumeration",
+          description: "选择要筛选的内容类型",
+          value: "",
+          belongTo: {
+            paramName: "air_status",
+            value: ["released","upcoming"],
+          },
+          enumOptions: [
+            { title: "全部类型", value: "" },
+            { title: "冒险", value: "12" },
+            { title: "剧情", value: "18" },
+            { title: "动作", value: "28" },
+            { title: "动画", value: "16" },
+            { title: "历史", value: "36" },
+            { title: "喜剧", value: "35" },
+            { title: "奇幻", value: "14" },
+            { title: "家庭", value: "10751" },
+            { title: "恐怖", value: "27" },
+            { title: "悬疑", value: "9648" },
+            { title: "惊悚", value: "53" },
+            { title: "战争", value: "10752" },
+            { title: "爱情", value: "10749" },
+            { title: "犯罪", value: "80" },
+            { title: "科幻", value: "878" },
+            { title: "记录", value: "99" },
+            { title: "西部", value: "37" },
+            { title: "音乐", value: "10402" },
+            { title: "电视电影", value: "10770" }
+          ]
+        },
+        {
+          name: "air_status",
+          title: "上映状态",
+          type: "enumeration",
+          description: "默认已上映",
+          value: "released",
+          enumOptions: [
+            { title: "已上映", value: "released" },
+            { title: "未上映", value: "upcoming" }
+          ]
+        },
+        {
+          name: "sort_by",
+          title: "🔢 排序方式",
+          type: "enumeration",
+          description: "选择内容排序方式,默认上映时间↓",
+          value: "primary_release_date.desc",
+          enumOptions: [
+            { title: "上映时间↓", value: "primary_release_date.desc" },
+            { title: "上映时间↑", value: "primary_release_date.asc" },
+            { title: "人气最高", value: "popularity.desc" },
+            { title: "评分最高", value: "vote_average.desc" },
+            { title: "最多投票", value: "vote_count.desc" }
+          ]
+        },
+        { name: "page", title: "页码", type: "page" },
+        { name: "language", title: "语言", type: "language", value: "zh-CN" }
+      ]
+    },
+
+    // --- 高级筛选模块 ---
+    {
+        title: "TMDB 即将上映",
+        description: "即将上映的电影 (可筛选)",
+        requiresWebView: false,
+        functionName: "tmdbUpcomingMovies",
+        cacheDuration: 3600,
+        params: [
+            { name: "language", title: "语言", type: "language", value: "zh-CN" },
+            { 
+                name: "primary_release_date.gte", 
+                title: "起始日期 (含)", 
+                type: "input", 
+                description: "格式：YYYY-MM-DD（默认今天）", 
+                value: "",
+                placeholder: "例：2023-12-31"
+            },
+            { 
+                name: "primary_release_date.lte", 
+                title: "结束日期 (含)", 
+                type: "input", 
+                description: "格式：YYYY-MM-DD（可选）", 
+                value: "",
+                placeholder: "例：2024-05-01"
+            },
+            { 
+                name: "with_release_type", 
+                title: "发行渠道", 
+                type: "enumeration", 
+                description: "选择发行渠道（多选用逗号分隔）", 
+                value: "2,3",
+                enumOptions: [ 
+                    { title: "影院上映 (优先)", value: "2,3" },
+                    { title: "全部渠道", value: "" }, 
+                    { title: "数字发行", value: "4" }, 
+                    { title: "实体发行", value: "5" }, 
+                    { title: "电视播出", value: "6" }
+                ] 
+            },
+            { 
+                name: "with_genres", 
+                title: "🎭类型筛选", 
+                type: "enumeration", 
+                description: "选择电影类型", 
+                value: "",
+                enumOptions: [ 
+                    { title: "任意类型", value: "" }, 
+                    { title: "动作", value: "28" }, 
+                    { title: "冒险", value: "12" },
+                    { title: "动画", value: "16" }, 
+                    { title: "喜剧", value: "35" }, 
+                    { title: "犯罪", value: "80" },
+                    { title: "纪录", value: "99" }, 
+                    { title: "剧情", value: "18" }, 
+                    { title: "家庭", value: "10751" },
+                    { title: "悬疑", value: "9648" }, 
+                    { title: "爱情", value: "10749" },
+                    { title: "科幻", value: "878" }, 
+                    { title: "战争", value: "10752" },
+                    { title: "西部", value: "37" }, 
+                    { title: "电视电影", value: "10770" }
+                ] 
+            },
+            { 
+                name: "vote_average.gte", 
+                title: "最低评分", 
+                type: "input", 
+                description: "输入0-10之间的数字（如7）", 
+                value: "",
+                placeholder: "0-10"
+            },
+            { 
+                name: "vote_count.gte", 
+                title: "最少评价数", 
+                type: "input", 
+                description: "输入最小评价数量", 
+                value: "",
+                placeholder: "如：100"
+            },
+            { 
+                name: "with_keywords", 
+                title: "关键词", 
+                type: "input", 
+                description: "英文关键词（如'superhero'）", 
+                value: "",
+                placeholder: "多个用逗号分隔"
+            },
+            { name: "page", title: "页码", type: "page" }
+        ]
+    },
+
+    // =============IMDB模块=============
+    {
+      title: "IMDb Top 250 电影",
+      description: "IMDb 用户评分最高的 250 部电影",
+      requiresWebView: false,
+      functionName: "loadImdbCardItems",
+      cacheDuration: 3600,
+      params: [
+        { name: "url", 
+          title: "🔗 列表地址", 
+          type: "constant", 
+          value: "https://www.imdb.com/chart/top/?ref_=nv_mv_250" },
+        { name: "page", title: "页码", type: "page" },
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+      ]
+    },
+    {
+      title: "IMDb Top 250 剧集",
+      description: "IMDb 用户评分最高的 250 部剧集",
+      requiresWebView: false,
+      functionName: "loadImdbCardItems",
+      cacheDuration: 3600,
+      params: [
+        { name: "url", 
+          title: "🔗 列表地址", 
+          type: "constant", 
+          value: "https://www.imdb.com/chart/toptv/?ref_=nv_tvv_250" },
+        { name: "page", title: "页码", type: "page" },
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+      ]
+    },
+    {
+      title: "IMDB 自定义片单",
+      description: "解析 IMDB 热门电影/剧集等网页片单 (需输入 URL)",
+      requiresWebView: false,
+      functionName: "loadImdbCardItems",
+      cacheDuration: 3600,
+      params: [
+        {
+          name: "url", 
+          title: "🔗 列表地址", 
+          type: "input", 
+          description: "输入 IMDB 片单或榜单地址",
+          placeholders: [
+            { title: "时下热门电影", 
+              value: "https://www.imdb.com/chart/moviemeter/?ref_=nv_mv_mpm" },
+            { title: "时下热门剧集", 
+              value: "https://www.imdb.com/chart/tvmeter/?ref_=nv_tvv_mptv" }
           ]
         },
         { name: "page", title: "页码", type: "page" },
