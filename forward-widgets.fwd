@@ -49,22 +49,13 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/ForwardWidgets.js"
     },
     {
-      "id": "forward.combined.media.lists",
-      "title": "Forw​​ardWidget豆瓣影视榜单",
-      "description": "基于Forw​​ardWidget架构导入豆瓣影视模块",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.6",
-      "author": "乔伊",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBtrending.js"
-    },
-    {
       "id": "forward.tmdb",
       "title": "TMDB 趋势",
       "description": "获取 TMDB 的趋势榜单数据",
       "requiredVersion": "0.0.1",
       "version": "1.0.4",
       "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdbList.js"
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBtrending.js"
     },
   ]
 }
