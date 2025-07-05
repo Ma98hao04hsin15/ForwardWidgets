@@ -4,7 +4,7 @@ WidgetMetadata = {
   description: "基于Forw​​ardWidget架构导入豆瓣相关影视模块",
   author: "乔伊",
   site: "https://github.com/joy51744/FW-Widgets",
-  version: "1.0.0",
+  version: "1.2.7",
   requiredVersion: "0.0.1",
   detailCacheDuration: 60,
   modules: [
