@@ -629,7 +629,9 @@ WidgetMetadata = {
             { title: "时下热门电影", 
               value: "https://www.imdb.com/chart/moviemeter/?ref_=nv_mv_mpm" },
             { title: "时下热门剧集", 
-              value: "https://www.imdb.com/chart/tvmeter/?ref_=nv_tvv_mptv" }
+              value: "https://www.imdb.com/chart/tvmeter/?ref_=nv_tvv_mptv" },
+            { title: "北京电影学院硕士要看的100部电影", 
+              value: "https://www.imdb.com/list/ls599235177/?ref_=uspf_t_1" },            
           ]
         },
         { name: "page", title: "页码", type: "page" },
