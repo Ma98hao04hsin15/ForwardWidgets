@@ -40,8 +40,8 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdbupcoming.js"
     },
     {
-      "id": "douban.imdb",
-      "title": "Douban片單",
+      "id": "douban",
+      "title": "豆瓣",
       "description": "解析豆瓣片单，获取视频信息",
       "requiredVersion": "0.0.1",
       "version": "1.0.4",
