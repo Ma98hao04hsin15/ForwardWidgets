@@ -4,7 +4,7 @@ WidgetMetadata = {
   description: "豆瓣自定义片单",
   author: "Joy",
   site: "https://github.com/quantumultxx/FW-Widgets",
-  version: "1.0.5",
+  version: "1.0.6",
   requiredVersion: "0.0.1",
   detailCacheDuration: 60,
   modules: [
