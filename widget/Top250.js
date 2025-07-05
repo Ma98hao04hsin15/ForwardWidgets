@@ -3,11 +3,11 @@ WidgetMetadata = {
   title: "TMDB",
   version: "1.0.1",
   requiredVersion: "0.0.1",
-  description: "获取 TMDB 的榜单数据",
-  author: "Forward",
+  description: "获取 TMDB 的片单数据",
+  author: "Forward + Joy",
   site: "https://github.com/InchStudio/ForwardWidgets",
   modules: [
-   {
+    {
       id: "list",
       title: "片单",
       functionName: "list",
@@ -23,8 +23,12 @@ WidgetMetadata = {
               value: "https://www.themoviedb.org/list/8512095-2025-oscar-nominations-for-best-picture-97th-academy-awards",
             },
             {
-              title: "Top 250 IMDB",
+              title: "IMDb Top 250",
               value: "https://www.themoviedb.org/list/634-top-250-imdb?language=zh-CN",
+            },
+            {
+              title: "韓劇推薦（KR Drama）",
+              value: "https://www.themoviedb.org/list/8540446-kr-drama",
             },
           ],
         },
@@ -42,7 +46,6 @@ async function fetchData(api, params, forceMediaType) {
       throw new Error("获取数据失败");
     }
 
-    console.log(response);
     const data = response.results;
     const result = data.map((item) => {
       let mediaType = item.media_type;
@@ -73,6 +76,7 @@ async function fetchData(api, params, forceMediaType) {
     throw error;
   }
 }
+
 async function list(params = {}) {
   let url = params.url;
 
@@ -85,9 +89,7 @@ async function list(params = {}) {
     }
   }
 
-  console.log("请求片单页面:", url);
-  
-  // 发送请求获取片单页面
+  // 请求片单页面
   const response = await Widget.http.get(url, {
     headers: {
       Referer: `https://www.themoviedb.org/`,
@@ -100,20 +102,10 @@ async function list(params = {}) {
     throw new Error("获取片单数据失败");
   }
 
-
-  console.log("片单页面数据长度:", response.data.length);
-  console.log("开始解析");
-
-  // 解析 HTML 得到文档 ID
+  // 解析 HTML 得到元素
   const $ = Widget.html.load(response.data);
-  if (!$ || $ === null) {
-    throw new Error("解析 HTML 失败");
-  }
 
-  //        // 获取所有视频项，得到元素ID数组
   const coverElements = $(".block.aspect-poster");
-
-  console.log("items:", coverElements);
 
   let tmdbIds = [];
   for (const itemId of coverElements) {
@@ -122,11 +114,11 @@ async function list(params = {}) {
     if (!link) {
       continue;
     }
-    const match = link.match(/^\/(movie|tv)\/([^\/-]+)-/)
+    const match = link.match(/^\/(movie|tv)\/([^\/-]+)-/);
     const type = match?.[1];
     const id = match?.[2];
     if (id && type) {
-      tmdbIds.push({ id: `${type}.${id}`, type: 'tmdb' });
+      tmdbIds.push({ id: `${type}.${id}`, type: "tmdb" });
     }
   }
 
