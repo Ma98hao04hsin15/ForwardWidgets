@@ -1,7 +1,7 @@
 WidgetMetadata = {
   id: "forward.imdb",
-  title: "IMDB片單",
-  description: "獲取 IMDB 片單",
+  title: "IMDB 片单",
+  description: "抓取 IMDb 当前最受欢迎的电视剧/电影榜单",
   author: "pack1r",
   site: "https://github.com/pack1r/ForwardWidgets",
   version: "1.0.0",
