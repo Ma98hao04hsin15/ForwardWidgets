@@ -19,8 +19,8 @@ WidgetMetadata = {
           description: "TMDB 片单地址",
           placeholders: [
             {
-              title: "奥斯卡金像奖",
-              value: "https://www.themoviedb.org/list/8512095-2025-oscar-nominations-for-best-picture-97th-academy-awards",
+              title: "Top 250 IMDB",
+              value: "https://www.themoviedb.org/list/634-top-250-imdb?language=zh-CN",
             }
           ],
         }
