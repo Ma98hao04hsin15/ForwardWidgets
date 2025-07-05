@@ -47,8 +47,8 @@ WidgetMetadata = {
   version: "1.0.0",
   requiredVersion: "0.0.1",
   description: "解析豆瓣片单，获取视频信息",
-  author: "pack1r",
-  site: "https://github.com/pack1r/ForwardWidgets"
+  author: "Joy",
+  site: "https://github.com/Ma98hao04hsin15/ForwardWidgets"
 };
 // 解析豆瓣片单
 async function loadCardItems(params = {}) {
