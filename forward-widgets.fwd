@@ -67,9 +67,9 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBList.js"
     },
     {
-      "id": "tmdb",
-      "title": "TMDB Top250",
-      "description": "從 TMDB 網頁解析Top250",
+      "id": "tmdb.list",
+      "title": "TMDB 片單",
+      "description": "自訂 TMDB 片單網址，抓取其中的電影或影集，支援 IMDb / 豆瓣 / 亞洲片單整理",
       "requiredVersion": "0.0.1",
       "version": "1.0.0",
       "author": "Joy",
