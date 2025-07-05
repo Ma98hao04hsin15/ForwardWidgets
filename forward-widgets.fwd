@@ -57,5 +57,14 @@
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbtvmeter.js"
     },
+    {
+      "id": "tmdb",
+      "title": "TMDB 熱門電影榜（免 API）",
+      "description": "從 TMDB 網頁解析熱門電影資料，支援類型與地區篩選",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBList.js"
+    },
   ]
 }
