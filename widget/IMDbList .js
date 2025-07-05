@@ -1,43 +1,5 @@
 // 豆瓣片单组件
 WidgetMetadata = {
-  id: "douban",
-  title: "豆瓣",
-  modules: [
-    {
-      title: "片单",
-      requiresWebView: false,
-      functionName: "loadCardItems",
-      params: [
-        {
-          name: "url",
-          title: "列表地址",
-          type: "input",
-          description: "豆瓣片单地址",
-          placeholders: [
-            {
-              title: "电影学院本科生必看100部",
-              value: "https://www.douban.com/doulist/108673",
-            },
-            {
-              title: "北京电影学院硕士要看的100部电影",
-              value:
-                "https://www.douban.com/doulist/42564",
-            },
-          ],
-        },
-        {
-          name: "start",
-          title: "开始",
-          type: "count",
-        },
-        {
-          name: "limit",
-          title: "每页数量",
-          type: "constant",
-          value: "20",
-        },
-      ],
-    },
     {
   title: "IMDb 列表",
   functionName: "loadImdbItems",
@@ -62,7 +24,7 @@ WidgetMetadata = {
   ],
   version: "1.0.0",
   requiredVersion: "0.0.1",
-  description: "解析豆瓣片单，获取视频信息",
+  description: "解析IMDb片单，获取视频信息",
   author: "Joy",
   site: "https://github.com/Ma98hao04hsin15/ForwardWidgets"
 };
