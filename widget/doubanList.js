@@ -38,27 +38,6 @@ WidgetMetadata = {
         },
       ],
     },
-    {
-  title: "IMDb 列表",
-  functionName: "loadImdbItems",
-  params: [
-    {
-      name: "url",
-      title: "IMDb 列表地址",
-      type: "input",
-      placeholders: [
-        {
-          title: "IMDb 热门电视剧",
-          value: "https://www.imdb.com/chart/tvmeter/"
-        },
-        {
-          title: "用户自建列表",
-          value: "https://www.imdb.com/list/ls055592025/"
-        },
-      ],
-    },
-  ],
-},
   ],
   version: "1.0.0",
   requiredVersion: "0.0.1",
@@ -66,49 +45,6 @@ WidgetMetadata = {
   author: "Joy",
   site: "https://github.com/Ma98hao04hsin15/ForwardWidgets"
 };
-async function loadImdbItems(params = {}) {
-  const url = params.url;
-  if (!url || !url.includes("imdb.com")) {
-    throw new Error("无效的 IMDb 链接");
-  }
-
-  const response = await Widget.http.get(url, {
-    headers: {
-      Referer: "https://www.imdb.com/",
-      "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/115.0.0.0 Safari/537.36"
-    }
-  });
-
-  if (!response || !response.data) {
-    throw new Error("获取 IMDb 页面失败");
-  }
-
-  const docId = Widget.dom.parse(response.data);
-  if (docId < 0) {
-    throw new Error("IMDb 页面解析失败");
-  }
-
-  // 选取所有包含影片链接的元素
-  const linkElements = Widget.dom.select(docId, 'a[href*="/title/tt"]');
-  const imdbSet = new Set();
-
-  for (const el of linkElements) {
-    const href = await Widget.dom.attr(el, "href");
-    const match = href.match(/\/title\/(tt\d{7,8})/);
-    if (match) {
-      imdbSet.add(match[1]);
-    }
-  }
-
-  const imdbIds = Array.from(imdbSet).map((id) => ({
-    id,
-    type: "imdb"
-  }));
-
-  return imdbIds;
-}
-
 // 解析豆瓣片单
 async function loadCardItems(params = {}) {
   try {
