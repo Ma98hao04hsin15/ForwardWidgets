@@ -1,31 +1,26 @@
 WidgetMetadata = {
-  id: "tmdb.list",
-  title: "TMDB 片單",
-  version: "1.0.0",
+  id: "forward.tmdb",
+  title: "TMDB",
+  version: "1.0.1",
   requiredVersion: "0.0.1",
-  description: "自訂 TMDB 片單網址，抓取其中的電影或影集，支援 IMDb / 豆瓣 / 亞洲片單整理",
+  description: "获取 TMDB 的榜单数据",
   author: "Forward",
-  site: "https://www.themoviedb.org/",
+  site: "https://github.com/InchStudio/ForwardWidgets",
   modules: [
-    {
-      title: "TMDB 片單",
-      functionName: "loadItemsFromList",
-      cacheDuration: 86400,
+   {
+      id: "list",
+      title: "片单",
+      functionName: "list",
       params: [
         {
           name: "url",
+          title: "列表地址",
           type: "input",
-          title: "TMDB 片單網址",
-          description: "請輸入以 https://www.themoviedb.org/list/ 開頭的網址",
-          default: "https://www.themoviedb.org/list/634-top-250-imdb?language=zh-CN",
+          description: "TMDB 片单地址",
           placeholders: [
             {
-              title: "IMDb Top 250",
-              value: "https://www.themoviedb.org/list/634-top-250-imdb?language=zh-CN",
-            },
-            {
-              title: "豆瓣电影 Top 250",
-              value: "https://www.themoviedb.org/list/8231604-douban-top-250",
+              title: "奥斯卡金像奖",
+              value: "https://www.themoviedb.org/list/8512095-2025-oscar-nominations-for-best-picture-97th-academy-awards",
             },
             {
               title: "奥斯卡最佳影片（历届）",
@@ -35,53 +30,12 @@ WidgetMetadata = {
               title: "AFI 百年百大电影",
               value: "https://www.themoviedb.org/list/8231599-afi-100-years-100-movies",
             },
-            {
-              title: "Sight & Sound 最伟大电影（2022 版）",
-              value: "https://www.themoviedb.org/list/8231603-sight-sound-100-greatest-films-2022",
-            },
-            {
-              title: "烂番茄 Top 100 经典必看电影",
-              value: "https://www.themoviedb.org/list/8231600-rotten-tomatoes-top-100",
-            },
-            {
-              title: "金馬獎最佳影片（歷屆）",
-              value: "https://www.themoviedb.org/list/8231610-golden-horse-best-pictures",
-            },
-            {
-              title: "香港金像獎最佳影片（歷屆）",
-              value: "https://www.themoviedb.org/list/8231611-hkfa-best-pictures",
-            },
-            {
-              title: "大鐘獎最佳影片（韓國）",
-              value: "https://www.themoviedb.org/list/8231612-grand-bell-awards-best-pictures",
-            },
-            {
-              title: "青龍獎最佳影片（韓國）",
-              value: "https://www.themoviedb.org/list/8231613-blue-dragon-awards-best-pictures",
-            },
-            {
-              title: "日本電影旬報年度十大",
-              value: "https://www.themoviedb.org/list/8231614-kinenote-top-10",
-            },
-            {
-              title: "亞洲百大經典電影",
-              value: "https://www.themoviedb.org/list/8231615-top-100-asian-cinema",
-            },
-            {
-              title: "村上春樹推薦電影清單",
-              value: "https://www.themoviedb.org/list/8231616-haruki-murakami-favorites",
-            },
-            {
-              title: "豆瓣华语高分电影 Top 100",
-              value: "https://www.themoviedb.org/list/8231617-douban-chinese-top-100",
-            }
-          ]
+          ],
         }
-      ]
+      ],
     }
-  ]
-}
-
+  ],
+};
 
 // 基础获取TMDB数据方法
 async function fetchData(api, params, forceMediaType) {
@@ -123,8 +77,6 @@ async function fetchData(api, params, forceMediaType) {
     throw error;
   }
 }
-
-
 async function list(params = {}) {
   let url = params.url;
 
@@ -138,6 +90,7 @@ async function list(params = {}) {
   }
 
   console.log("请求片单页面:", url);
+  
   // 发送请求获取片单页面
   const response = await Widget.http.get(url, {
     headers: {
