@@ -23,12 +23,8 @@ WidgetMetadata = {
               value: "https://www.themoviedb.org/list/8512095-2025-oscar-nominations-for-best-picture-97th-academy-awards",
             },
             {
-              title: "奥斯卡最佳影片（历届）",
-              value: "https://www.themoviedb.org/list/8231601-oscar-best-pictures",
-            },
-            {
-              title: "AFI 百年百大电影",
-              value: "https://www.themoviedb.org/list/8231599-afi-100-years-100-movies",
+              title: "Top 250 IMDB",
+              value: "https://www.themoviedb.org/list/634-top-250-imdb?language=zh-CN",
             },
           ],
         },
