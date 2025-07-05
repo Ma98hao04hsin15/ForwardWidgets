@@ -40,7 +40,7 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdbupcoming.js"
     },
     {
-      "id": "forward.Douban",
+      "id": "douban.imdb",
       "title": "Douban/IMDb片單",
       "description": "获取 Douban/IMDb 的片单数据",
       "requiredVersion": "0.0.1",
