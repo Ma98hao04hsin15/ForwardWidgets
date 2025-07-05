@@ -1,9 +1,15 @@
+// =============UserScript=============
+// @name         影视聚合查询组件
+// @version      1.2.7
+// @description  聚合查询豆瓣/TMDB/IMDB/BGM影视数据
+// @author       阿米诺斯
+// =============UserScript=============
 WidgetMetadata = {
   id: "forward.combined.media.lists",
-  title: "Forward影视榜单",
-  description: "基于Forw​​ardWidget架构导入豆瓣相关影视模块",
-  author: "乔伊",
-  site: "https://github.com/joy51744/FW-Widgets",
+  title: "影视榜单",
+  description: "聚合豆瓣、TMDB、IMDB和Bangumi的影视动画榜单",
+  author: "阿米诺斯",
+  site: "https://github.com/quantumultxx/FW-Widgets",
   version: "1.2.7",
   requiredVersion: "0.0.1",
   detailCacheDuration: 60,
@@ -26,7 +32,7 @@ WidgetMetadata = {
           type: "constant", 
           value: "movie" },
         { name: "page", title: "页码", type: "page" },
-        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "25" }
       ]
     },
     {
@@ -45,7 +51,7 @@ WidgetMetadata = {
           type: "constant", 
           value: "tv" },
         { name: "page", title: "页码", type: "page" },
-        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "25" }
       ]
     },
 
@@ -62,7 +68,7 @@ WidgetMetadata = {
           type: "constant", 
           value: "https://m.douban.com/subject_collection/movie_top250" },
         { name: "page", title: "页码", type: "page" },
-        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "25" }
       ]
     },
     {
@@ -78,18 +84,18 @@ WidgetMetadata = {
           type: "input", 
           description: "输入豆瓣片单或榜单地址 (subject_collection 或 doulist)",
           placeholders: [
-            { title: "第27届上海国际电影节获奖名单", 
-              value: "https://m.douban.com/subject_collection/ECMY73FGQ?type=rank" },
-            { title: "2025年07月定档热门电影推荐", 
-              value: "https://m.douban.com/subject_collection/ECEY7ZCTY?type=rank" },
-            { title: "2024年上半年高分电影Top50", 
-              value: "https://m.douban.com/subject_collection/EC446NAZA?type=rank" },
-            { title: "北京电影学院硕士要看的100部电影", 
-              value: "https://www.douban.com/doulist/42564/" }
+            { title: "一周电影口碑榜", 
+              value: "https://m.douban.com/subject_collection/movie_weekly_best" },
+            { title: "一周华语口碑剧集榜", 
+              value: "https://m.douban.com/subject_collection/tv_chinese_best_weekly" },
+            { title: "一周全球口碑剧集榜", 
+              value: "https://m.douban.com/subject_collection/tv_global_best_weekly" },
+            { title: "第97届奥斯卡 (2025)", 
+              value: "https://m.douban.com/subject_collection/EC7I7ZDRA?type=rank" }
           ]
         },
         { name: "page", title: "页码", type: "page" },
-        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "25" }
       ]
     },
 
@@ -183,7 +189,7 @@ WidgetMetadata = {
           ]
         },
         { name: "page", title: "页码", type: "page" },
-        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "25" }
       ]
     },
     {
@@ -209,7 +215,7 @@ WidgetMetadata = {
           value: "tv"
         },
         { name: "page", title: "页码", type: "page" },
-        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "25" }
       ]
     },
 
@@ -629,13 +635,11 @@ WidgetMetadata = {
             { title: "时下热门电影", 
               value: "https://www.imdb.com/chart/moviemeter/?ref_=nv_mv_mpm" },
             { title: "时下热门剧集", 
-              value: "https://www.imdb.com/chart/tvmeter/?ref_=nv_tvv_mptv" },
-            { title: "北京电影学院硕士要看的100部电影", 
-              value: "https://www.imdb.com/list/ls599235177/?ref_=uspf_t_1" },            
+              value: "https://www.imdb.com/chart/tvmeter/?ref_=nv_tvv_mptv" }
           ]
         },
         { name: "page", title: "页码", type: "page" },
-        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "50" }
       ]
     },
     // =============BGM模块=============
@@ -1005,7 +1009,7 @@ function createErrorItem(id, title, error) {
 
 function calculatePagination(params) {
     let page = parseInt(params.page) || 1;
-    const limit = parseInt(params.limit) || 50;
+    const limit = parseInt(params.limit) || 20;
     
     if (typeof params.start !== 'undefined') {
         page = Math.floor(parseInt(params.start) / limit) + 1;
