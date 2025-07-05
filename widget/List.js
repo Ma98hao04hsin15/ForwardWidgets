@@ -1,7 +1,7 @@
 // 豆瓣片单组件
 WidgetMetadata = {
-  id: "douban",
-  title: "豆瓣",
+  id: "douban/IMDb",
+  title: "豆瓣/IMDb",
   modules: [
     {
       title: "片单",
@@ -38,35 +38,45 @@ WidgetMetadata = {
         },
       ],
     },
+    {
+  title: "IMDb 列表",
+  functionName: "loadImdbItems",
+  params: [
+    {
+      name: "url",
+      title: "IMDb 列表地址",
+      type: "input",
+      placeholders: [
         {
-      title: "IMDb 列表",
-      functionName: "loadImdbItems",
-      params: [
+          title: "IMDb 热门电视剧",
+          value: "https://www.imdb.com/chart/tvmeter/"
+        },
         {
-          name: "url",
-          title: "IMDb 列表地址",
-          type: "input",
-          placeholders: [
-            {
-              title: "IMDb 热门电视剧",
-              value: "https://www.imdb.com/chart/tvmeter/"
-            },
-            {
-              title: "用户自建列表",
-              value: "https://www.imdb.com/list/ls055592025/"
-            },
-          ],
+          title: "用户自建列表",
+          value: "https://www.imdb.com/list/ls055592025/"
         },
       ],
     },
+        {
+          name: "start",
+          title: "开始",
+          type: "count",
+        },
+        {
+          name: "limit",
+          title: "每页数量",
+          type: "constant",
+          value: "20",
+        },	
+	],
+},
   ],
   version: "1.0.0",
   requiredVersion: "0.0.1",
-  description: "解析豆瓣/IMDb片单，获取视频信息",
+  description: "解析豆瓣片单，获取视频信息",
   author: "Joy",
   site: "https://github.com/Ma98hao04hsin15/ForwardWidgets"
 };
-
 async function loadImdbItems(params = {}) {
   const url = params.url;
   if (!url || !url.includes("imdb.com")) {
@@ -80,8 +90,7 @@ async function loadImdbItems(params = {}) {
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/115.0.0.0 Safari/537.36"
     }
   });
-  
-// 解析IMDb片单
+
   if (!response || !response.data) {
     throw new Error("获取 IMDb 页面失败");
   }
@@ -91,6 +100,7 @@ async function loadImdbItems(params = {}) {
     throw new Error("IMDb 页面解析失败");
   }
 
+  // 选取所有包含影片链接的元素
   const linkElements = Widget.dom.select(docId, 'a[href*="/title/tt"]');
   const imdbSet = new Set();
 
@@ -107,7 +117,6 @@ async function loadImdbItems(params = {}) {
     type: "imdb"
   }));
 
-  console.log("IMDb ID 数量:", imdbIds.length);
   return imdbIds;
 }
 
