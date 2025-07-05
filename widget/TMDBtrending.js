@@ -12,7 +12,7 @@ WidgetMetadata = {
       title: "趋势",
       functionName: "trending",
       params: [
-      {
+        {
           name: "time_window",
           title: "时间窗口",
           type: "enumeration",
@@ -27,22 +27,9 @@ WidgetMetadata = {
             },
           ],
         },
-      ],
-        {
-          name: "type",
-          title: "接口",
-          type: "电影",
-          value: "movie",
-        },
-        {
-          name: "type",
-          title: "接口",
-          type: "剧集",
-          value: "tv",
-        },
         {
           name: "language",
-          title: "今日",
+          title: "语言",
           type: "language",
           value: "zh-CN",
         },
@@ -101,9 +88,9 @@ async function nowPlaying(params) {
   return await fetchData(api, params, type);
 }
 
-async function trending(params) {
+async function trending(params) {  
   const timeWindow = params.time_window;
-  const api = `trending/all/${timeWindow}`;
+  const api = `trending/movie/${timeWindow}`;
   delete params.time_window;
   return await fetchData(api, params);
 }
