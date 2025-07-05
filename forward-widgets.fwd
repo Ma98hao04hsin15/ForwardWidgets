@@ -66,5 +66,14 @@
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdbList.js"
     },
+    {
+      "id": "forward.combined.media.lists",
+      "title": "Forward影视榜单",
+      "description": "基于Forw​​ardWidget架构导入豆瓣相关影视模块",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "乔伊",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/ForwardWidgets.js"
+    },
   ]
 }
