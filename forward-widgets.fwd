@@ -57,14 +57,5 @@
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbtvmeter.js"
     },
-    {
-      "id": "imdb-region-filter",
-      "title": "IMDb 熱門影集 × 地區篩選",
-      "description": "抓取 IMDb 熱門影集榜單，結合 TMDB 地區資料過濾（無需 API Key）",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbRegion.js"
-    },
   ]
 }
