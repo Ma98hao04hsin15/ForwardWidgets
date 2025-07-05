@@ -27,25 +27,22 @@ WidgetMetadata = {
             },
           ],
         },
+      ],
         {
           name: "type",
           title: "接口",
-          type: "enumeration",
-          enumOptions: [
-            {
-              title: "电影",
-              value: "movie",
-            },
-            {
-              title: "剧集",
-              value: "tv",
-            },
-          ],
+          type: "电影",
+          value: "movie",
         },
-      ],
+        {
+          name: "type",
+          title: "接口",
+          type: "剧集",
+          value: "tv",
+        },
         {
           name: "language",
-          title: "语言",
+          title: "今日",
           type: "language",
           value: "zh-CN",
         },
