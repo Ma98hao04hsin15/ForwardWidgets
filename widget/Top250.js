@@ -31,9 +31,9 @@ WidgetMetadata = {
               value: "https://www.themoviedb.org/list/8231599-afi-100-years-100-movies",
             },
           ],
-        }
+        },
       ],
-    }
+    },
   ],
 };
 
