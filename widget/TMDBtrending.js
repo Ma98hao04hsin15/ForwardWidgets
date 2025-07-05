@@ -1,12 +1,45 @@
 WidgetMetadata = {
   id: "forward.tmdb",
-  title: "TMDB",
+  title: "TMDB 趋势",
   version: "1.0.1",
   requiredVersion: "0.0.1",
-  description: "获取 TMDB 的榜单数据",
-  author: "Forward",
+  description: "获取 TMDB 的趋势数据",
+  author: "special",
   site: "https://github.com/InchStudio/ForwardWidgets",
   modules: [
+    {
+      id: "nowPlaying",
+      title: "正在热映",
+      functionName: "nowPlaying",
+      params: [
+        {
+          name: "type",
+          title: "接口",
+          type: "enumeration",
+          enumOptions: [
+            {
+              title: "电影",
+              value: "movie",
+            },
+            {
+              title: "剧集",
+              value: "tv",
+            },
+          ],
+        },
+        {
+          name: "page",
+          title: "页码",
+          type: "page"
+        },
+        {
+          name: "language",
+          title: "语言",
+          type: "language",
+          value: "zh-CN",
+        },
+      ],
+    },
     {
       id: "trending",
       title: "趋势",
@@ -25,7 +58,33 @@ WidgetMetadata = {
               title: "本周",
               value: "week",
             },
+            {
+              title: "电影",
+              value: "movie",
+            },
+            {
+              title: "剧集",
+              value: "tv",
+            },            
+          ],
+        },
         {
+          name: "language",
+          title: "语言",
+          type: "language",
+          value: "zh-CN",
+        },
+      ],
+    },
+    {
+      id: "popular",
+      title: "备受欢迎",
+      functionName: "popular",
+      params: [
+        {
+          name: "type",
+          title: "类型",
+          type: "enumeration",
           enumOptions: [
             {
               title: "电影",
@@ -37,6 +96,281 @@ WidgetMetadata = {
             },
           ],
         },
+        {
+          name: "language",
+          title: "语言",
+          type: "language",
+          value: "zh-CN",
+        },
+        {
+          name: "page",
+          title: "页码",
+          type: "page",
+        },
+      ],
+    },
+    {
+      id: "topRated",
+      title: "高分内容",
+      functionName: "topRated",
+      params: [
+        {
+          name: "type",
+          title: "接口",
+          type: "enumeration",
+          enumOptions: [
+            {
+              title: "电影",
+              value: "movie",
+            },
+            {
+              title: "剧集",
+              value: "tv",
+            },
+          ],
+        },
+        {
+          name: "page",
+          title: "页码",
+          type: "page"
+        },
+        {
+          name: "language",
+          title: "语言",
+          type: "language",
+          value: "zh-CN",
+        },
+      ],
+    },
+    {
+      id: "categories",
+      title: "分类",
+      functionName: "categories",
+      params: [
+        {
+          name: "with_genres",
+          title: "分类",
+          type: "enumeration",
+          enumOptions: [
+            {
+              title: "合家欢",
+              value: "10751",
+            },
+            {
+              title: "动画",
+              value: "16",
+            },
+            {
+              title: "喜剧",
+              value: "35",
+            },
+            {
+              title: "犯罪",
+              value: "80",
+            },
+            {
+              title: "纪录",
+              value: "99",
+            },
+            {
+              title: "剧情",
+              value: "18",
+            },
+            {
+              title: "悬疑",
+              value: "9648",
+            },
+            {
+              title: "西部",
+              value: "37",
+            },
+            {
+              title: "儿童",
+              value: "10762",
+            },
+            {
+              title: "科幻",
+              value: "878",
+            },
+            {
+              title: "动作",
+              value: "28",
+            },
+            {
+              title: "惊悚",
+              value: "53",
+            },
+            {
+              title: "真人秀",
+              value: "10764",
+            },
+          ],
+        },
+        {
+          name: "type",
+          title: "类型",
+          type: "enumeration",
+          belongTo: {
+            paramName: "with_genres",
+            value: ["16", "35", "80", "99", "18", "878", "9648", "37", "10751"],
+          },
+          enumOptions: [
+            {
+              title: "电影",
+              value: "movie",
+            },
+            {
+              title: "剧集",
+              value: "tv",
+            },
+          ],
+        },
+        {
+          name: "with_origin_country",
+          title: "国家",
+          type: "input",
+          belongTo: {
+            paramName: "with_genres",
+            value: ["10764"],
+          },
+          value: "CN",
+          placeholders: [
+            {
+              title: "中国",
+              value: "CN",
+            },
+            {
+              title: "美国",
+              value: "US",
+            },
+            {
+              title: "英国",
+              value: "GB",
+            },
+            {
+              title: "日本",
+              value: "JP",
+            },
+            {
+              title: "韩国",
+              value: "KR",
+            },
+          ],
+        },
+        {
+          name: "page",
+          title: "页码",
+          type: "page"
+        },
+        {
+          name: "language",
+          title: "语言",
+          type: "language",
+          value: "zh-CN",
+        },
+      ],
+    },
+    {
+      id: "networks",
+      title: "播出平台",
+      functionName: "networks",
+      params: [
+        {
+          name: "with_networks",
+          title: "播出平台",
+          type: "enumeration",
+          enumOptions: [
+            {
+              title: "Netflix",
+              value: "213",
+            },
+            {
+              title: "Disney+",
+              value: "2739",
+            },
+            {
+              title: "Apple TV+",
+              value: "2552",
+            },
+            {
+              title: "HBO Max",
+              value: "3186",
+            },
+            {
+              title: "Hulu",
+              value: "453",
+            },
+          ],
+        },
+        {
+          name: "page",
+          title: "页码",
+          type: "page"
+        },
+        {
+          name: "language",
+          title: "语言",
+          type: "language",
+          value: "zh-CN",
+        },
+      ],
+    },
+    {
+      id: "companies",
+      title: "出品公司",
+      functionName: "companies",
+      params: [
+        {
+          name: "with_companies",
+          title: "出品公司",
+          type: "enumeration",
+          enumOptions: [
+            {
+              title: "迪士尼",
+              value: "2",
+            },
+            {
+              title: "华纳兄弟",
+              value: "174",
+            },
+            {
+              title: "哥伦比亚影业",
+              value: "5",
+            },
+            {
+              title: "索尼影业",
+              value: "34",
+            },
+            {
+              title: "环球影业",
+              value: "33",
+            },
+            {
+              title: "派拉蒙影业",
+              value: "4",
+            },
+            {
+              title: "二十世纪影业",
+              value: "25",
+            },
+            {
+              title: "Marvel",
+              value: "420",
+            },
+          ]
+        },
+        {
+          name: "page",
+          title: "页码",
+          type: "page"
+        },
+        {
+          name: "language",
+          title: "语言",
+          type: "language",
+          value: "zh-CN",
+        },
+      ]
     },
     {
       id: "list",
