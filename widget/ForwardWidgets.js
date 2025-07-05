@@ -1005,7 +1005,7 @@ function createErrorItem(id, title, error) {
 
 function calculatePagination(params) {
     let page = parseInt(params.page) || 1;
-    const limit = parseInt(params.limit) || 20;
+    const limit = parseInt(params.limit) || 50;
     
     if (typeof params.start !== 'undefined') {
         page = Math.floor(parseInt(params.start) / limit) + 1;
