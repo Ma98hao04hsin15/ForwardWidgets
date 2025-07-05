@@ -49,15 +49,6 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/DoubanList.js"
     },
     {
-      "id": "forward.imdb",
-      "title": "IMDb 热门电视剧榜",
-      "description": "抓取 IMDb 当前最受欢迎的电视剧/电影榜单",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbPop.js"
-    },
-    {
       "id": "forward.tmdb",
       "title": "TMDB 片单",
       "description": "获取 TMDB 的片单数据",
