@@ -1,7 +1,7 @@
 // 豆瓣片单组件
 WidgetMetadata = {
-  id: "douban",
-  title: "豆瓣",
+  id: "douban.imdb",
+  title: "豆瓣/IMDb",
   modules: [
     {
       title: "片单",
