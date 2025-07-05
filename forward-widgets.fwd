@@ -41,7 +41,7 @@
     },
     {
       "id": "douban.imdb",
-      "title": "Douban/IMDb片單",
+      "title": "Douban片單",
       "description": "解析豆瓣片单，获取视频信息",
       "requiredVersion": "0.0.1",
       "version": "1.0.4",
