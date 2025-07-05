@@ -30,17 +30,8 @@ WidgetMetadata = {
             },
           ],
         },
-        {
-          name: "start",
-          title: "开始",
-          type: "count",
-        },
-        {
-          name: "limit",
-          title: "每页数量",
-          type: "constant",
-          value: "0",
-        },
+        { name: "page", title: "页码", type: "page" },
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
       ],
     },
   ],
@@ -50,6 +41,69 @@ WidgetMetadata = {
   author: "Joy",
   site: "https://github.com/Ma98hao04hsin15/ForwardWidgets"
 };
+
+// ===============辅助函数===============
+function formatItemDescription(item) {
+    let description = item.description || '';
+    const hasRating = /评分|rating/i.test(description);
+    const hasYear = /年份|year/i.test(description);
+    
+    if (item.rating && !hasRating) {
+        description = `评分: ${item.rating} | ${description}`;
+    }
+    
+    if (item.releaseDate && !hasYear) {
+        const year = String(item.releaseDate).substring(0,4);
+        if (/^\d{4}$/.test(year)) {
+            description = `年份: ${year} | ${description}`;
+        }
+    }
+    
+    return description
+        .replace(/^\|\s*/, '')
+        .replace(/\s*\|$/, '')
+        .trim();
+}
+
+function createErrorItem(id, title, error) {
+    const errorMessage = String(error?.message || error || '未知错误');
+    const uniqueId = `error-${id.replace(/[^a-zA-Z0-9]/g, '-')}-${Date.now()}`;
+    return {
+        id: uniqueId,
+        type: "error",
+        title: title || "加载失败",
+        description: `错误详情：${errorMessage}`
+    };
+}
+
+function calculatePagination(params) {
+    let page = parseInt(params.page) || 1;
+    const limit = parseInt(params.limit) || 20;
+    
+    if (typeof params.start !== 'undefined') {
+        page = Math.floor(parseInt(params.start) / limit) + 1;
+    }
+    
+    if (page < 1) page = 1;
+    if (limit > 50) throw new Error("单页数量不能超过50");
+
+    const start = (page - 1) * limit;
+    return { page, limit, start };
+}
+
+function getBeijingDate() {
+    const now = new Date();
+    
+    const beijingTime = now.getTime() + (8 * 60 * 60 * 1000);
+    const beijingDate = new Date(beijingTime);
+    
+    const year = beijingDate.getUTCFullYear();
+    const month = String(beijingDate.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(beijingDate.getUTCDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+}
+
 // 解析豆瓣片单
 async function loadCardItems(params = {}) {
   try {
