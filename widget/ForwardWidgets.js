@@ -78,12 +78,12 @@ WidgetMetadata = {
           type: "input", 
           description: "输入豆瓣片单或榜单地址 (subject_collection 或 doulist)",
           placeholders: [
-            { title: "历届奥斯卡最佳动画短片及提名", 
-              value: "https://www.douban.com/doulist/510983/" },
-            { title: "柏林电影节片单", 
-              value: "https://www.douban.com/doulist/161004180/" },
-            { title: "电影学院本科生必看100部", 
-              value: "https://www.douban.com/doulist/108673/" },
+            { title: "第27届上海国际电影节获奖名单", 
+              value: "https://m.douban.com/subject_collection/ECMY73FGQ?type=rank" },
+            { title: "2025年07月定档热门电影推荐", 
+              value: "https://m.douban.com/subject_collection/ECEY7ZCTY?type=rank" },
+            { title: "一周全球口碑剧集榜", 
+              value: "https://m.douban.com/subject_collection/tv_global_best_weekly" },
             { title: "北京电影学院硕士要看的100部电影", 
               value: "https://www.douban.com/doulist/42564/" }
           ]
