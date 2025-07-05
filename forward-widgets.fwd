@@ -41,8 +41,8 @@
     },
     {
       "id": "forward.Douban",
-      "title": "Douban片單",
-      "description": "获取 Douban 的片单数据",
+      "title": "Douban/IMDb片單",
+      "description": "获取 Douban/IMDb 的片单数据",
       "requiredVersion": "0.0.1",
       "version": "1.0.4",
       "author": "Joy",
