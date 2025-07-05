@@ -58,6 +58,14 @@ WidgetMetadata = {
               title: "本周",
               value: "week",
             },
+            {
+              title: "电影",
+              value: "movie",
+            },
+            {
+              title: "剧集",
+              value: "tv",
+            },            
           ],
         },
         {
