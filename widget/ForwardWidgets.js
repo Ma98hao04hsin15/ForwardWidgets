@@ -93,6 +93,35 @@ WidgetMetadata = {
         { name: "page", title: "页码", type: "page" },
         { name: "limit", title: "🔢 每页数量", type: "constant", value: "25" }
       ]
+    }, 
+    
+    // --- 🏆 豆瓣自定义片单 ---
+    {
+      title: "奥斯卡",
+      description: "加载豆瓣官方榜单或用户豆列 (需输入 URL)",
+      requiresWebView: false,
+      functionName: "loadDoubanCardItems",
+      cacheDuration: 3600,
+      params: [
+        {
+          name: "url", 
+          title: "🔗 列表地址", 
+          type: "input", 
+          description: "有关奥斯卡的榜单或豆列",
+          placeholders: [
+            { title: "历届奥斯卡最佳影片", 
+              value: "https://m.douban.com/subject_collection/ECMQHVGWI" },
+            { title: "历届奥斯卡最佳外语片", 
+              value: "https://m.douban.com/subject_collection/ECNIHQROY?dt_dapp=1" },
+            { title: "奧斯卡歷屆影后", 
+              value: "https://m.douban.com/doulist/175144/" },            
+            { title: "第97届奥斯卡金像奖 (2025)", 
+              value: "https://m.douban.com/subject_collection/EC7I7ZDRA?dt_dapp=1" },
+          ]
+        },
+        { name: "page", title: "页码", type: "page" },
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "25" }
+      ]
     },
 
     // --- 🎬 探索发现 ---
