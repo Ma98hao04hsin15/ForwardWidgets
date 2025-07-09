@@ -58,7 +58,7 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBtrending.js"
     },
     {
-      "id": "forward.tmdb",
+      "id": "douban.coming.beijing",
       "title": "Douban即将上映",
       "description": "获取 Douban即将上映榜单数据",
       "requiredVersion": "0.0.1",
