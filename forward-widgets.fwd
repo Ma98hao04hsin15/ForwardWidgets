@@ -41,8 +41,8 @@
     },
     {
       "id": "forward.combined.media.lists",
-      "title": "Forw​​ardWidget豆瓣影视榜单",
-      "description": "基于Forw​​ardWidget架构导入豆瓣影视模块",
+      "title": "Forw​​ardWidget影视榜单",
+      "description": "基于Forw​​ardWidget架构导入影视模块",
       "requiredVersion": "0.0.1",
       "version": "1.0.6",
       "author": "乔伊",
