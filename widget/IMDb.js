@@ -31,7 +31,7 @@ export const WidgetMetadata = {
             },
             {
               title: "IMDb 用户清单",
-              value: "https://www.imdb.com/list/ls047496221/",
+              value: "https://www.imdb.com/list/ls599657926/?ref_=uspf_t_1",
             },
           ],
         },
