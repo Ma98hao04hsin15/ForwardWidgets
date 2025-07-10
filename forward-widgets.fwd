@@ -48,23 +48,5 @@
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBtrending.js"
     },
-    {
-      "id": "forward.tmdb",
-      "title": "TMDB Person",
-      "description": "获取 TMDB Person榜单数据",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.4",
-      "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdb.js"
-    },
-    {
-      "id": "Trakt",
-      "title": "Trakt片單",
-      "description": "获取 Trakt片單",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.11",
-      "author": "Joey",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/traktList.js"
-    },
   ]
 }
