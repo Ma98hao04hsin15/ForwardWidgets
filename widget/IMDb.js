@@ -4,7 +4,7 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 // ======= Widget Metadata =======
-var WidgetMetadata = {
+const WidgetMetadata = {
   id: "imdb.watchlist",
   title: "IMDb Watchlist",
   description: "根据 IMDb 用户 ID 获取其 Watchlist 片单内容，无需 API Key",
