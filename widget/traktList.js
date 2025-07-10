@@ -78,47 +78,6 @@ WidgetMetadata = {
                 },
             ],
         },
-        {
-            title: "Trakt追剧日历",
-            requiresWebView: false,
-            functionName: "loadCalendarItems",
-            cacheDuration: 43200,
-            params: [
-                {
-                    name: "cookie",
-                    title: "用户Cookie",
-                    type: "input",
-                    description: "_traktsession=xxxx，未填写情况下接口不可用；可登陆网页后，通过loon，Qx等软件抓包获取Cookie",
-                },
-                {
-                    name: "start_date",
-                    title: "开始日期：n天前（0表示今天，-1表示昨天，1表示明天）",
-                    type: "input",
-                    description: "0表示今天，-1表示昨天，1表示明天，未填写情况下接口不可用",
-                },
-                {
-                    name: "days",
-                    title: "天数",
-                    type: "input",
-                    description: "如：7，会返回从开始日期起的7天内的节目，未填写情况下接口不可用",
-                },
-                {
-                    name: "order",
-                    title: "排序方式",
-                    type: "enumeration",
-                    enumOptions: [
-                        {
-                            title: "日期升序",
-                            value: "asc",
-                        },
-                        {
-                            title: "日期降序",
-                            value: "desc",
-                        },
-                    ],
-                },
-            ],
-        },
     ],
     version: "1.0.11",
     requiredVersion: "0.0.1",
