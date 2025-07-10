@@ -57,5 +57,14 @@
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBtrending.js"
     },
+    {
+      "id": "imdb.watchlist",
+      "title": "IMDb Watchlist",
+      "description": "根据 IMDb 用户 ID 获取其 Watchlist 片单内容，无需 API Key",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "Joey",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDb.js"
+    },
   ]
 }
