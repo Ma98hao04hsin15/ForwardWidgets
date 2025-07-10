@@ -66,5 +66,14 @@
       "author": "Joey",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDb.js"
     },
+    {
+      "id": "person.movie.tmdb",
+      "title": "TMDB人物影视作品",
+      "description": "获取 TMDB 随机50热门人物模块相关作品数据",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.5",
+      "author": "Joey + ChatGPT",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBHotPerson.js"
+    },
   ]
 }
