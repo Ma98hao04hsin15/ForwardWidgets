@@ -1,145 +1,177 @@
-// forward.imdb.watchlist.js
+// forward.imdb.js
 
-const axios = require("axios");
-const cheerio = require("cheerio");
-
-// ======= Widget Metadata =======
-const WidgetMetadata = {
-  id: "imdb.watchlist",
-  title: "IMDb Watchlist",
-  description: "根据 IMDb 用户 ID 获取其 Watchlist 片单内容，无需 API Key",
-  author: "YourName",
-  site: "https://www.imdb.com",
+export const WidgetMetadata = {
+  id: "imdb",
+  title: "IMDb 榜单 & 推荐",
+  description: "支持 IMDb 榜单、用户清单与官方推荐，无需 API Key",
+  author: "pack1r",
+  site: "https://github.com/pack1r/ForwardWidgets",
   version: "1.0.0",
   requiredVersion: "0.0.1",
-  detailCacheDuration: 60,
   modules: [
     {
-      title: "我的 Watchlist",
-      description: "通过 IMDb 用户 ID 获取 Watchlist 内容",
+      title: "IMDb 片单",
+      description: "支援 IMDb 官方榜单与用户自建清单",
       requiresWebView: false,
-      functionName: "loadImdbWatchlist",
-      sectionMode: false,
-      cacheDuration: 3600,
+      functionName: "loadCardItems",
       params: [
         {
-          name: "userId",
-          title: "IMDb 用户 ID",
+          name: "url",
+          title: "列表地址",
           type: "input",
-          description: "例如：ur204635540，可在 IMDb 个人资料页 URL 中找到",
-          value: ""
+          description: "IMDb 官方榜单或用户清单地址",
+          placeholders: [
+            {
+              title: "IMDb Top 250 Movies",
+              value: "https://www.imdb.com/chart/top/",
+            },
+            {
+              title: "IMDb Top 250 TV",
+              value: "https://www.imdb.com/chart/toptv/",
+            },
+            {
+              title: "IMDb 用户清单",
+              value: "https://www.imdb.com/list/ls047496221/",
+            },
+          ],
         },
+      ],
+    },
+    {
+      title: "IMDb 推荐",
+      description: "来自 IMDb 的个性推荐与热门片单",
+      requiresWebView: false,
+      functionName: "loadApiItems",
+      params: [
         {
-          name: "filter",
-          title: "内容类型",
-          type: "enumeration",
-          description: "选择要展示的内容类型",
-          value: "all",
-          enumOptions: [
-            { title: "全部", value: "all" },
-            { title: "电影", value: "movie" },
-            { title: "剧集", value: "tv" }
-          ]
+          name: "url",
+          title: "API 地址",
+          type: "input",
+          description: "IMDb GraphQL 推荐接口地址",
+          placeholders: [
+            {
+              title: "用户最爱",
+              value:
+                "https://api.graphql.imdb.com/?operationName=FanFavorites&variables=%7B%22first%22%3A48,%22includeUserRating%22%3Afalse,%22locale%22%3A%22zh-CN%22%7D&extensions=%7B%22persistedQuery%22%3A%7B%22sha256Hash%22%3A%227c01e0d9d8581975bf64701df0c96b02aaec777fdfc75734d68d009bde984b99%22,%22version%22%3A1%7D%7D",
+            },
+            {
+              title: "热门选择",
+              value:
+                "https://api.graphql.imdb.com/?operationName=TopPicksTab&variables=%7B%22first%22%3A48%2C%22includeUserRating%22%3Afalse%2C%22locale%22%3A%22zh-CN%22%7D&extensions=%7B%22persistedQuery%22%3A%7B%22sha256Hash%22%3A%222f5671615846a8c1698b904a993e6eace63c5f94293eb7b68d12c105b6f5f319%22%2C%22version%22%3A1%7D%7D",
+            },
+            {
+              title: "最受欢迎",
+              value:
+                "https://api.graphql.imdb.com/?operationName=PopularTitles&variables=%7B%22includeUserRating%22%3Afalse%2C%22limit%22%3A48%2C%22locale%22%3A%22zh-CN%22%2C%22queryFilter%22%3A%7B%22releaseDateRange%22%3A%7B%22end%22%3A%222025-04-02%22%7D%7D%7D&extensions=%7B%22persistedQuery%22%3A%7B%22sha256Hash%22%3A%22f928c4406df23ac79204ff916c3f7429d3a44c9aac069d332a9d7eb6932c4f2f%22%2C%22version%22%3A1%7D%7D",
+            },
+          ],
         },
-        {
-          name: "sort",
-          title: "排序方式",
-          type: "enumeration",
-          value: "date_added,desc",
-          enumOptions: [
-            { title: "添加时间（新→旧）", value: "date_added,desc" },
-            { title: "添加时间（旧→新）", value: "date_added,asc" },
-            { title: "IMDb 评分（高→低）", value: "user_rating,desc" },
-            { title: "上映时间（新→旧）", value: "release_date,desc" },
-            { title: "标题（A→Z）", value: "alpha,asc" }
-          ]
-        },
-        {
-          name: "count",
-          title: "数量",
-          type: "count",
-          value: 30,
-          description: "最多加载条目数，默认 30 条"
-        }
-      ]
-    }
-  ]
+      ],
+    },
+  ],
 };
 
-// ======= 主函数 =======
-const loadImdbWatchlist = async (params) => {
-  const {
-    userId,
-    sort = "date_added,desc",
-    filter = "all",
-    count = 30
-  } = params;
+export async function loadCardItems(params = {}) {
+  const url = params.url;
+  if (!url) throw new Error("缺少片单 URL");
 
-  if (!userId) throw new Error("请提供 IMDb 用户 ID");
-
-  const sortParam = encodeURIComponent(sort);
-  const filterParam = filter === "all" ? "" : `&filter=${filter}`;
-  const url = `https://www.imdb.com/user/${userId}/watchlist?sort=${sortParam}${filterParam}`;
-
-  const html = await fetchHtml(url);
-  const $ = cheerio.load(html);
-  const scripts = $("script");
-
-  let jsonText = null;
-  scripts.each((_, el) => {
-    const content = $(el).html();
-    if (content && content.includes("IMDbReactInitialState.push")) {
-      const match = content.match(/\{.+\}/);
-      if (match) jsonText = match[0];
-    }
-  });
-
-  if (!jsonText) throw new Error("无法解析 IMDb Watchlist 数据");
-
-  const data = JSON.parse(jsonText);
-  const items = data.list?.items || [];
-
-  const result = [];
-  for (let i = 0; i < Math.min(items.length, count); i++) {
-    const item = items[i];
-    const imdbId = item.const;
-    const title = item.displayableTitle || item.title;
-    const image = item.primaryImage?.url?.split("_V1")[0] + "_V1_UX400.jpg";
-    const rating = item.rating?.value || null;
-    const releaseDate = item.releaseDate || "";
-    const year = releaseDate.slice(0, 4);
-
-    result.push({
-      id: imdbId,
-      title: title,
-      subtitle: `${year || ""}${rating ? " · ⭐" + rating : ""}`,
-      image: image,
-      jumpUrl: `https://www.imdb.com/title/${imdbId}/`
-    });
-  }
-
-  return result;
-};
-
-// ======= 辅助函数 =======
-const fetchHtml = async (url) => {
-  const res = await axios.get(url, {
+  const response = await Widget.http.get(url, {
     headers: {
+      Referer: "https://www.imdb.com/",
       "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.117 Safari/537.36",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
     },
   });
-  return res.data;
-};
 
-// 预留：IMDb ID → TMDb 信息
-const fetchTmdbInfoByImdbId = async (imdbId) => {
-  // 可接入你自己的映射逻辑，如 forward.tmdb.fetchByImdb(imdbId)
-  return {};
-};
+  if (!response || !response.data) throw new Error("获取片单数据失败");
 
-// ======= 导出 =======
-module.exports = {
-  WidgetMetadata,
-  loadImdbWatchlist
-};
+  const videoIds = [];
+
+  // 支援用户清单页面
+  if (url.includes("/list/")) {
+    const docId = Widget.dom.parse(response.data);
+    if (docId < 0) throw new Error("解析用户清单 HTML 失败");
+
+    const items = Widget.dom.select(docId, ".lister-item-header a");
+    for (const item of items) {
+      const href = await Widget.dom.attr(item, "href");
+      const title = await Widget.dom.text(item);
+      const match = href.match(/\/title\/(tt\d+)\//);
+      if (match) {
+        videoIds.push({
+          id: match[1],
+          type: "imdb",
+          title: title?.trim(),
+        });
+      }
+    }
+  } else {
+    // 官方榜单解析：先尝试 ld+json，再尝试 DOM
+    const ldJson = response.data.match(
+      /<script type="application\/ld\+json">(.*?)<\/script>/
+    );
+    if (ldJson && ldJson[1]) {
+      const json = JSON.parse(ldJson[1]);
+      for (const item of json.itemListElement) {
+        const match = item.item.url.match(/tt(\d+)/);
+        if (match) {
+          videoIds.push({
+            id: `tt${match[1]}`,
+            type: "imdb",
+            title: item.name,
+            description: item.description,
+            coverUrl: item.image,
+          });
+        }
+      }
+    } else {
+      const docId = Widget.dom.parse(response.data);
+      if (docId < 0) throw new Error("解析榜单 HTML 失败");
+
+      const links = Widget.dom.select(docId, ".ipc-metadata-list-summary-item .ipc-poster a");
+      for (const linkNode of links) {
+        const href = await Widget.dom.attr(linkNode, "href");
+        const match = href.match(/tt(\d+)/);
+        if (match) {
+          videoIds.push({ id: `tt${match[1]}`, type: "imdb" });
+        }
+      }
+    }
+  }
+
+  return videoIds;
+}
+
+export async function loadApiItems(params = {}) {
+  const url = params.url;
+  if (!url) throw new Error("缺少 API 地址");
+
+  const response = await Widget.http.get(url, {
+    headers: {
+      "Content-Type": "application/json",
+      Referer: "https://www.imdb.com/",
+      "User-Agent":
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    },
+  });
+
+  if (!response || !response.data) throw new Error("获取 API 数据失败");
+
+  const edges =
+    response.data?.data?.fanPicksTitles?.edges ||
+    response.data?.data?.popularTitles?.edges ||
+    response.data?.data?.topPicksTitles?.edges ||
+    [];
+
+  const videos = edges.map((edge) => {
+    const node = edge.node;
+    return {
+      id: node.id,
+      type: "imdb",
+      title: node.titleText?.text,
+      coverUrl: node.primaryImage?.url,
+    };
+  });
+
+  return videos;
+}
