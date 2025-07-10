@@ -647,8 +647,8 @@ WidgetMetadata = {
 
     // =============IMDB模块=============
     {
-      title: "IMDb Top 250 电影",
-      description: "IMDb 用户评分最高的 250 部电影",
+      title: "时下热门电影",
+      description: "IMDb 时下热门电影",
       requiresWebView: false,
       functionName: "loadImdbCardItems",
       cacheDuration: 3600,
@@ -656,13 +656,13 @@ WidgetMetadata = {
         { name: "url", 
           title: "🔗 列表地址", 
           type: "constant", 
-          value: "https://www.imdb.com/chart/top/?ref_=nv_mv_250" },
+          value: "https://www.imdb.com/chart/moviemeter/?ref_=nv_mv_mpm" },
         { name: "page", title: "页码", type: "page" },
         { name: "limit", title: "🔢 每页数量", type: "constant", value: "50" }
       ]
     },
     {
-      title: "IMDb Top 250 剧集",
+      title: "IMDb 时下热门剧集",
       description: "IMDb 用户评分最高的 250 部剧集",
       requiresWebView: false,
       functionName: "loadImdbCardItems",
@@ -671,7 +671,7 @@ WidgetMetadata = {
         { name: "url", 
           title: "🔗 列表地址", 
           type: "constant", 
-          value: "https://www.imdb.com/chart/toptv/?ref_=nv_tvv_250" },
+          value: "https://www.imdb.com/chart/tvmeter/?ref_=nv_tvv_mptv" },
         { name: "page", title: "页码", type: "page" },
         { name: "limit", title: "🔢 每页数量", type: "constant", value: "50" }
       ]
@@ -689,10 +689,14 @@ WidgetMetadata = {
           type: "input", 
           description: "输入 IMDB 片单或榜单地址",
           placeholders: [
-            { title: "时下热门电影", 
-              value: "https://www.imdb.com/chart/moviemeter/?ref_=nv_mv_mpm" },
-            { title: "时下热门剧集", 
-              value: "https://www.imdb.com/chart/tvmeter/?ref_=nv_tvv_mptv" }
+            {
+              title: "北京电影学院硕士要看的100部电影",
+              value: "https://www.imdb.com/list/ls599235177/",
+            },
+            {
+              title: "1100 Movies you must see before you die",
+              value: "https://www.imdb.com/list/ls002448041/",
+            },
           ]
         },
         { name: "page", title: "页码", type: "page" },
