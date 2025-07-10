@@ -1,106 +1,61 @@
-const WidgetMetadata = {
-  id: "tmdb.people",
-  title: "TMDB 人氣人物",
-  version: "1.0.1",
+var WidgetMetadata = {
+  id: "tmdb.person",
+  title: "TMDB 人物資訊",
+  version: "1.0.0",
   requiredVersion: "0.0.1",
-  description: "顯示 TMDB 上的人氣演員與導演，支援搜尋功能",
   author: "Forward",
-  site: "https://www.themoviedb.org/person?language=zh-CN",
-  detailCacheDuration: 21600,
+  description: "根據 TMDB person ID 抓取人物代表作",
+  site: "https://www.themoviedb.org/",
   modules: [
     {
-      title: "人氣人物",
-      functionName: "loadPopularPeople",
-      requiresWebView: false,
-      params: []
-    },
-    {
-      title: "搜尋人物",
-      functionName: "searchPeople",
-      requiresWebView: false,
+      id: "personKnownFor",
+      title: "人物代表作",
+      description: "根據 TMDB person ID 顯示人物資訊與代表作",
       params: [
         {
-          name: "keyword",
+          name: "personId",
+          title: "人物 ID",
           type: "input",
-          title: "關鍵字",
-          description: "輸入人物名稱以搜尋 TMDB 上的演員或導演"
+          default: "500",
+          placeholder: "輸入 TMDB person ID"
         }
-      ]
+      ],
+      functionName: "loadPersonKnownFor",
+      cacheDuration: 21600,
+      requiresWebView: false
     }
   ]
 };
+async function loadPersonKnownFor(params, ctx) {
+  const { personId } = params;
+  const url = `https://www.themoviedb.org/person/${personId}?language=zh-CN`;
+  const html = await ctx.fetchText(url);
 
-async function loadCardItems() {
-  const url = "https://www.themoviedb.org/person?language=zh-CN";
-  const html = await $http.get(url);
-  const $ = cheerio.load(html);
+  const name = html.match(/<h2 class="title">([\s\S]*?)<\/h2>/)?.[1]?.trim() || "未知人物";
+  const avatar = html.match(/<img class="profile lazyload"[^>]*data-src="([^"]+)"/)?.[1] || "";
+  const department = html.match(/<p class="facts">([\s\S]*?)<\/p>/)?.[1]?.trim() || "";
 
-  const cards = [];
+  const knownForSection = html.match(/<section class="known_for[^>]*>([\s\S]*?)<\/section>/)?.[1] || "";
+  const items = [...knownForSection.matchAll(/<div class="card">([\s\S]*?)<\/div>/g)].map(match => {
+    const block = match[1];
+    const idMatch = block.match(/href="\/(movie|tv)\/(\d+)-[^"]+/);
+    const type = idMatch?.[1] || "";
+    const id = idMatch?.[2] || "";
+    const title = block.match(/<p class="title">([\s\S]*?)<\/p>/)?.[1]?.trim() || "";
+    const poster = block.match(/data-src="([^"]+)"/)?.[1] || "";
+    const subtitle = block.match(/<p class="character">([\s\S]*?)<\/p>/)?.[1]?.trim() || "";
 
-  $(".people .card").each((index, el) => {
-    const $el = $(el);
-    const name = $el.find(".info h2").text().trim();
-    const knownFor = $el.find(".info p").text().trim();
-    const link = "https://www.themoviedb.org" + $el.find("a").attr("href");
-    const image = $el.find(".image_content img").attr("data-src") || $el.find(".image_content img").attr("src");
-
-    cards.push({
-      title: name,
-      description: knownFor,
-      image,
-      url: link
-    });
+    return {
+      title,
+      subtitle,
+      image: poster,
+      url: `https://www.themoviedb.org/${type}/${id}?language=zh-CN`
+    };
   });
 
-  return cards;
-}
-
-async function loadPopularPeople() {
-  const url = "https://www.themoviedb.org/person?language=zh-CN";
-  const html = await $http.get(url);
-  const $ = cheerio.load(html);
-  const cards = [];
-
-  $(".people .card").each((i, el) => {
-    const $el = $(el);
-    const name = $el.find(".info h2").text().trim();
-    const knownFor = $el.find(".info p").text().trim();
-    const link = "https://www.themoviedb.org" + $el.find("a").attr("href");
-    const image = $el.find(".image_content img").attr("data-src") || $el.find(".image_content img").attr("src");
-
-    cards.push({
-      title: name,
-      description: knownFor,
-      image,
-      url: link
-    });
-  });
-
-  return cards;
-}
-
-async function searchPeople({ keyword }) {
-  if (!keyword) return [];
-
-  const searchUrl = `https://www.themoviedb.org/search/person?query=${encodeURIComponent(keyword)}&language=zh-CN`;
-  const html = await $http.get(searchUrl);
-  const $ = cheerio.load(html);
-  const cards = [];
-
-  $(".card.person").each((i, el) => {
-    const $el = $(el);
-    const name = $el.find(".info h2").text().trim();
-    const knownFor = $el.find(".info p").text().trim();
-    const link = "https://www.themoviedb.org" + $el.find("a").attr("href");
-    const image = $el.find(".image img").attr("data-src") || $el.find(".image img").attr("src");
-
-    cards.push({
-      title: name,
-      description: knownFor,
-      image,
-      url: link
-    });
-  });
-
-  return cards;
+  return {
+    title: `${name} - ${department}`,
+    icon: avatar,
+    items
+  };
 }
