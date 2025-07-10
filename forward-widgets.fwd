@@ -58,13 +58,13 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdb.js"
     },
     {
-      "id": "metacritic.tv",
-      "title": "Metacritic TV",
-      "description": "获取 Metacritic TV 热门和高分剧集",
+      "id": "Trakt",
+      "title": "Trakt片單",
+      "description": "获取 Trakt片單",
       "requiredVersion": "0.0.1",
-      "version": "1.0.0",
+      "version": "1.0.11",
       "author": "Joey",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/Metacritic.js"
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/traktList.js"
     },
   ]
 }
