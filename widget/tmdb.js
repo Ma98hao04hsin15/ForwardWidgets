@@ -1,9 +1,9 @@
 WidgetMetadata = {
   id: "forward.tmdb",
   title: "TMDB",
-  version: "1.0.1",
+  version: "1.0.4",
   requiredVersion: "0.0.1",
-  description: "获取 TMDB 的榜单数据",
+  description: "获取 TMDB Person的榜单数据",
   author: "Forward",
   site: "https://github.com/InchStudio/ForwardWidgets",
   modules: [
@@ -382,7 +382,31 @@ WidgetMetadata = {
           ],
         }
       ],
-    }
+    },
+    {
+      id: "recommend",
+      title: "推薦內容",
+      functionName: "loadRecommendation",
+      params: [
+        {
+          name: "type",
+          title: "類型",
+          type: "select",
+          options: [
+            { title: "人物推薦", value: "person" },
+            { title: "電影推薦", value: "movie" },
+            { title: "影集推薦", value: "tv" }
+          ]
+        },
+        {
+          name: "id",
+          title: "TMDB ID",
+          type: "input",
+          placeholder: "請輸入對應的 TMDB 人物/電影/影集 ID"
+        }
+  ],
+  cacheDuration: 21600
+}
   ],
 };
 
@@ -552,4 +576,55 @@ async function list(params = {}) {
   }
 
   return tmdbIds;
+}
+
+async function loadRecommendation({ type, id }) {
+  const items = [];
+
+  if (type === "person") {
+    // 基於人物的推薦方式：抓熱門作品
+    const credits = await tmdbAPI(`/person/${id}/combined_credits`);
+    const known = [...credits.cast, ...credits.crew]
+      .filter(item => item.vote_count > 100) // 篩選一定評價量
+      .sort((a, b) => b.popularity - a.popularity)
+      .slice(0, 20);
+
+    for (const item of known) {
+      items.push({
+        title: item.title || item.name,
+        subtitle: `${item.media_type === "tv" ? "影集" : "電影"} · ${item.release_date || item.first_air_date || ""}`,
+        picture: tmdbImage(item.poster_path),
+        url: getTmdbUrl(item),
+      });
+    }
+  }
+
+  if (type === "movie" || type === "tv") {
+    const data = await tmdbAPI(`/${type}/${id}/recommendations`);
+    for (const item of data.results.slice(0, 20)) {
+      items.push({
+        title: item.title || item.name,
+        subtitle: `${type === "tv" ? "影集" : "電影"} · ${item.release_date || item.first_air_date || ""}`,
+        picture: tmdbImage(item.poster_path),
+        url: getTmdbUrl(item),
+      });
+    }
+  }
+
+  return items;
+}
+function tmdbAPI(path) {
+  return $fetch(`https://api.themoviedb.org/3${path}?language=zh-TW`, {
+    headers: {
+      Authorization: `Bearer ${TMDB_TOKEN}` // 若你使用 API Key 則改為 api_key=xxx 的格式
+    }
+  });
+}
+
+function tmdbImage(path) {
+  return path ? `https://image.tmdb.org/t/p/w500${path}` : "";
+}
+
+function getTmdbUrl(item) {
+  return `https://www.themoviedb.org/${item.media_type || (item.first_air_date ? "tv" : "movie")}/${item.id}?language=zh-TW`;
 }
