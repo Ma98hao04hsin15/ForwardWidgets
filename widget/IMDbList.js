@@ -157,3 +157,6 @@ async function loadCardItems(params = {}) {
   console.log(videoIds);
   return videoIds;
 }
+const { start, limit } = calculatePagination(params);
+const end = start + limit;
+return videoIds.slice(start, end);
