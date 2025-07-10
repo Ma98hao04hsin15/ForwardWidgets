@@ -8,7 +8,7 @@ const WidgetMetadata = {
   id: "imdb.watchlist",
   title: "IMDb Watchlist",
   description: "根据 IMDb 用户 ID 获取其 Watchlist 片单内容，无需 API Key",
-  author: "Joey",
+  author: "YourName",
   site: "https://www.imdb.com",
   version: "1.0.0",
   requiredVersion: "0.0.1",
@@ -66,8 +66,8 @@ const WidgetMetadata = {
   ]
 };
 
-// ======= Main Function =======
-async function loadImdbWatchlist(params) {
+// ======= 主函数 =======
+const loadImdbWatchlist = async (params) => {
   const {
     userId,
     sort = "date_added,desc",
@@ -109,7 +109,6 @@ async function loadImdbWatchlist(params) {
     const releaseDate = item.releaseDate || "";
     const year = releaseDate.slice(0, 4);
 
-    // 如需平台筛选可调用 fetchTmdbInfoByImdbId(imdbId)
     result.push({
       id: imdbId,
       title: title,
@@ -120,10 +119,10 @@ async function loadImdbWatchlist(params) {
   }
 
   return result;
-}
+};
 
-// ======= Utility Functions =======
-async function fetchHtml(url) {
+// ======= 辅助函数 =======
+const fetchHtml = async (url) => {
   const res = await axios.get(url, {
     headers: {
       "User-Agent":
@@ -131,13 +130,13 @@ async function fetchHtml(url) {
     },
   });
   return res.data;
-}
+};
 
-// 可选：IMDb ID → TMDB 信息（包含平台）
-async function fetchTmdbInfoByImdbId(imdbId) {
-  // 你可替换为内部无 API Key 的 TMDB 映射逻辑，例如 forward.tmdb.fetchByImdb()
-  return {}; // 预留结构
-}
+// 预留：IMDb ID → TMDb 信息
+const fetchTmdbInfoByImdbId = async (imdbId) => {
+  // 可接入你自己的映射逻辑，如 forward.tmdb.fetchByImdb(imdbId)
+  return {};
+};
 
 // ======= 导出 =======
 module.exports = {
