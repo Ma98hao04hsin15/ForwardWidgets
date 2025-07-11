@@ -2,7 +2,7 @@ var WidgetMetadata = {
   id: "imdb_watchlist",
   title: "IMDB Watchlist",
   description: "顯示你的 IMDB Watchlist",
-  author: "你的名字",
+  author: "Joy",
   site: "https://www.imdb.com",
   version: "1.0.0",
   requiredVersion: "0.0.1",
