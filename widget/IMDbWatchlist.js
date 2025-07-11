@@ -1,103 +1,98 @@
 var WidgetMetadata = {
-  id: "imdb_watchlist",
-  title: "IMDB Watchlist",
-  description: "顯示你的 IMDB Watchlist",
-  author: "Joy",
-  site: "https://www.imdb.com",
+  id: "IMDbWatchlist",
+  title: "IMDb Watchlist",
   version: "1.0.0",
   requiredVersion: "0.0.1",
-  detailCacheDuration: 60,
-
+  description: "解析 IMDb 用户 Watchlist 页面获取 IMDb ID、标题与封面，无需 API Key",
+  author: "Forward",
+  site: "https://github.com/InchStudio/ForwardWidgets",
   modules: [
     {
-      title: "我的 Watchlist",
-      description: "載入 IMDB Watchlist 頁面",
+      title: "IMDb Watchlist",
+      description: "支持分页与排序的 IMDb Watchlist 抓取组件",
       requiresWebView: false,
-      functionName: "loadWatchlist",
-      sectionMode: false,
-      cacheDuration: 3600,
+      functionName: "loadImdbWatchlistItems",
+      cacheDuration: 21600,
       params: [
         {
-          name: "userId",
-          title: "IMDB 使用者 ID",
+          name: "user_id",
+          title: "IMDb 用户 ID",
           type: "input",
-          description: "例如：ur204635540",
-          value: "ur204635540"
+          description: "例如：ur204635540，可在 IMDb 用户主页网址中找到"
+        },
+        {
+          name: "sort",
+          title: "排序方式",
+          type: "select",
+          options: [
+            { title: "默认排序", value: "" },
+            { title: "标题 A-Z", value: "title,asc" },
+            { title: "添加时间（新→旧）", value: "date_added,desc" },
+            { title: "添加时间（旧→新）", value: "date_added,asc" }
+          ]
+        },
+        {
+          name: "page",
+          title: "页码",
+          type: "page"
         }
       ]
     }
   ]
 };
-async function loadWatchlist(params = {}) {
-  try {
-    const userId = params.userId || "ur204635540";
-    const url = `https://www.imdb.com/user/${userId}/watchlist`;
 
+async function loadImdbWatchlistItems(params = {}) {
+  try {
+    const page = params.page || 1;
+    const userId = params.user_id;
+    const sort = params.sort || "";
+    const count = 20;
+    const start = (page - 1) * count + 1;
+
+    if (!userId) throw new Error("必须提供 IMDb 用户 ID");
+
+    const url = `https://www.imdb.com/user/${userId}/watchlist?start=${start}${sort ? `&sort=${sort}` : ""}`;
     const response = await Widget.http.get(url, {
       headers: {
-        "User-Agent": "Mozilla/5.0",
-        Referer: "https://www.imdb.com"
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+        "Accept-Language": "en-US,en;q=0.9"
       }
     });
 
-    const html = response.data;
-    const $ = Widget.html.load(html);
+    const doc = Widget.dom.parse(response.data);
+    const elements = Widget.dom.select(doc, 'div.lister-item');
 
-    // 遍歷所有 <script>，找到包含 __INITIAL_STATE__ 的那個
-    let stateText = null;
-    $("script").each((i, el) => {
-      const scriptText = $(el).html();
-      if (scriptText && scriptText.includes("window.__INITIAL_STATE__")) {
-        const match = scriptText.match(/window\.__INITIAL_STATE__\s*=\s*(\{.*\});?/s);
-        if (match && match[1]) {
-          stateText = match[1];
-        }
+    const items = elements.map(el => {
+      const link = Widget.dom.select(el, 'h3.lister-item-header a')[0];
+      const href = link && Widget.dom.attr(link, 'href');
+      const match = href?.match(/\/title\/(tt\d+)/);
+      const title = link?.textContent.trim() || "";
+      const posterEl = Widget.dom.select(el, '.lister-item-image img')[0];
+      const poster = posterEl && (Widget.dom.attr(posterEl, 'loadlate') || Widget.dom.attr(posterEl, 'src'));
+
+      if (match) {
+        return {
+          id: match[1],
+          type: "imdb",
+          title,
+          poster
+        };
       }
-    });
+      return null;
+    }).filter(Boolean);
 
-    if (!stateText) {
-      throw new Error("無法找到 __INITIAL_STATE__");
-    }
+    // 获取总条目数（用于分页）
+    const totalText = Widget.dom.select(doc, '.desc')[0]?.textContent || '';
+    const totalMatch = totalText.replace(/,/g, '').match(/of\s+(\d+)/i);
+    const totalResults = totalMatch ? parseInt(totalMatch[1], 10) : page * count;
 
-    const state = JSON.parse(stateText);
-    const listId = state.watchlist?.listId;
-    const listItems = state.lists?.byId?.[`ls${listId}`]?.items;
-
-    if (!listItems || listItems.length === 0) {
-      throw new Error("Watchlist 是空的或無法讀取資料");
-    }
-
-    return listItems.map(item => {
-      const id = item.const;
-      const title = item.primary?.title || "未知標題";
-      const image = item.primary?.image?.url;
-      const year = item.primary?.year;
-      const rating = item.ratingsSummary?.aggregateRating;
-      const genres = item.genres?.join(" / ");
-      const description = item.primary?.description || "";
-
-      return {
-        id: `imdb.${id}`,
-        type: "imdb",
-        title,
-        posterPath: image,
-        backdropPath: image,
-        releaseDate: year ? `${year}-01-01` : "",
-        mediaType: "movie",
-        rating: rating ? rating.toString() : null,
-        genreTitle: genres,
-        duration: null,
-        durationText: null,
-        previewUrl: null,
-        videoUrl: null,
-        link: `https://www.imdb.com/title/${id}/`,
-        episode: 0,
-        description
-      };
-    });
+    return {
+      total: totalResults,
+      data: items
+    };
   } catch (error) {
-    console.error("解析 Watchlist 失敗：", error);
+    console.error("IMDb Watchlist 抓取失败:", error);
     throw error;
   }
 }
-
