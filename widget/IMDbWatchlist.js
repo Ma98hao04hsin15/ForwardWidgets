@@ -41,15 +41,27 @@ async function loadWatchlist(params = {}) {
     });
 
     const html = response.data;
+    const $ = Widget.html.load(html);
 
-    // 提取 window.__INITIAL_STATE__ 變數中的 JSON
-    const match = html.match(/window\.__INITIAL_STATE__\s*=\s*(\{.*?\});<\/script>/s);
-    if (!match || match.length < 2) {
+    // 遍歷所有 <script>，找到包含 __INITIAL_STATE__ 的那個
+    let stateText = null;
+    $("script").each((i, el) => {
+      const scriptText = $(el).html();
+      if (scriptText && scriptText.includes("window.__INITIAL_STATE__")) {
+        const match = scriptText.match(/window\.__INITIAL_STATE__\s*=\s*(\{.*\});?/s);
+        if (match && match[1]) {
+          stateText = match[1];
+        }
+      }
+    });
+
+    if (!stateText) {
       throw new Error("無法找到 __INITIAL_STATE__");
     }
 
-    const state = JSON.parse(match[1]);
-    const listItems = state?.lists?.byId?.[`ls${state.watchlist.listId}`]?.items;
+    const state = JSON.parse(stateText);
+    const listId = state.watchlist?.listId;
+    const listItems = state.lists?.byId?.[`ls${listId}`]?.items;
 
     if (!listItems || listItems.length === 0) {
       throw new Error("Watchlist 是空的或無法讀取資料");
@@ -88,3 +100,4 @@ async function loadWatchlist(params = {}) {
     throw error;
   }
 }
+
