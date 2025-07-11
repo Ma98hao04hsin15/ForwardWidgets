@@ -1,86 +1,77 @@
-WidgetMetadata = {
-  id: "IMDbWatchlist",
-  title: "IMDb Watchlist",
+var WidgetMetadata = {
+  id: "imdb_watchlist",
+  title: "IMDB Watchlist",
+  description: "顯示你的 IMDB Watchlist",
+  author: "你的名字",
+  site: "https://www.imdb.com",
   version: "1.0.0",
   requiredVersion: "0.0.1",
-  description: "通过抓取 IMDb 用户 Watchlist 页面解析 IMDb ID，无需 API Key",
-  author: "Joy",
-  site: "https://github.com/joy51744/ForwardWidgets",
+  detailCacheDuration: 60,
+
   modules: [
     {
-      title: "IMDb Watchlist",
+      title: "我的 Watchlist",
+      description: "載入 IMDB Watchlist 頁面",
       requiresWebView: false,
-      functionName: "loadImdbWatchlist",
+      functionName: "loadWatchlist",
+      sectionMode: false,
       cacheDuration: 3600,
       params: [
         {
-          name: "user_id",
-          title: "用户ID",
+          name: "userId",
+          title: "IMDB 使用者 ID",
           type: "input",
-          description: "IMDb 用户 ID，例如：ur12345678",
-        },
-        {
-          name: "page",
-          title: "页码",
-          type: "page",
-        },
-      ],
-    },
-  ],
-};
-
-async function loadImdbWatchlist(params = {}) {
-  try {
-    const userId = params.user_id || "";
-    const page = Math.max(parseInt(params.page || "1", 10), 1);
-    const count = 100;
-    const minNum = (page - 1) * count + 1;
-    const maxNum = page * count;
-
-    if (!userId) {
-      throw new Error("必须提供 IMDb 用户 ID");
+          description: "例如：ur204635540",
+          value: "ur204635540"
+        }
+      ]
     }
-
+  ]
+};
+async function loadWatchlist(params = {}) {
+  try {
+    const userId = params.userId || "ur204635540";
     const url = `https://www.imdb.com/user/${userId}/watchlist`;
 
     const response = await Widget.http.get(url, {
       headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-        "Cache-Control": "no-cache",
-        "Pragma": "no-cache",
-        "Expires": "0",
-      },
+        "User-Agent": "Mozilla/5.0",
+        Referer: "https://www.imdb.com"
+      }
     });
 
-    const doc = Widget.dom.parse(response.data);
-    const elements = Widget.dom.select(doc, '.lister-item-header a[href^="/title/tt"]');
+    const html = response.data;
+    const $ = Widget.html.load(html);
 
-    if (!elements || elements.length === 0) {
-      throw new Error("未找到任何 IMDb ID");
-    }
+    // 從 JSON-LD 數據抓影片列表（嵌在 script 標籤中）
+    const jsonText = $('script[type="application/ld+json"]').html();
+    const data = JSON.parse(jsonText);
 
-    let imdbIds = Array.from(
-      new Set(
-        elements
-          .map((el) => Widget.dom.attr(el, "href"))
-          .filter((href) => /^\/title\/tt\d+/.test(href))
-          .map((href) => {
-            const match = href.match(/(tt\d+)/);
-            return match ? match[1] : null;
-          })
-          .filter(Boolean)
-      )
-    );
+    const items = Array.isArray(data.itemListElement) ? data.itemListElement : [];
 
-    imdbIds = imdbIds.slice(minNum - 1, maxNum);
-
-    return imdbIds.map((id) => ({
-      id,
-      type: "imdb",
-    }));
+    return items.map((item, index) => {
+      const movie = item.item;
+      return {
+        id: movie['@id'] || movie.url,
+        type: "url",
+        title: movie.name,
+        posterPath: movie.image,
+        backdropPath: movie.image,
+        releaseDate: movie.datePublished || "",
+        mediaType: "movie",
+        rating: movie.aggregateRating ? movie.aggregateRating.ratingValue : null,
+        genreTitle: Array.isArray(movie.genre) ? movie.genre.join(" / ") : movie.genre,
+        duration: null,
+        durationText: null,
+        previewUrl: null,
+        videoUrl: null,
+        link: movie.url,
+        episode: 0,
+        description: movie.description
+      };
+    });
   } catch (error) {
-    console.error("IMDb Watchlist 处理失败:", error);
+    console.error("載入失敗：", error);
     throw error;
   }
 }
