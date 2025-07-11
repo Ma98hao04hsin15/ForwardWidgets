@@ -51,7 +51,7 @@
     {
       "id": "imdb_watchlist",
       "title": "IMDB Watchlist",
-      "description": "載入 IMDB Watchlist 頁面",
+      "description": "基于Forw​​ardWidget架构載入 IMDB Watchlist 頁面",
       "requiredVersion": "0.0.1",
       "version": "1.0.0",
       "author": "Joy",
