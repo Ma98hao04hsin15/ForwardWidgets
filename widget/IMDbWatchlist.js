@@ -41,37 +41,50 @@ async function loadWatchlist(params = {}) {
     });
 
     const html = response.data;
-    const $ = Widget.html.load(html);
 
-    // 從 JSON-LD 數據抓影片列表（嵌在 script 標籤中）
-    const jsonText = $('script[type="application/ld+json"]').html();
-    const data = JSON.parse(jsonText);
+    // 提取 window.__INITIAL_STATE__ 變數中的 JSON
+    const match = html.match(/window\.__INITIAL_STATE__\s*=\s*(\{.*?\});<\/script>/s);
+    if (!match || match.length < 2) {
+      throw new Error("無法找到 __INITIAL_STATE__");
+    }
 
-    const items = Array.isArray(data.itemListElement) ? data.itemListElement : [];
+    const state = JSON.parse(match[1]);
+    const listItems = state?.lists?.byId?.[`ls${state.watchlist.listId}`]?.items;
 
-    return items.map((item, index) => {
-      const movie = item.item;
+    if (!listItems || listItems.length === 0) {
+      throw new Error("Watchlist 是空的或無法讀取資料");
+    }
+
+    return listItems.map(item => {
+      const id = item.const;
+      const title = item.primary?.title || "未知標題";
+      const image = item.primary?.image?.url;
+      const year = item.primary?.year;
+      const rating = item.ratingsSummary?.aggregateRating;
+      const genres = item.genres?.join(" / ");
+      const description = item.primary?.description || "";
+
       return {
-        id: movie['@id'] || movie.url,
-        type: "url",
-        title: movie.name,
-        posterPath: movie.image,
-        backdropPath: movie.image,
-        releaseDate: movie.datePublished || "",
+        id: `imdb.${id}`,
+        type: "imdb",
+        title,
+        posterPath: image,
+        backdropPath: image,
+        releaseDate: year ? `${year}-01-01` : "",
         mediaType: "movie",
-        rating: movie.aggregateRating ? movie.aggregateRating.ratingValue : null,
-        genreTitle: Array.isArray(movie.genre) ? movie.genre.join(" / ") : movie.genre,
+        rating: rating ? rating.toString() : null,
+        genreTitle: genres,
         duration: null,
         durationText: null,
         previewUrl: null,
         videoUrl: null,
-        link: movie.url,
+        link: `https://www.imdb.com/title/${id}/`,
         episode: 0,
-        description: movie.description
+        description
       };
     });
   } catch (error) {
-    console.error("載入失敗：", error);
+    console.error("解析 Watchlist 失敗：", error);
     throw error;
   }
 }
