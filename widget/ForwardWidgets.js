@@ -68,6 +68,86 @@ WidgetMetadata = {
     
     // --- 🏆 豆瓣自定义片单 ---
     {
+      title: "2024年度电影榜单",
+      description: "加载豆瓣官方榜单或用户豆列 (需输入 URL)",
+      requiresWebView: false,
+      functionName: "loadDoubanCardItems",
+      cacheDuration: 3600,
+      params: [
+        {
+          name: "url", 
+          title: "🔗 列表地址", 
+          type: "input", 
+          description: "输入豆瓣片单或榜单地址 (subject_collection 或 doulist)",
+          placeholders: [
+            { title: "2024年上半年高分电影Top50", 
+              value: "https://m.douban.com/subject_collection/EC446NAZA?type=rank" },
+            { title: "豆瓣2024评分最高华语电影", 
+              value: "https://m.douban.com/subject_collection/ECBE7RX5A" },
+            { title: "豆瓣2024评分最高外语电影", 
+              value: "https://m.douban.com/subject_collection/ECBQ7RNSA" },
+            { title: "豆瓣2024评分最高冷门佳片", 
+              value: "https://m.douban.com/subject_collection/ECSE7P7GQ" },
+            { title: "豆瓣2024评分最高日本电影", 
+              value: "https://m.douban.com/subject_collection/ECRY73E2Q" },
+            { title: "豆瓣2024评分最高韩国电影", 
+              value: "https://m.douban.com/subject_collection/ECBM7NLJA" },
+            { title: "豆瓣2024评分最高喜剧片", 
+              value: "https://m.douban.com/subject_collection/ECLE7RV6Y" },
+            { title: "豆瓣2024评分最高爱情片", 
+              value: "https://m.douban.com/subject_collection/ECHU7QOYQ" },
+            { title: "豆瓣2024评分最高动画片", 
+              value: "https://m.douban.com/subject_collection/ECZA7V7AA" },
+            { title: "豆瓣2024评分最高纪录片", 
+              value: "https://m.douban.com/subject_collection/ECS47YXRQ" },
+          ]
+        },
+        { name: "page", title: "页码", type: "page" },
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "25" }
+      ]
+    },
+    
+    // --- 🏆 豆瓣自定义片单 ---
+    {
+      title: "2023年度电影榜单",
+      description: "加载豆瓣官方榜单或用户豆列 (需输入 URL)",
+      requiresWebView: false,
+      functionName: "loadDoubanCardItems",
+      cacheDuration: 3600,
+      params: [
+        {
+          name: "url", 
+          title: "🔗 列表地址", 
+          type: "input", 
+          description: "输入豆瓣片单或榜单地址 (subject_collection 或 doulist)",
+          placeholders: [
+            { title: "豆瓣2023评分最高华语电影", 
+              value: "https://m.douban.com/subject_collection/ECQ46F7XI" },
+            { title: "豆瓣2023评分最高外语电影", 
+              value: "https://m.douban.com/subject_collection/ECFA6FLWQ" },
+            { title: "豆瓣2023评分最高冷门佳片", 
+              value: "https://m.douban.com/subject_collection/ECMY6GCCA" },
+            { title: "豆瓣2023评分最高日本电影", 
+              value: "https://m.douban.com/subject_collection/ECCU6MRTY" },
+            { title: "豆瓣2023评分最高韩国电影", 
+              value: "https://m.douban.com/subject_collection/EC4Y6ALRA" },
+            { title: "豆瓣2023评分最高喜剧片", 
+              value: "https://m.douban.com/subject_collection/ECCI6H3TA" },
+            { title: "豆瓣2023评分最高爱情片", 
+              value: "https://m.douban.com/subject_collection/EC3A56FJA" },
+            { title: "豆瓣2023评分最高动画片", 
+              value: "https://m.douban.com/subject_collection/ECHU6BXBI" },
+            { title: "豆瓣2023评分最高纪录片", 
+              value: "https://m.douban.com/subject_collection/ECRM6A2JA" },
+          ]
+        },
+        { name: "page", title: "页码", type: "page" },
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "25" }
+      ]
+    },
+    
+    // --- 🏆 豆瓣自定义片单 ---
+    {
       title: "豆瓣自定义片单",
       description: "加载豆瓣官方榜单或用户豆列 (需输入 URL)",
       requiresWebView: false,
