@@ -1,68 +1,92 @@
 var WidgetMetadata = {
-  id: "IMDbWatchlist",
-  title: "IMDb Watchlist",
-  version: "1.0.0",
-  requiredVersion: "0.0.1",
-  description: "解析 IMDb 使用者 Watchlist 頁面，提取 IMDb ID",
-  author: "Forward",
-  site: "https://github.com/InchStudio/ForwardWidgets",
-  modules: [
-    {
-      title: "IMDb Watchlist",
-      requiresWebView: false,
-      functionName: "loadImdbWatchlist",
-      cacheDuration: 3600,
-      params: [
+    id: "IMDbWatchlist",
+    title: "IMDb Watchlist",
+    version: "1.0.0",
+    requiredVersion: "0.0.1",
+    description: "抓取公开的IMDb Watchlist内容并转换为IMDb ID，可分页或随机抽取展示。",
+    author: "huangxd",
+    site: "https://github.com/huangxd-/ForwardWidgets",
+    modules: [
         {
-          name: "user_id",
-          title: "用戶ID",
-          type: "input",
-          description: "IMDb 使用者 ID，例如 ur12345678",
-        },
-        {
-          name: "page",
-          title: "頁碼",
-          type: "page",
+            title: "IMDb Watchlist",
+            requiresWebView: false,
+            functionName: "loadIMDbWatchlistItems",
+            cacheDuration: 3600,
+            params: [
+                {
+                    name: "watchlist_url",
+                    title: "IMDb Watchlist 链接",
+                    type: "input",
+                    description: "如：https://www.imdb.com/user/urXXXX/watchlist/?ref_=hm_nv_urwls_all，必须为公开列表",
+                },
+                {
+                    name: "mode",
+                    title: "加载模式",
+                    type: "enumeration",
+                    enumOptions: [
+                        {
+                            title: "分页加载",
+                            value: "page",
+                        },
+                        {
+                            title: "随机抽取9个影片",
+                            value: "random",
+                        },
+                    ]
+                },
+                {
+                    name: "page",
+                    title: "页码",
+                    type: "page",
+                },
+            ],
         }
-      ],
-    }
-  ]
+    ]
 };
-async function loadImdbWatchlist(params = {}) {
-  const userId = params.user_id;
-  const page = params.page || 1;
-  const pageSize = 100;
-  const start = (page - 1) * pageSize + 1;
+async function loadIMDbWatchlistItems(params = {}) {
+    try {
+        const url = params.watchlist_url;
+        const mode = params.mode || "page";
+        const page = params.page || 1;
 
-  if (!userId) throw new Error("必須提供 IMDb 使用者 ID，例如 ur12345678");
+        if (!url || !url.includes("/watchlist")) {
+            throw new Error("请输入有效的 IMDb Watchlist 链接");
+        }
 
-  const url = `https://www.imdb.com/user/${userId}/watchlist?start=${start}`;
+        const response = await Widget.http.get(url, {
+            headers: {
+                "User-Agent":
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+            },
+        });
 
-  const response = await Widget.http.get(url, {
-    headers: {
-      "User-Agent": "Mozilla/5.0",
-      "Accept-Language": "en-US,en;q=0.9",
-      "Cache-Control": "no-cache",
-    },
-  });
+        const match = response.data.match(/"itemListElement":(\[.*?\]),\n/);
+        if (!match) {
+            throw new Error("无法找到 watchlist 数据，可能是列表未公开或 IMDb 页面结构已更改");
+        }
 
-  const imdbIds = extractImdbIdsFromWatchlist(response.data);
-  return imdbIds.map(id => ({ id, type: "imdb" }));
-}
-function extractImdbIdsFromWatchlist(html) {
-  const docId = Widget.dom.parse(html);
-  const elements = Widget.dom.select(docId, 'div.lister-item.mode-detail');
+        const items = JSON.parse(match[1]);
+        const imdbIds = items
+            .map(item => item?.item?.['@id']?.match(/title\/(tt\d+)/)?.[1])
+            .filter(Boolean);
 
-  const ids = [];
+        let resultIds;
+        if (mode === "random") {
+            if (page > 1) return [];
+            const shuffled = imdbIds.sort(() => 0.5 - Math.random());
+            resultIds = shuffled.slice(0, 9);
+        } else {
+            const count = 20;
+            const start = (page - 1) * count;
+            resultIds = imdbIds.slice(start, start + count);
+        }
 
-  for (const el of elements) {
-    const link = Widget.dom.select(el, 'h3.lister-item-header a')[0];
-    if (!link) continue;
-
-    const href = Widget.dom.attr(link, 'href');
-    const match = href.match(/\/title\/(tt\d+)/);
-    if (match) ids.push(match[1]);
-  }
-
-  return [...new Set(ids)];
+        return resultIds.map(id => ({
+            id,
+            type: "imdb"
+        }));
+    } catch (error) {
+        console.error("IMDb Watchlist 加载失败:", error);
+        throw error;
+    }
 }
