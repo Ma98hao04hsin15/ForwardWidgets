@@ -93,6 +93,52 @@ WidgetMetadata = {
         { name: "page", title: "页码", type: "page" },
         { name: "limit", title: "🔢 每页数量", type: "constant", value: "25" }
       ]
+    },
+    
+    // --- 🏆 豆瓣自定义片单 ---
+    {
+      title: "戛纳电影节",
+      description: "加载豆瓣官方榜单或用户豆列 (需输入 URL)",
+      requiresWebView: false,
+      functionName: "loadDoubanCardItems",
+      cacheDuration: 3600,
+      params: [
+        {
+          name: "url", 
+          title: "🔗 列表地址", 
+          type: "input", 
+          description: "输入豆瓣片单或榜单地址 (subject_collection 或 doulist)",
+          placeholders: [
+            { title: "历届戛纳电影节节获奖名单", 
+              value: "https://m.douban.com/doulist/161131618/" },
+          ]
+        },
+        { name: "page", title: "页码", type: "page" },
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "25" }
+      ]
+    }, 
+    
+    // --- 🏆 豆瓣自定义片单 ---
+    {
+      title: "TSPDT榜",
+      description: "加载豆瓣官方榜单或用户豆列 (需输入 URL)",
+      requiresWebView: false,
+      functionName: "loadDoubanCardItems",
+      cacheDuration: 3600,
+      params: [
+        {
+          name: "url", 
+          title: "🔗 列表地址", 
+          type: "input", 
+          description: "输入豆瓣片单或榜单地址 (subject_collection 或 doulist)",
+          placeholders: [
+            { title: "历届戛纳电影节节获奖名单", 
+              value: "https://m.douban.com/doulist/161131618/" },
+          ]
+        },
+        { name: "page", title: "页码", type: "page" },
+        { name: "limit", title: "🔢 每页数量", type: "constant", value: "25" }
+      ]
     }, 
     
     // --- 🏆 豆瓣自定义片单 ---
