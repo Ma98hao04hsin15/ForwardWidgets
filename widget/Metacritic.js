@@ -1,73 +1,83 @@
 var WidgetMetadata = {
-  id: "metacritic.tv",
-  title: "Metacritic TV",
-  version: "1.0.0",
+  id: "MetacriticCurrentYear",
+  title: "Metacritic 本年度电影",
+  version: "1.1.0",
   requiredVersion: "0.0.1",
-  description: "获取 Metacritic TV 热门和高分剧集",
-  author: "Forward",
-  site: "https://www.metacritic.com/tv/",
+  description: "从 Metacritic 当前年度电影页面提取热门电影，支持分页与排序",
+  author: "你的名字",
+  site: "https://www.metacritic.com/",
+  source: "https://www.metacritic.com/browse/movie/all/all/current-year/",
   modules: [
     {
-      id: "trending",
-      title: "本週熱門劇集",
-      requiresWebView: false,
-      functionName: "loadMetacriticTrending",
-      cacheDuration: 21600
-    },
-    {
-      id: "bestof2025",
-      title: "2025 高分劇集",
-      requiresWebView: false,
-      functionName: "loadMetacriticBestOf",
-      cacheDuration: 21600
+      title: "本年度电影",
+      functionName: "loadCurrentYearMovies",
+      cacheDuration: 3600,
+      params: [
+        {
+          name: "page",
+          title: "页码（从1开始）",
+          default: "1"
+        },
+        {
+          name: "sort",
+          title: "排序方式",
+          type: "select",
+          default: "default",
+          options: [
+            { title: "默认排序", value: "default" },
+            { title: "评分最高", value: "metascore" }
+          ]
+        }
+      ]
     }
   ]
 };
 
-// 解析 Metacritic TV 首頁「Trending Shows This Week」
-async function loadMetacriticTrending() {
-  const url = "https://www.metacritic.com/tv/";
-  const html = await loadText(url);
-  const list = [];
+async function loadCurrentYearMovies(params) {
+  const page = params.page || "1";
+  const sort = params.sort === "metascore" ? "?sort=desc" : "";
+  const pagePath = parseInt(page) > 1 ? `?page=${page}` : "";
+  const url = `https://www.metacritic.com/browse/movie/all/all/current-year/${sort ? sort : pagePath}${sort && pagePath ? "&" + pagePath.slice(1) : ""}`;
 
-  const regex = /<a href="(\/tv\/[^"]+)"[^>]*>\s*<h3[^>]*>([^<]+)<\/h3>[\s\S]*?class="c-siteReviewScore"[^>]*>(\d+)<\/span>/g;
-  let match;
+  const res = await $http.get(url, {
+    headers: {
+      "User-Agent": "Mozilla/5.0",
+      "Accept-Language": "en-US,en;q=0.9"
+    }
+  });
 
-  while ((match = regex.exec(html)) !== null) {
-    const link = "https://www.metacritic.com" + match[1];
-    const title = match[2].trim();
-    const score = match[3].trim();
+  const html = res.data;
 
-    list.push({
-      title: `${title} (${score})`,
+  const itemRegex = /<div class=".*?product_wrap.*?">(.*?)<\/div>\s*<\/div>\s*<\/div>/gs;
+  const items = [...html.matchAll(itemRegex)];
+
+  const result = [];
+
+  for (const item of items) {
+    const block = item[1];
+
+    const titleMatch = block.match(/<h3.*?class=".*?product_title.*?">\s*<a.*?>(.*?)<\/a>/s);
+    const title = titleMatch?.[1]?.trim() || "未知";
+
+    const linkMatch = block.match(/<a href="(\/movie\/.*?)"/);
+    const link = linkMatch ? `https://www.metacritic.com${linkMatch[1]}` : null;
+
+    const imageMatch = block.match(/<img[^>]*src="(.*?)"/);
+    const image = imageMatch?.[1] || null;
+
+    const scoreMatch = block.match(/<div class=".*?metascore_w.*?">(.*?)<\/div>/);
+    const score = scoreMatch?.[1]?.trim() || "N/A";
+
+    const dateMatch = block.match(/<div class=".*?clamp-details.*?">\s*(.*?)\s*<\/div>/s);
+    const date = dateMatch?.[1]?.trim() || "";
+
+    result.push({
+      title,
+      description: `评分：${score}｜上映日期：${date}`,
+      picture: image,
       url: link
     });
   }
 
-  return list.slice(0, 10);
-}
-
-// 解析 2025 年度高分劇集榜單
-async function loadMetacriticBestOf() {
-  const url = "https://www.metacritic.com/pictures/the-20-best-new-tv-shows-of-2025-so-far/";
-  const html = await loadText(url);
-  const list = [];
-
-  const regex = /<h3[^>]*>(\d+)\. ([^<]+)<\/h3>[\s\S]*?<img[^>]+src="([^"]+)"[^>]*>[\s\S]*?Metascore[^>]*?(\d+)/g;
-  let match;
-
-  while ((match = regex.exec(html)) !== null) {
-    const rank = match[1];
-    const title = match[2].trim();
-    const image = match[3];
-    const score = match[4];
-
-    list.push({
-      title: `${rank}. ${title} (${score})`,
-      image: image,
-      url: "https://www.metacritic.com/pictures/the-20-best-new-tv-shows-of-2025-so-far/"
-    });
-  }
-
-  return list;
+  return result;
 }
