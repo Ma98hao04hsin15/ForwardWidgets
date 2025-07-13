@@ -66,5 +66,14 @@
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/Metacritic.js"
     },
+    {
+      "id": "imdb",
+      "title": "IMDB",
+      "description": "IMDB",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDb.js"
+    },
   ]
 }
