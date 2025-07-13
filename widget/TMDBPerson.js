@@ -81,25 +81,10 @@ WidgetMetadata = {
     },
     {
       id: "actorWorks",
-      title: "大陆女演员作品",
+      title: "演员作品",
       functionName: "getActorWorks",
       cacheDuration: 172800,
       params: [
-            { title: "赵丽颖", value: "1260868" },
-            { title: "孙俪", value: "52898" },
-            { title: "杨紫", value: "1696482" },
-      ]
-    },
-    {
-      id: "actorWorks",
-      title: "大陆男演员作品",
-      functionName: "getActorWorks",
-      cacheDuration: 172800,
-      params: [
-            { title: "胡歌", value: "1106514" },
-            { title: "张译", value: "3963465" },
-            { title: "张若昀", value: "1675905" },
-            { title: "秦昊", value: "1016315" },
       ]
     },
     {
@@ -108,11 +93,6 @@ WidgetMetadata = {
       functionName: "getDirectorWorks",
       cacheDuration: 172800,
       params: [
-            { title: "徐克", value: "26760" },
-            { title: "宋康昊", value: "20738" },
-            { title: "孔笙", value: "1494556" },
-            { title: "张艺谋", value: "607" },
-            { title: "李安", value: "1614" },
       ]
     },
     {
