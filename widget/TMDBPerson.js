@@ -3,7 +3,7 @@ WidgetMetadata = {
   title: "TMDB人物影视作品",
   version: "1.0.4",
   requiredVersion: "0.0.1",
-  description: "获取 TMDB 个人相关影视作品数据",
+  description: "TMDB 个人相关影视作品数据",
   author: "Evan",
   site: "https://github.com/Ma98hao04hsin15/ForwardWidgets",
   cacheDuration: 172800,
@@ -20,8 +20,6 @@ WidgetMetadata = {
           type: "input",
           description: "在 TMDB 网站获取的数字 ID",
           placeholders: [
-            { title: "张艺谋", value: "607" },
-            { title: "李安", value: "1614" },
             { title: "周星驰", value: "57607" },
             { title: "成龙", value: "18897" },
             { title: "吴京", value: "78871" },
@@ -33,20 +31,12 @@ WidgetMetadata = {
             { title: "宁浩", value: "17295" },
             { title: "黄渤", value: "128026" },
             { title: "葛优", value: "76913" },
-            { title: "胡歌", value: "1106514" },
-            { title: "张译", value: "3963465" },
             { title: "沈腾", value: "1519026" },
             { title: "王宝强", value: "71051" },
-            { title: "赵丽颖", value: "1260868" },
-            { title: "孙俪", value: "52898" },
-            { title: "张若昀", value: "1675905" },
-            { title: "秦昊", value: "1016315" },
             { title: "易烊千玺", value: "2223265" },
             { title: "王倦", value: "2467977" },
-            { title: "孔笙", value: "1494556" },
             { title: "张国立", value: "543178" },
             { title: "陈思诚", value: "1065761" },
-            { title: "徐克", value: "26760" },
             { title: "林超贤", value: "81220" },
             { title: "郭帆", value: "1100748" },
             { title: "史蒂文·斯皮尔伯格", value: "488" },
@@ -62,7 +52,6 @@ WidgetMetadata = {
             { title: "杨紫琼", value: "1620" },
             { title: "凯特·布兰切特", value: "112" },
             { title: "丹尼尔·戴·刘易斯", value: "11856" },
-            { title: "宋康昊", value: "20738" }
           ]
         },
         { name: "language", title: "语言", type: "language", value: "zh-CN" },
@@ -92,17 +81,39 @@ WidgetMetadata = {
     },
     {
       id: "actorWorks",
-      title: "演员作品",
+      title: "大陆女演员作品",
       functionName: "getActorWorks",
       cacheDuration: 172800,
-      params: []
+      params: [
+            { title: "赵丽颖", value: "1260868" },
+            { title: "孙俪", value: "52898" },
+            { title: "杨紫", value: "1696482" },
+      ]
+    },
+    {
+      id: "actorWorks",
+      title: "大陆男演员作品",
+      functionName: "getActorWorks",
+      cacheDuration: 172800,
+      params: [
+            { title: "胡歌", value: "1106514" },
+            { title: "张译", value: "3963465" },
+            { title: "张若昀", value: "1675905" },
+            { title: "秦昊", value: "1016315" },
+      ]
     },
     {
       id: "directorWorks",
       title: "导演作品",
       functionName: "getDirectorWorks",
       cacheDuration: 172800,
-      params: []
+      params: [
+            { title: "徐克", value: "26760" },
+            { title: "宋康昊", value: "20738" },
+            { title: "孔笙", value: "1494556" },
+            { title: "张艺谋", value: "607" },
+            { title: "李安", value: "1614" },
+      ]
     },
     {
       id: "otherWorks",
