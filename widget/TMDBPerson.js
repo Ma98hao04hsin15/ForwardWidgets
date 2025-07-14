@@ -10,11 +10,21 @@ WidgetMetadata = {
   modules: [
     {
       id: "allWorks",
-      title: "全部作品",
+      title: "國內男演員",
       functionName: "getAllWorks",
       cacheDuration: 172800,
       params: [
         {
+          name: "personId",
+          title: "个人ID",
+          type: "input",
+          description: "在 TMDB 网站获取的数字 ID",
+          placeholders: [
+            { title: "靳东", value: "1727498" },
+            { title: "楊玏", value: "2018045" },
+            { title: "鍾漢良", value: "1183233" },
+          ]
+        },        {
           name: "personId",
           title: "个人ID",
           type: "input",
@@ -86,7 +96,6 @@ WidgetMetadata = {
       functionName: "getActorWorks",
       cacheDuration: 172800,
       params: [
-            { title: "珊卓布拉克", value: "18277" },        
       ]
     },
     {
