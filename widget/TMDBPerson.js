@@ -86,6 +86,7 @@ WidgetMetadata = {
       functionName: "getActorWorks",
       cacheDuration: 172800,
       params: [
+            { title: "珊卓布拉克", value: "18277" },        
       ]
     },
     {
