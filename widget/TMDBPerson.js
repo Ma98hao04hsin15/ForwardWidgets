@@ -52,6 +52,7 @@ WidgetMetadata = {
             { title: "杨紫琼", value: "1620" },
             { title: "凯特·布兰切特", value: "112" },
             { title: "丹尼尔·戴·刘易斯", value: "11856" },
+            { title: "珊卓布拉克", value: "18277" },        
           ]
         },
         { name: "language", title: "语言", type: "language", value: "zh-CN" },
@@ -85,7 +86,6 @@ WidgetMetadata = {
       functionName: "getActorWorks",
       cacheDuration: 172800,
       params: [
-            { title: "珊卓布拉克", value: "18277" },        
       ]
     },
     {
