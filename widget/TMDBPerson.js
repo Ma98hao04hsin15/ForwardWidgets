@@ -23,6 +23,7 @@ WidgetMetadata = {
             { title: "靳东", value: "1727498" },
             { title: "楊玏", value: "2018045" },
             { title: "鍾漢良", value: "1183233" },
+            { title: "雷佳音", value: "1724403" },
             { title: "鄧超", value: "99689" },
             { title: "冯绍峰", value: "936431" },
             { title: "胡歌", value: "1106514" },
