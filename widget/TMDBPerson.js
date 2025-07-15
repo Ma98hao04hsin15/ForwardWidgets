@@ -110,45 +110,6 @@ WidgetMetadata = {
             { title: "高露", value: "1630009" },
             { title: "白百何", value: "588057" },
             { title: "唐艺昕", value: "1539646" },
-          ]
-        }, 
-        { name: "language", title: "语言", type: "language", value: "zh-CN" },
-        {
-          name: "type",
-          title: "类型",
-          type: "enumeration",
-          enumOptions: [
-            { title: "全部", value: "all" },
-            { title: "电影", value: "movie" },
-            { title: "电视剧", value: "tv" }
-          ],
-          value: "all"
-        },
-        {
-          name: "sort_by",
-          title: "排序方式",
-          type: "enumeration",
-          enumOptions: [
-            { title: "发行日期降序", value: "release_date.desc" },
-            { title: "评分降序", value: "vote_average.desc" },
-            { title: "热门降序", value: "popularity.desc" }
-          ],
-          value: "popularity.desc"
-        }
-      ]
-    },
-    {
-      id: "allWorks",
-      title: "韓國演員",
-      functionName: "getAllWorks",
-      cacheDuration: 172800,
-      params: [
-        {
-          name: "personId",
-          title: "个人ID",
-          type: "input",
-          description: "在 TMDB 网站获取的数字 ID",
-          placeholders: [
             { title: "宋康昊", value: "20738" },
             { title: "崔宇植", value: "1255881" },
             { title: "李善均", value: "115290" },
@@ -240,7 +201,7 @@ WidgetMetadata = {
             { title: "金高銀", value: "1067849" },
             { title: "劉寅娜", value: "1254169" },
             { title: "孫藝真", value: "86889" },
-            { title: "李荷妮", value: "1364528" },
+            { title: "李荷妮", value: "1364528" },            
           ]
         }, 
         { name: "language", title: "语言", type: "language", value: "zh-CN" },
