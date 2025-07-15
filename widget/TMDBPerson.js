@@ -205,6 +205,8 @@ WidgetMetadata = {
             { title: "李荷妮", value: "1364528" },            
           ]
         }, 
+        {  name: "page",  title: "页码",  type: "number",  value: 1},
+        {  name: "limit",  title: "每页条数",  type: "number",  value: 50},
         { name: "language", title: "语言", type: "language", value: "zh-CN" },
         {
           name: "type",
@@ -340,6 +342,7 @@ async function getAllWorks(params) {
   list = filterByType(list, p.type);
   list = applySorting(list, p.sort_by);
   return formatResults(list);
+  return paginateResults(formatResults(list), p.page, p.limit);
 }
 async function getActorWorks(params) {
   var p = params || {};
@@ -369,4 +372,11 @@ async function getOtherWorks(params) {
   list = filterByType(list, p.type);
   list = applySorting(list, p.sort_by);
   return formatResults(list);
+}
+
+function paginateResults(items, page, limit) {
+  page = page || 1;
+  limit = limit || 30;
+  var start = (page - 1) * limit;
+  return items.slice(start, start + limit);
 }
