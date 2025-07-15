@@ -374,9 +374,33 @@ async function getOtherWorks(params) {
   return formatResults(list);
 }
 
+//分頁
 function paginateResults(items, page, limit) {
-  page = page || 1;
-  limit = limit || 30;
+  page = parseInt(page) || 1;
+  limit = parseInt(limit) || 30;
   var start = (page - 1) * limit;
   return items.slice(start, start + limit);
+}
+
+// 格式化输出
+function formatResults(items) {
+  var seen = {};
+  var result = [];
+  items.forEach(item => {
+    if (!seen[item.id]) {
+      seen[item.id] = true;
+      result.push(item);
+    }
+  });
+  return result.map(movie => ({
+    id: movie.id,
+    type: "tmdb",
+    title: movie.title || movie.name,
+    description: movie.overview,
+    releaseDate: movie.releaseDate,
+    posterPath: movie.poster_path,
+    backdropPath: movie.backdrop_path,
+    rating: movie.vote_average,
+    mediaType: movie.mediaType
+  }));
 }
