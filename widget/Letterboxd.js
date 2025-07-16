@@ -1,56 +1,42 @@
 var WidgetMetadata = {
-  id: "letterboxd.list",
-  title: "Letterboxd 片單",
+  id: "letterboxd.list.bailey0.best",
+  title: "Letterboxd Everyone Says Best",
   version: "1.0.0",
   requiredVersion: "0.0.1",
-  description: "解析 Letterboxd 公開片單內容",
+  description: "解析 Letterboxd 清單：Movies Everyone Tells You Are the Best Movies",
   author: "Forward",
-  site: "https://letterboxd.com",
-  cacheDuration: 86400,
+  site: "https://letterboxd.com/bailey0/list/movies-everyone-tells-you-are-the-best-movies/",
   modules: [
     {
-      id: "list",
-      title: "Letterboxd 片單",
-      type: "list",
+      id: "letterboxdList",
+      title: "Letterboxd片單",
+      functionName: "loadItems",
       requiresWebView: false,
-      functionName: "loadLetterboxdList",
-      params: [
-        {
-          name: "url",
-          title: "Letterboxd 片單網址",
-          type: "string",
-          default: "https://letterboxd.com/evanhsin/list/my-favorite-korean-films/"
-        }
-      ]
+      cacheDuration: 86400
     }
   ]
 };
 
-async function loadLetterboxdList(params, ctx) {
-  const url = params.url;
-  const html = await ctx.network.fetchHtml(url);
+async function loadItems() {
+  const url = "https://letterboxd.com/bailey0/list/movies-everyone-tells-you-are-the-best-movies/";
+  const html = await $http.get(url).then(res => res.data);
+  const list = [];
 
-  const items = [];
-  const movieBlocks = html.match(/<li class="poster-container.*?<\/li>/gs) || [];
+  const regex = /data-film-id="(\d+)"[\s\S]*?data-film-slug="([^"]+)"[\s\S]*?data-film-name="([^"]+)"[\s\S]*?data-film-release-year="(\d{4})"/g;
 
-  for (const block of movieBlocks) {
-    const titleMatch = block.match(/data-film-slug="\/film\/([^"]+)"/);
-    const posterMatch = block.match(/data-src="([^"]+)"|src="([^"]+)"/);
-    const yearMatch = block.match(/data-film-release-year="(\d{4})"/);
-    const filmSlug = titleMatch?.[1];
-    const posterUrl = posterMatch?.[1] || posterMatch?.[2];
-    const year = yearMatch?.[1];
-
-    if (filmSlug) {
-      const title = decodeURIComponent(filmSlug.replace(/-/g, " "));
-      items.push({
-        title: title.replace(/\b\w/g, c => c.toUpperCase()),
-        subtitle: year || "",
-        image: posterUrl?.replace(/(?<=cloudfront\.net\/)([^.]+)\.jpg.*/, '$1-0-230-345-crop.jpg'),
-        url: `https://letterboxd.com/film/${filmSlug}/`
-      });
-    }
+  let match;
+  while ((match = regex.exec(html)) !== null) {
+    const [, filmId, slug, name, year] = match;
+    const poster = `https://a.ltrbxd.com/resized/film-poster/${filmId}/-300-450-0-70.jpg`; // fallback 圖
+    const link = `https://letterboxd.com${slug}`;
+    list.push({
+      title: name,
+      subtitle: year,
+      image: poster,
+      url: link,
+      id: filmId
+    });
   }
 
-  return { items };
+  return list;
 }
