@@ -58,13 +58,13 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbWatchlist.js"
     },
     {
-      "id": "MetacriticMovie",
-      "title": "Metacritic 电影榜单",
-      "description": "从 Metacritic 获取电影榜单数据，支持当前年度、新上映、热门等类型页面",
+      "id": "letterboxd.list",
+      "title": "letterboxd片單",
+      "description": "letterboxd片單",
       "requiredVersion": "0.0.1",
       "version": "1.0.0",
       "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/Metacritic.js"
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/Letterboxd.js"
     },
     {
       "id": "person.movie.tmdb",
