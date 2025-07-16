@@ -1,42 +1,74 @@
 var WidgetMetadata = {
-  id: "letterboxd.list.bailey0.best",
-  title: "Letterboxd Everyone Says Best",
+  id: "letterboxd_list",
+  title: "Letterboxd 列表抓取",
+  description: "根据用户输入的 Letterboxd 列表 URL，抓取影片封面、标题和链接",
+  author: "YourName",
+  site: "https://letterboxd.com",
   version: "1.0.0",
   requiredVersion: "0.0.1",
-  description: "解析 Letterboxd 清單：Movies Everyone Tells You Are the Best Movies",
-  author: "Forward",
-  site: "https://letterboxd.com/bailey0/list/movies-everyone-tells-you-are-the-best-movies/",
+  detailCacheDuration: 3600,
   modules: [
     {
-      id: "letterboxdList",
-      title: "Letterboxd片單",
-      functionName: "loadItems",
-      requiresWebView: false,
-      cacheDuration: 86400
+      title: "获取列表影片",
+      functionName: "getLetterboxdList",
+      cacheDuration: 1800,
+      inputs: [
+        {
+          key: "url",
+          type: "input",
+          title: "Letterboxd 列表 URL",
+          placeholder: "https://letterboxd.com/username/list/list-name/",
+          required: true
+        },
+        {
+          key: "page",
+          type: "offset",
+          title: "页码",
+          placeholder: "默认为 1",
+          required: false
+        }
+      ]
     }
   ]
 };
 
-async function loadItems() {
-  const url = "https://letterboxd.com/bailey0/list/movies-everyone-tells-you-are-the-best-movies/";
-  const html = await $http.get(url).then(res => res.data);
-  const list = [];
+async function getLetterboxdList(params) {
+  const listUrl = params.url;
+  const page = params.page && params.page > 1 ? params.page : 1;
+  const fetchUrl = listUrl + (page > 1 ? `page/${page}/` : "");
 
-  const regex = /data-film-id="(\d+)"[\s\S]*?data-film-slug="([^"]+)"[\s\S]*?data-film-name="([^"]+)"[\s\S]*?data-film-release-year="(\d{4})"/g;
+  // 发起请求
+  const response = await Widget.http.get(fetchUrl, {
+    headers: {
+      "User-Agent": "ForwardWidgets",
+      "Referer": "https://letterboxd.com"
+    }
+  });
 
-  let match;
-  while ((match = regex.exec(html)) !== null) {
-    const [, filmId, slug, name, year] = match;
-    const poster = `https://a.ltrbxd.com/resized/film-poster/${filmId}/-300-450-0-70.jpg`; // fallback 圖
-    const link = `https://letterboxd.com${slug}`;
-    list.push({
-      title: name,
-      subtitle: year,
-      image: poster,
-      url: link,
-      id: filmId
+  // 解析 HTML
+  const $ = Widget.html.load(response.data);
+
+  // 遍历影片项
+  const items = [];
+  $(".poster-list > li").each((index, element) => {
+    const $el = $(element);
+    const linkPath = $el.find("a").attr("href"); // e.g. /film/inception/
+    const title = $el.find("img").attr("alt");
+    const coverUrl = $el.find("img").attr("data-src") || $el.find("img").attr("src");
+    const id = linkPath.replace(/\/film\/|\/$/g, ""); // 影片 slug 作为 ID
+
+    items.push({
+      id: id,
+      type: "url",
+      title: title,
+      coverUrl: coverUrl,
+      releaseDate: "",
+      mediaType: "movie",
+      rating: "",
+      description: "",
+      url: "https://letterboxd.com" + linkPath
     });
-  }
+  });
 
-  return list;
+  return items;
 }
