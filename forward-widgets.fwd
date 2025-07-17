@@ -49,13 +49,13 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBtrending.js"
     },
     {
-      "id": "imdb_watchlist",
-      "title": "IMDB Watchlist",
-      "description": "基于Forw​​ardWidget架构載入 IMDB Watchlist 頁面",
+      "id": "ImdbListOnly",
+      "title": "IMDB list",
+      "description": "基于Forw​​ardWidget架构載入 IMDB list 頁面",
       "requiredVersion": "0.0.1",
       "version": "1.0.0",
       "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbWatchlist.js"
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbList.js"
     },
     {
       "id": "letterboxd.list",
