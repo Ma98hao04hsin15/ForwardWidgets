@@ -1,14 +1,15 @@
 var WidgetMetadata = {
-    "id": "dcard_hot",
-  "title": "Dcard 熱門文章",
-  "description": "抓取 Dcard 熱門文章列表",
-  "author": "你的名字",
-  "version": "1.0.0",
-  "modules": [
+  id: "dcard_hot",
+  title: "Dcard 熱門文章",
+  description: "抓取 Dcard 熱門文章列表",
+  author: "Joy",
+  version: "1.0.0",
+  requiredVersion: "0.0.1",
+  modules: [
     {
-      "name": "熱門文章",
-      "function": "hotPosts",
-      "parameters": []
+      name: "熱門文章",
+      function: "hotPosts",
+      parameters: []
     }
   ]
 };
