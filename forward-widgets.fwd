@@ -1,6 +1,6 @@
 {
   "title": "Joy's Widgets",
-  "description": "IMDb 榜單與放映日曆工具",
+  "description": "A Collection of widgets created by Joy",
   "icon": "https://assets.vvebo.vip/scripts/icon.png",
   "widgets": [
     {
@@ -36,7 +36,7 @@
       "description": "基于Forw​​ardWidget架构导入影视模块",
       "requiredVersion": "0.0.1",
       "version": "1.0.6",
-      "author": "乔伊",
+      "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/ForwardWidgets.js"
     },
     {
@@ -58,15 +58,6 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbList.js"
     },
     {
-      "id": "letterboxd.list",
-      "title": "letterboxd片單",
-      "description": "letterboxd片單",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/Letterboxd.js"
-    },
-    {
       "id": "person.movie.tmdb",
       "title": "TMDB人物影视作品",
       "description": "获取 TMDB 的人物影视榜单数据",
@@ -74,15 +65,6 @@
       "version": "1.0.4",
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBPerson.js"
-    },
-    {
-      "id": "awwrated",
-      "title": "串流避雷精选",
-      "description": "从 awwrated 获取 Netflix/Disney+ 的热度、即将下架、编辑推荐等信息",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/awwrated.js"
     },
     {
       "id": "forward.combined.media.lists",
