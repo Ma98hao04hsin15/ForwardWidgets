@@ -1,4 +1,4 @@
-var WidgetMetadata = {
+WidgetMetadata = {
   id: "metacritic",
   title: "Metacritic 電影排行榜",
   description: "抓取 Metacritic 當前年度及歷年最佳電影排行榜，支持查看影片詳情",
