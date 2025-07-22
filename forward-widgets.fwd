@@ -77,8 +77,8 @@
     },
     {
       "id": "metacritic",
-      "title": "Metacritic 電影榜單",
-      "description": "抓取 Metacritic 電影榜單，可指定年份與類型",
+      "title": "Metacritic 電影排行榜",
+      "description": "抓取 Metacritic 當前年度及歷年最佳電影排行榜，支持查看影片詳情",
       "requiredVersion": "0.0.1",
       "version": "1.0.0",
       "author": "Joy",
