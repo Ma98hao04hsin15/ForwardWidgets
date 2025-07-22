@@ -1,150 +1,114 @@
 WidgetMetadata = {
   id: "metacritic",
-  title: "Metacritic 電影排行榜",
-  description: "抓取 Metacritic 當前年度及歷年最佳電影排行榜，支持查看影片詳情",
+  title: "Metacritic 分類榜單",
+  description: "依照電影類型抓取 Metacritic 榜單，支援熱門分類 Top N",
   author: "YourName",
   site: "https://www.metacritic.com",
   version: "1.0.0",
   requiredVersion: "0.0.1",
-  detailCacheDuration: 86400,  // 詳細頁快取一天
+  detailCacheDuration: 86400, // 詳情快取時間：1 天
   modules: [
     {
-      title: "年度最佳電影",
-      description: "抓取當年度 Metascore 前幾名電影",
+      title: "分類最高電影",
+      description: "根據選定類型顯示 Metascore 前幾名電影",
       requiresWebView: false,
-      functionName: "fetchThisYearTop",
+      functionName: "fetchGenreTop",
       sectionMode: false,
       cacheDuration: 3600,
       params: [
         {
-          name: "limit",
-          title: "顯示數量",
-          type: "count",
-          description: "要顯示的電影數量 (預設 10)",
-          value: 10
-        }
-      ]
-    },
-    {
-      title: "史上最佳電影",
-      description: "抓取 Metacritic 綜合榜單（Best Movies of All Time）",
-      requiresWebView: false,
-      functionName: "fetchAllTimeTop",
-      sectionMode: false,
-      cacheDuration: 3600,
-      params: [
+          name: "genre",
+          title: "分類",
+          type: "enumeration",
+          description: "選擇電影類型",
+          value: "all",
+          enumOptions: [
+            { title: "全部／All", value: "all" },
+            { title: "動作／Action", value: "action" },
+            { title: "冒險／Adventure", value: "adventure" },
+            { title: "動畫／Animation", value: "animation" },
+            { title: "喜劇／Comedy", value: "comedy" },
+            { title: "犯罪／Crime", value: "crime" },
+            { title: "劇情／Drama", value: "drama" },
+            { title: "恐怖／Horror", value: "horror" },
+            { title: "科幻／Sci‑Fi", value: "sci_fi" },
+            { title: "奇幻／Fantasy", value: "fantasy" },
+            { title: "愛情／Romance", value: "romance" },
+            { title: "驚悚／Thriller", value: "thriller" }
+          ]
+        },
         {
           name: "limit",
           title: "顯示數量",
           type: "count",
-          description: "要顯示的電影數量 (預設 10)",
+          description: "要顯示的電影數量（預設 10）",
           value: 10
         }
       ]
     }
-  ],
-  search: {
-    title: "電影搜尋",
-    functionName: "searchMovies",
-    params: [
-      {
-        name: "query",
-        title: "電影名稱",
-        type: "input",
-        description: "輸入要搜索的電影名稱",
-        value: ""
-      }
-    ]
-  }
+  ]
 };
 
-async function fetchThisYearTop(params = {}) {
+// 🎬 模組主函數：依分類抓取榜單
+async function fetchGenreTop(params = {}) {
+  const genre = params.genre || "all";
   const limit = params.limit || 10;
-  const url = "https://www.metacritic.com/browse/movie/all/all/current-year/metascore";
-  const resp = await Widget.http.get(url, {
-    headers: { "User-Agent": "Mozilla/5.0", Referer: "https://www.metacritic.com" }
-  });
-  const $ = Widget.html.load(resp.data);
-  return $(".browse_list_wrapper .clamp-summary-wrap").slice(0, limit).map((i, el) => {
-    const title = $(el).find("h3").text().trim();
-    const score = $(el).find(".metascore_w").text().trim();
-    const date = $(el).find(".clamp-details span").first().text().trim();
-    const rel = $(el).find("a.title").attr("href");
-    const link = "https://www.metacritic.com" + rel;
-    return {
-      id: link,
-      type: "url",
-      title,
-      rating: score,
-      releaseDate: date,
-      link
-    };
-  }).get();
-}
 
-async function fetchAllTimeTop(params = {}) {
-  const limit = params.limit || 10;
-  const url = "https://www.metacritic.com/browse/movie/";
-  const resp = await Widget.http.get(url, {
-    headers: { "User-Agent": "Mozilla/5.0", Referer: "https://www.metacritic.com" }
-  });
-  const $ = Widget.html.load(resp.data);
-  return $(".browse_list_wrapper .clamp-summary-wrap").slice(0, limit).map((i, el) => {
-    const title = $(el).find("h3").text().trim();
-    const score = $(el).find(".metascore_w").text().trim();
-    const date = $(el).find(".clamp-details span").first().text().trim();
-    const rel = $(el).find("a.title").attr("href");
-    const link = "https://www.metacritic.com" + rel;
-    return {
-      id: link,
-      type: "url",
-      title,
-      rating: score,
-      releaseDate: date,
-      link
-    };
-  }).get();
-}
+  const url = genre === "all"
+    ? "https://www.metacritic.com/browse/movie/"
+    : `https://www.metacritic.com/browse/movie/genre/date/metascore?genres=${genre}`;
 
-async function searchMovies(params = {}) {
-  const q = (params.query || "").trim();
-  if (!q) throw new Error("請輸入搜尋關鍵字");
-  const url = `https://www.metacritic.com/search/movie/${encodeURIComponent(q)}/results`;
-  const resp = await Widget.http.get(url, {
-    headers: { "User-Agent": "Mozilla/5.0", Referer: "https://www.metacritic.com" }
+  const response = await Widget.http.get(url, {
+    headers: {
+      "User-Agent": "Mozilla/5.0",
+      Referer: "https://www.metacritic.com"
+    }
   });
-  const $ = Widget.html.load(resp.data);
-  return $(".search_results .result").map((i, el) => {
-    const title = $(el).find(".product_title a").text().trim();
+
+  const $ = Widget.html.load(response.data);
+  const items = [];
+
+  $(".browse_list_wrapper .clamp-summary-wrap").slice(0, limit).each((i, el) => {
+    const title = $(el).find("h3").text().trim();
     const score = $(el).find(".metascore_w").first().text().trim();
-    const rel = $(el).find(".product_title a").attr("href");
+    const date = $(el).find(".clamp-details span").first().text().trim();
+    const rel = $(el).find("a.title").attr("href");
     const link = "https://www.metacritic.com" + rel;
-    const date = $(el).find(".release_date .data").text().trim();
-    return { id: link, type: "url", title, rating: score, releaseDate: date, link };
-  }).get();
+
+    items.push({
+      id: link,
+      type: "url",
+      title,
+      rating: score,
+      releaseDate: date,
+      link
+    });
+  });
+
+  return items;
 }
 
+// 📄 詳情解析函數（點選影片後呼叫）
 async function loadDetail(item) {
   const resp = await Widget.http.get(item.link, {
-    headers: { "User-Agent": "Mozilla/5.0", Referer: "https://www.metacritic.com" }
+    headers: {
+      "User-Agent": "Mozilla/5.0",
+      Referer: "https://www.metacritic.com"
+    }
   });
+
   const $ = Widget.html.load(resp.data);
-  const poster = $(".product_image img").attr("src");
-  const summary = $(".summary_detail.summary_cast").first().text().trim() ||
-                  $(".blurb .inline_truncate").text().trim();
-  const director = $(".director span.data").text().trim();
-  const runtime = $(".runtime .data").text().trim();
-  const rating = $(".metascore_w.xlarge.movie").text().trim();
+
   return {
-    videoUrl: null,  // 不提供播放連結
-    posterPath: poster,
-    description: summary,
+    videoUrl: null,
+    posterPath: $(".product_image img").attr("src"),
+    description: $(".summary_detail.product_summary").text().trim(),
     genreTitle: $(".genres .data").text().trim(),
     childItems: [],
     additional: {
-      director,
-      runtime,
-      metascore: rating
+      director: $(".director span.data").text().trim(),
+      runtime: $(".runtime .data").text().trim(),
+      metascore: $(".metascore_w.xlarge.movie").text().trim()
     }
   };
 }
