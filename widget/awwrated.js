@@ -1,6 +1,7 @@
 // Netflix / Disney+ 避雷榜单
 WidgetMetadata = 
   {
+  id:"awwrated",
   title: "串流避雷精选",
   description: "从 awwrated 获取 Netflix/Disney+ 的热度、即将下架、编辑推荐等信息",
   requiresWebView: false,
