@@ -1,0 +1,28 @@
+import fetch from 'node-fetch';
+import fs from 'fs/promises';
+
+async function fetchAwwRatedCache(platform = "netflix") {
+  const url = `https://awwrated.com/zh-tw/${platform}`;
+  console.log(`抓取页面: ${url}`);
+
+  try {
+    const res = await fetch(url, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (compatible; MyCrawler/1.0)",
+        "Referer": "https://awwrated.com/"
+      }
+    });
+    const html = await res.text();
+
+    // 这里你可以直接保存 html，或者自己用正则/cheerio预处理提取列表，保存 JSON。
+    // 简单保存原始 HTML:
+    await fs.writeFile(`./cache/${platform}.html`, html, 'utf-8');
+
+    console.log("缓存保存成功");
+  } catch (e) {
+    console.error("抓取失败", e);
+  }
+}
+
+// 运行抓取
+fetchAwwRatedCache();
