@@ -76,6 +76,15 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBPerson.js"
     },
     {
+      "id": "awwrated",
+      "title": "串流避雷精选",
+      "description": "从 awwrated 获取 Netflix/Disney+ 的热度、即将下架、编辑推荐等信息",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/awwrated.js"
+    },
+    {
       "id": "forward.combined.media.lists",
       "title": "影视榜单",
       "description": "聚合豆瓣、TMDB、IMDB和Bangumi的影视动画榜单",
