@@ -75,5 +75,14 @@
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBPerson.js"
     },
+    {
+      "id": "MetacriticMovies",
+      "title": "Metacritic 電影榜單",
+      "description": "抓取 Metacritic 電影榜單，可指定年份與類型",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/Metacritic.js"
+    },
   ]
 }
