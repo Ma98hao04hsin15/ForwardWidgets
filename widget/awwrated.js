@@ -1,5 +1,6 @@
 // Netflix / Disney+ 避雷榜单
-{
+WidgetMetadata = 
+  {
   title: "串流避雷精选",
   description: "从 awwrated 获取 Netflix/Disney+ 的热度、即将下架、编辑推荐等信息",
   requiresWebView: false,
@@ -75,6 +76,7 @@
     }
   ]
 }
+
 
 async function getAwwRatedStream(params = {}) {
   const { platform="netflix", category="trend", timeframe="daily", region="", genre="", offset=0 } = params;
