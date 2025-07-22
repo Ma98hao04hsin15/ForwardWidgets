@@ -75,7 +75,7 @@ WidgetMetadata =
       type: "offset"
     }
   ]
-}
+};
 
 
 async function getAwwRatedStream(params = {}) {
