@@ -84,14 +84,5 @@
       "author": "阿米诺斯",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/YSBD.js"
     },
-    {
-      "id": "CnDramaHotRanking",
-      "title": "陸劇平台熱播榜",
-      "description": "抓取愛奇藝、騰訊視頻、優酷、芒果TV 等平台的熱播榜單",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/iqiyi.js"
-    },
   ]
 }
