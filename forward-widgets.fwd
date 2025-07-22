@@ -76,13 +76,13 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBPerson.js"
     },
     {
-      "id": "metacritic",
-      "title": "Metacritic 電影排行榜",
-      "description": "抓取 Metacritic 當前年度及歷年最佳電影排行榜，支持查看影片詳情",
+      "id": "forward.combined.media.lists",
+      "title": "影视榜单",
+      "description": "聚合豆瓣、TMDB、IMDB和Bangumi的影视动画榜单",
       "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/Metacritic.js"
+      "version": "1.3.0",
+      "author": "阿米诺斯",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/YSBD.js"
     },
   ]
 }
