@@ -186,3 +186,22 @@ function parseAwwRatedHTML(html, options = {}) {
   return items;
 }
 
+async function getAwwRatedStreamFromCache(params = {}) {
+  const platform = params.platform || "netflix";
+  const offset = Number(params.offset) || 0;
+
+  // 你的缓存文件 URL（GitHub raw 地址示范）
+  const cacheUrl = `https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/main/cache/${platform}.html`;
+
+  const res = await Widget.http.get(cacheUrl, {
+    headers: {
+      "User-Agent": USER_AGENT
+    }
+  });
+
+  if (!res || !res.data) throw new Error("读取缓存失败");
+
+  const items = parseAwwRatedHTML(res.data, params);
+
+  return items.slice(offset, offset + 20);
+}
