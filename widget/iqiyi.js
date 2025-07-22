@@ -2,7 +2,7 @@ var WidgetMetadata = {
     id: "iqiyi",           // Widget 唯一标识符
     title: "爱奇艺",     // Widget 显示标题
     description: "爱奇艺", // Widget 描述
-    author: "mw418",     // 作者
+    author: "Joy",     // 作者
     site: "https://example.com", // 网站地址
     version: "1.0.0",         // Widget 版本
     requiredVersion: "0.0.1",  // 所需 ForwardWidget 版本
