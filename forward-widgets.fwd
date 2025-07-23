@@ -67,13 +67,13 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBPerson.js"
     },
     {
-      "id": "dcard_hot",
-      "title": "Dcard 熱門文章",
-      "description": "抓取 Dcard 熱門文章列表",
+      "id": "Letterboxd",
+      "title": "Letterboxd片單-奧斯卡",
+      "description": "解析Letterboxd片单内的影片",
       "requiredVersion": "0.0.1",
       "version": "1.0.0",
       "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/HotPost.js"
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/Oscars.js"
     },
     {
       "id": "forward.combined.media.lists",
