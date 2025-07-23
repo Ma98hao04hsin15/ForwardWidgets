@@ -179,9 +179,9 @@ WidgetMetadata = {
     ],
     version: "1.0.0",
     requiredVersion: "0.0.1",
-    description: "解析Letterboxd片单内的影片【五折码：CHEAP.5;七折码：CHEAP】",
-    author: "huangxd",
-    site: "https://github.com/huangxd-/ForwardWidgets"
+    description: "解析Letterboxd片单内的影片",
+    author: "Joey",
+    site: "https://github.com/Ma98hao04hsin15/ForwardWidgets"
 };
 
 function extractLetterboxdUrlsFromResponse(responseData, minNum, maxNum) {
