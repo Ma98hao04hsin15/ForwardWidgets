@@ -255,7 +255,8 @@ const Oscar_STATIC = [
     "year": 1954,
     "tmdbID": 10074,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/1pxkZsNs9Mv8pnFsDVk5Xq9Bpzd.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/1pxkZsNs9Mv8pnFsDVk5Xq9Bpzd.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Marty",
