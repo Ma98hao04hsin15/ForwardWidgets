@@ -1,6 +1,6 @@
 WidgetMetadata = {
     id: "Letterboxd",
-    title: "Letterboxd电影爱好者平台",
+    title: "Letterboxd片單-奧斯卡",
     modules: [
         {
             id: "letterboxdList",
