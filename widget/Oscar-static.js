@@ -15,7 +15,6 @@ WidgetMetadata = {
 };
 
 const Oscar_STATIC = [
-  {
     {
     "title": "Wings",
     "title_zh": "翅膀",
@@ -792,7 +791,6 @@ const Oscar_STATIC = [
     "mediaType": "movie",
     "poster_path": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/2dNtTwMvoMGtISS2cTrMB8woqUy.jpg"
     },
-}
 ]
 async function getCollections(params = {}) {
     return getRandomArray(Oscar_STATIC);
