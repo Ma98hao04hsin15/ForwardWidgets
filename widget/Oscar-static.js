@@ -21,7 +21,8 @@ const Oscar_STATIC = [
     "year": 1927,
     "tmdbID": 339847,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/9ZH2TsycO2OcA5YmtftrLDXk5Jj.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/9ZH2TsycO2OcA5YmtftrLDXk5Jj.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Broadway Melody",
@@ -29,7 +30,8 @@ const Oscar_STATIC = [
     "year": 1929,
     "tmdbID": 60882,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/nDg3fWjJhp0dfBFxyQANfNZy9GL.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/nDg3fWjJhp0dfBFxyQANfNZy9GL.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "All Quiet on the Western Front",
@@ -37,7 +39,8 @@ const Oscar_STATIC = [
     "year": 1930,
     "tmdbID": 539,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/5IpGjjjjSrkFfLWUzVhzZiBt0aF.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/5IpGjjjjSrkFfLWUzVhzZiBt0aF.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Cimarron",
@@ -45,7 +48,8 @@ const Oscar_STATIC = [
     "year": 1931,
     "tmdbID": 1935,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/pXbguK5MtZHfLKglCpDYjc0NsG7.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/pXbguK5MtZHfLKglCpDYjc0NsG7.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Grand Hotel",
@@ -53,7 +57,8 @@ const Oscar_STATIC = [
     "year": 1932,
     "tmdbID": 1838,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/9iY3F6hG3XDyShTxpVgfVoGTZvY.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/9iY3F6hG3XDyShTxpVgfVoGTZvY.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Cavalcade",
@@ -61,7 +66,8 @@ const Oscar_STATIC = [
     "year": 1933,
     "tmdbID": 55542,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/aqNhhRfMvD0PhQDMb0HnT4O2fEn.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/aqNhhRfMvD0PhQDMb0HnT4O2fEn.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "It Happened One Night",
@@ -69,7 +75,8 @@ const Oscar_STATIC = [
     "year": 1934,
     "tmdbID": 448,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/x9jqTLRSxtKX8UfyHrvYlme8yp.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/x9jqTLRSxtKX8UfyHrvYlme8yp.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Mutiny on the Bounty",
@@ -77,7 +84,8 @@ const Oscar_STATIC = [
     "year": 1935,
     "tmdbID": 11848,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/c9S0iBcv67kzqCExKrVJbnA3yHm.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/c9S0iBcv67kzqCExKrVJbnA3yHm.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Great Ziegfeld",
@@ -85,7 +93,8 @@ const Oscar_STATIC = [
     "year": 1936,
     "tmdbID": 64804,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/tKZ0s3G3fq1qss3thOQy39ldrsX.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/tKZ0s3G3fq1qss3thOQy39ldrsX.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Life of Emile Zola",
@@ -93,7 +102,8 @@ const Oscar_STATIC = [
     "year": 1937,
     "tmdbID": 10466,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/c5CWGQJ8gkkVqSOXT9QiznJnPUd.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/c5CWGQJ8gkkVqSOXT9QiznJnPUd.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "You Can't Take It with You",
@@ -101,7 +111,8 @@ const Oscar_STATIC = [
     "year": 1938,
     "tmdbID": 23794,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/3C89sEgiBqOx18v1xGmZ0fFMqHr.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/3C89sEgiBqOx18v1xGmZ0fFMqHr.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Gone with the Wind",
@@ -109,7 +120,8 @@ const Oscar_STATIC = [
     "year": 1939,
     "tmdbID": 64,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/3nt0t9p9X1D3PrjrW6lbGdShwWb.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/3nt0t9p9X1D3PrjrW6lbGdShwWb.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Rebecca",
@@ -117,7 +129,8 @@ const Oscar_STATIC = [
     "year": 1940,
     "tmdbID": 2219,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/ssjyX4mrT7kaHqK0fLM1aP9N4Ux.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/ssjyX4mrT7kaHqK0fLM1aP9N4Ux.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "How Green Was My Valley",
@@ -125,7 +138,8 @@ const Oscar_STATIC = [
     "year": 1941,
     "tmdbID": 348,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/gp2xPDAJHHLgI3AdNFrnX5PKCDm.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/gp2xPDAJHHLgI3AdNFrnX5PKCDm.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Mrs. Miniver",
@@ -133,7 +147,8 @@ const Oscar_STATIC = [
     "year": 1942,
     "tmdbID": 9692,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/92rwe10GQj7AjPG5R4UzwEYhTpE.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/92rwe10GQj7AjPG5R4UzwEYhTpE.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Casablanca",
@@ -141,7 +156,8 @@ const Oscar_STATIC = [
     "year": 1943,
     "tmdbID": 289,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/ylWk2ADbL1TvFr6K2mE6y2TTtYj.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/ylWk2ADbL1TvFr6K2mE6y2TTtYj.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Going My Way",
@@ -149,7 +165,8 @@ const Oscar_STATIC = [
     "year": 1944,
     "tmdbID": 25199,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/jxlqGfgCG8sNjBhsLd3Kd3PS5Rl.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/jxlqGfgCG8sNjBhsLd3Kd3PS5Rl.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Lost Weekend",
@@ -157,7 +174,8 @@ const Oscar_STATIC = [
     "year": 1945,
     "tmdbID": 10277,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/v6vA3uyPsqWvJPvkVZo7tV5f0Dy.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/v6vA3uyPsqWvJPvkVZo7tV5f0Dy.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Best Years of Our Lives",
@@ -165,7 +183,8 @@ const Oscar_STATIC = [
     "year": 1946,
     "tmdbID": 11434,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/lhJ96zOkkLgIlo7i9cplkjvjG9d.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/lhJ96zOkkLgIlo7i9cplkjvjG9d.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Gentleman's Agreement",
@@ -173,7 +192,8 @@ const Oscar_STATIC = [
     "year": 1947,
     "tmdbID": 2295,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/65uXOKkLCxLxK6Y8NX0ghG2A0fk.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/65uXOKkLCxLxK6Y8NX0ghG2A0fk.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Hamlet",
@@ -181,7 +201,8 @@ const Oscar_STATIC = [
     "year": 1948,
     "tmdbID": 457,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/uxdQmLUlDfL9MjNQFC5RGiuzr5y.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/uxdQmLUlDfL9MjNQFC5RGiuzr5y.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "All the King's Men",
@@ -189,7 +210,8 @@ const Oscar_STATIC = [
     "year": 1949,
     "tmdbID": 20083,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/2lKnSOXZejwrHUQG4x9TScOiAXV.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/2lKnSOXZejwrHUQG4x9TScOiAXV.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "All About Eve",
@@ -197,7 +219,8 @@ const Oscar_STATIC = [
     "year": 1950,
     "tmdbID": 478,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/s3W6lCJwoZoS9fPe0kYp8cDsPrT.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/s3W6lCJwoZoS9fPe0kYp8cDsPrT.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "An American in Paris",
@@ -205,7 +228,8 @@ const Oscar_STATIC = [
     "year": 1951,
     "tmdbID": 12944,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/c3e8XvquQtbhMZTqjGp0XtZw2Q9.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/c3e8XvquQtbhMZTqjGp0XtZw2Q9.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Greatest Show on Earth",
@@ -213,7 +237,8 @@ const Oscar_STATIC = [
     "year": 1952,
     "tmdbID": 14892,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/6dEzEE54uy8u0uqRWnqaZ5oLPSQ.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/6dEzEE54uy8u0uqRWnqaZ5oLPSQ.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "From Here to Eternity",
@@ -221,7 +246,8 @@ const Oscar_STATIC = [
     "year": 1953,
     "tmdbID": 14975,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/dnYLoDYhsO7yQWiWquy6t2mliEO.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/dnYLoDYhsO7yQWiWquy6t2mliEO.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "On the Waterfront",
@@ -237,7 +263,8 @@ const Oscar_STATIC = [
     "year": 1955,
     "tmdbID": 3010,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/iFM1MdbNKciPlo30x6WtDH59GJq.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/iFM1MdbNKciPlo30x6WtDH59GJq.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Around the World in 80 Days",
@@ -245,7 +272,8 @@ const Oscar_STATIC = [
     "year": 1956,
     "tmdbID": 516,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/7VwmX7pZVFDH9uNUXkOZ2i04nsD.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/7VwmX7pZVFDH9uNUXkOZ2i04nsD.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Bridge on the River Kwai",
@@ -253,7 +281,8 @@ const Oscar_STATIC = [
     "year": 1957,
     "tmdbID": 464,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/7vpqHncYYOwMLKnOmjLqdxOLxMJ.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/7vpqHncYYOwMLKnOmjLqdxOLxMJ.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Gigi",
@@ -261,7 +290,8 @@ const Oscar_STATIC = [
     "year": 1958,
     "tmdbID": 455,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/v8cWkiJo4Ef6YoHPQh22vj2e4WL.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/v8cWkiJo4Ef6YoHPQh22vj2e4WL.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Ben-Hur",
@@ -269,7 +299,8 @@ const Oscar_STATIC = [
     "year": 1959,
     "tmdbID": 162,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/3kBaZWSNHTSoiEdF9kxwq7kRyGq.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/3kBaZWSNHTSoiEdF9kxwq7kRyGq.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Apartment",
@@ -277,7 +308,8 @@ const Oscar_STATIC = [
     "year": 1960,
     "tmdbID": 1935,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/dvXjc7fp1MP0JHloRwwU76Qy4Op.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/dvXjc7fp1MP0JHloRwwU76Qy4Op.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "West Side Story",
@@ -285,7 +317,8 @@ const Oscar_STATIC = [
     "year": 1961,
     "tmdbID": 245,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/6Jk3k7gX48IlwOogfdgcyuGRMq9.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/6Jk3k7gX48IlwOogfdgcyuGRMq9.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Lawrence of Arabia",
@@ -293,7 +326,8 @@ const Oscar_STATIC = [
     "year": 1962,
     "tmdbID": 108,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/vK2URX4XxAT6cQKCY36xz1EsCki.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/vK2URX4XxAT6cQKCY36xz1EsCki.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Tom Jones",
@@ -301,7 +335,8 @@ const Oscar_STATIC = [
     "year": 1963,
     "tmdbID": 23653,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/aRYsWpyb6Dv5v4MqWtPRt7ZClFr.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/aRYsWpyb6Dv5v4MqWtPRt7ZClFr.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "My Fair Lady",
@@ -309,7 +344,8 @@ const Oscar_STATIC = [
     "year": 1964,
     "tmdbID": 426,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/78e7hL7ZaZ9Xb4mn0l2vhyQe4uj.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/78e7hL7ZaZ9Xb4mn0l2vhyQe4uj.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Sound of Music",
@@ -317,7 +353,8 @@ const Oscar_STATIC = [
     "year": 1965,
     "tmdbID": 240,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/fdi7BdGmD94Vx5nLoS94G9i38pT.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/fdi7BdGmD94Vx5nLoS94G9i38pT.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "A Man for All Seasons",
@@ -325,7 +362,8 @@ const Oscar_STATIC = [
     "year": 1966,
     "tmdbID": 25094,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/4EWJe0V1Um2QhcvQG9CTs0t3f1b.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/4EWJe0V1Um2QhcvQG9CTs0t3f1b.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "In the Heat of the Night",
@@ -333,7 +371,8 @@ const Oscar_STATIC = [
     "year": 1967,
     "tmdbID": 815,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/3fOVrhMOoVLFUd5ohOj3xpiJxEj.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/3fOVrhMOoVLFUd5ohOj3xpiJxEj.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Oliver!",
@@ -341,7 +380,8 @@ const Oscar_STATIC = [
     "year": 1968,
     "tmdbID": 421,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/qEDQ5tCjFlZrQOibzk5OBN9PeLL.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/qEDQ5tCjFlZrQOibzk5OBN9PeLL.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Midnight Cowboy",
@@ -349,7 +389,8 @@ const Oscar_STATIC = [
     "year": 1969,
     "tmdbID": 591,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/jPqWAnVJjE38KEB4SyIvNi7PBDz.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/jPqWAnVJjE38KEB4SyIvNi7PBDz.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Patton",
@@ -357,7 +398,8 @@ const Oscar_STATIC = [
     "year": 1970,
     "tmdbID": 1562,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/lW1YVKZSWzIhyv7dYmNV2rcJTkf.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/lW1YVKZSWzIhyv7dYmNV2rcJTkf.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The French Connection",
@@ -365,7 +407,8 @@ const Oscar_STATIC = [
     "year": 1971,
     "tmdbID": 433,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/3X0Q5gPT6JPN3vKuFngn7HWujQU.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/3X0Q5gPT6JPN3vKuFngn7HWujQU.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Godfather",
@@ -373,7 +416,8 @@ const Oscar_STATIC = [
     "year": 1972,
     "tmdbID": 238,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Sting",
@@ -381,7 +425,8 @@ const Oscar_STATIC = [
     "year": 1973,
     "tmdbID": 621,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/h1H9NkAk9jo0nhVbkCrzqPC6Ejz.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/h1H9NkAk9jo0nhVbkCrzqPC6Ejz.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Godfather Part II",
@@ -389,7 +434,8 @@ const Oscar_STATIC = [
     "year": 1974,
     "tmdbID": 240,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/amvmeQWheahG3StKwIE1f7jRnkZ.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/amvmeQWheahG3StKwIE1f7jRnkZ.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "One Flew Over the Cuckoo's Nest",
@@ -397,7 +443,8 @@ const Oscar_STATIC = [
     "year": 1975,
     "tmdbID": 113,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/3jcbDmRFiQ83drXNOvRDeKHxS0C.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/3jcbDmRFiQ83drXNOvRDeKHxS0C.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Rocky",
@@ -405,7 +452,8 @@ const Oscar_STATIC = [
     "year": 1976,
     "tmdbID": 360,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/6xKCYgH16UzM77sZx6Tp75j8eyF.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/6xKCYgH16UzM77sZx6Tp75j8eyF.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Annie Hall",
@@ -413,7 +461,8 @@ const Oscar_STATIC = [
     "year": 1977,
     "tmdbID": 162,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/fF6i0e0ZtC2GRN34U5vQjHkw2Ct.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/fF6i0e0ZtC2GRN34U5vQjHkw2Ct.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Deer Hunter",
@@ -421,7 +470,8 @@ const Oscar_STATIC = [
     "year": 1978,
     "tmdbID": 668,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/b6cKfQKvPncR2QoZiWwmLE2pBpb.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/b6cKfQKvPncR2QoZiWwmLE2pBpb.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Kramer vs. Kramer",
@@ -429,7 +479,8 @@ const Oscar_STATIC = [
     "year": 1979,
     "tmdbID": 10842,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/eGH4rwZVPBknWBeMYdFk2My6exA.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/eGH4rwZVPBknWBeMYdFk2My6exA.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Ordinary People",
@@ -437,7 +488,8 @@ const Oscar_STATIC = [
     "year": 1980,
     "tmdbID": 436,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/e22T0VtHeYDwB3Ap2HX3NeomvIq.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/e22T0VtHeYDwB3Ap2HX3NeomvIq.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Chariots of Fire",
@@ -445,7 +497,8 @@ const Oscar_STATIC = [
     "year": 1981,
     "tmdbID": 346,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/qJ3HvyjvR6Md8HYayk7N9arue90.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/qJ3HvyjvR6Md8HYayk7N9arue90.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Gandhi",
@@ -453,7 +506,8 @@ const Oscar_STATIC = [
     "year": 1982,
     "tmdbID": 282,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/xv8ptFIFX5TxYrkj2YwmUi6z4dE.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/xv8ptFIFX5TxYrkj2YwmUi6z4dE.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Terms of Endearment",
@@ -461,7 +515,8 @@ const Oscar_STATIC = [
     "year": 1983,
     "tmdbID": 11323,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/jdx3uVJ5TXm8YNQdCaPcdqXLxUa.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/jdx3uVJ5TXm8YNQdCaPcdqXLxUa.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Amadeus",
@@ -469,7 +524,8 @@ const Oscar_STATIC = [
     "year": 1984,
     "tmdbID": 1113,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/gAODCGlrSwzq0vgc7pFhzppqcnA.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/gAODCGlrSwzq0vgc7pFhzppqcnA.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Out of Africa",
@@ -477,7 +533,8 @@ const Oscar_STATIC = [
     "year": 1985,
     "tmdbID": 168,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/4D04HEZ3McvdbR0IUHo7P2mcX72.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/4D04HEZ3McvdbR0IUHo7P2mcX72.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Platoon",
@@ -485,7 +542,8 @@ const Oscar_STATIC = [
     "year": 1986,
     "tmdbID": 908,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/fn0F5LO6HllhWlyX4oZa07Gu2HE.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/fn0F5LO6HllhWlyX4oZa07Gu2HE.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Last Emperor",
@@ -493,7 +551,8 @@ const Oscar_STATIC = [
     "year": 1987,
     "tmdbID": 292,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/2y8CNcfh8DXVp5Cn0o0i6s0FoZm.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/2y8CNcfh8DXVp5Cn0o0i6s0FoZm.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Rain Man",
@@ -501,7 +560,8 @@ const Oscar_STATIC = [
     "year": 1988,
     "tmdbID": 202,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/8UikIYSb83F5tDFRoARbGht3V4p.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/8UikIYSb83F5tDFRoARbGht3V4p.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Driving Miss Daisy",
@@ -509,7 +569,8 @@ const Oscar_STATIC = [
     "year": 1989,
     "tmdbID": 462,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/vj6sQFEjr3dGcfpqBY5C5z9WRry.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/vj6sQFEjr3dGcfpqBY5C5z9WRry.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Dances with Wolves",
@@ -517,7 +578,8 @@ const Oscar_STATIC = [
     "year": 1990,
     "tmdbID": 123,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/l57kqz7PjKZrsYNpJ4MNhP03evL.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/l57kqz7PjKZrsYNpJ4MNhP03evL.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Silence of the Lambs",
@@ -525,7 +587,8 @@ const Oscar_STATIC = [
     "year": 1991,
     "tmdbID": 274,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/poPJzL5Kc2Xlkgrm6tZLDG9x4rr.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/poPJzL5Kc2Xlkgrm6tZLDG9x4rr.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Unforgiven",
@@ -533,7 +596,8 @@ const Oscar_STATIC = [
     "year": 1992,
     "tmdbID": 571,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/t3pBGc4XPzNOMnOiI6OpMGoWdrG.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/t3pBGc4XPzNOMnOiI6OpMGoWdrG.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Schindler's List",
@@ -541,7 +605,8 @@ const Oscar_STATIC = [
     "year": 1993,
     "tmdbID": 424,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/c8Ass7acuOe4za6DhSattE359gr.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/c8Ass7acuOe4za6DhSattE359gr.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Forrest Gump",
@@ -549,7 +614,8 @@ const Oscar_STATIC = [
     "year": 1994,
     "tmdbID": 13,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/saHP97rTPS5eLmrLQEcANmKrsFl.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Braveheart",
@@ -557,7 +623,8 @@ const Oscar_STATIC = [
     "year": 1995,
     "tmdbID": 424,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/3jRbDxqYjFpB6ipfR1poU23asV9.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/3jRbDxqYjFpB6ipfR1poU23asV9.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The English Patient",
@@ -565,7 +632,8 @@ const Oscar_STATIC = [
     "year": 1996,
     "tmdbID": 345,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/AnfiM8k9J78Yu9Q7x6bu6KW38Bq.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/AnfiM8k9J78Yu9Q7x6bu6KW38Bq.jpg",
+    "category": "最佳影片"
   },
   {
     "title": "Titanic",
@@ -573,7 +641,8 @@ const Oscar_STATIC = [
     "year": 1997,
     "tmdbID": 597,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/kHXEpyfl6zqn8a6YuozZUujufXf.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/kHXEpyfl6zqn8a6YuozZUujufXf.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Shakespeare in Love",
@@ -581,7 +650,8 @@ const Oscar_STATIC = [
     "year": 1998,
     "tmdbID": 203,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/tUjWmEKnMMxQ6a8pLw6eWErVjHH.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/tUjWmEKnMMxQ6a8pLw6eWErVjHH.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "American Beauty",
@@ -589,7 +659,8 @@ const Oscar_STATIC = [
     "year": 1999,
     "tmdbID": 19995,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/6E9Z9b3rQ91A5zjF7Bqf9kYTwjN.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/6E9Z9b3rQ91A5zjF7Bqf9kYTwjN.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Gladiator",
@@ -597,7 +668,8 @@ const Oscar_STATIC = [
     "year": 2000,
     "tmdbID": 98,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/ty8TGRuvJLPUmAR1H1nRIsgwvim.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/ty8TGRuvJLPUmAR1H1nRIsgwvim.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "A Beautiful Mind",
@@ -605,7 +677,8 @@ const Oscar_STATIC = [
     "year": 2001,
     "tmdbID": 453,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/3zkI9xmHJ3B7HxIoZi3jVhqP22R.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/3zkI9xmHJ3B7HxIoZi3jVhqP22R.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Chicago",
@@ -613,7 +686,8 @@ const Oscar_STATIC = [
     "year": 2002,
     "tmdbID": 529,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/6kfxD7jhCxqcrjI6GgxDgV4cDCE.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/6kfxD7jhCxqcrjI6GgxDgV4cDCE.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Lord of the Rings: The Return of the King",
@@ -621,7 +695,8 @@ const Oscar_STATIC = [
     "year": 2003,
     "tmdbID": 122,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Million Dollar Baby",
@@ -629,7 +704,8 @@ const Oscar_STATIC = [
     "year": 2004,
     "tmdbID": 12162,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/xHkQVk0dX3kOhAANnX6mu7JQ6Cr.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/xHkQVk0dX3kOhAANnX6mu7JQ6Cr.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Crash",
@@ -637,7 +713,8 @@ const Oscar_STATIC = [
     "year": 2005,
     "tmdbID": 9167,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/bm55Jg8bDwOiXKlj2PYzGUx0wFo.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/bm55Jg8bDwOiXKlj2PYzGUx0wFo.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Departed",
@@ -645,7 +722,8 @@ const Oscar_STATIC = [
     "year": 2006,
     "tmdbID": 1422,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/iW3c5fGzYFvli7c6HjGZfGqCc1M.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/iW3c5fGzYFvli7c6HjGZfGqCc1M.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "No Country for Old Men",
@@ -653,7 +731,8 @@ const Oscar_STATIC = [
     "year": 2007,
     "tmdbID": 6977,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/6d5XOczc226jECq0LIX0siKtgHR.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/6d5XOczc226jECq0LIX0siKtgHR.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Slumdog Millionaire",
@@ -661,7 +740,8 @@ const Oscar_STATIC = [
     "year": 2008,
     "tmdbID": 12405,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/ai5MSWDhjA6oJ60r3ISGkHpbFEX.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/ai5MSWDhjA6oJ60r3ISGkHpbFEX.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Hurt Locker",
@@ -669,7 +749,8 @@ const Oscar_STATIC = [
     "year": 2009,
     "tmdbID": 12162,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/dV4LhNnNxZkL3RQfuLhZ9oQWxBE.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/dV4LhNnNxZkL3RQfuLhZ9oQWxBE.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The King's Speech",
@@ -693,7 +774,8 @@ const Oscar_STATIC = [
     "year": 2012,
     "tmdbID": 68734,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/74C2mmNnlbz3O7d7CtpqD0P8kGb.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/74C2mmNnlbz3O7d7CtpqD0P8kGb.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "12 Years a Slave",
@@ -701,7 +783,8 @@ const Oscar_STATIC = [
     "year": 2013,
     "tmdbID": 76203,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/njheT0gBfF6wF7K4Ei6nBZ3n8LN.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/njheT0gBfF6wF7K4Ei6nBZ3n8LN.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Birdman",
@@ -709,7 +792,8 @@ const Oscar_STATIC = [
     "year": 2014,
     "tmdbID": 194662,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/75UeuqUGzKHhdAqjwK3MfSjlKOk.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/75UeuqUGzKHhdAqjwK3MfSjlKOk.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Spotlight",
@@ -717,7 +801,8 @@ const Oscar_STATIC = [
     "year": 2015,
     "tmdbID": 314365,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/7wlGk6nlYxvULrgEwtOJBgkRGMn.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/7wlGk6nlYxvULrgEwtOJBgkRGMn.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Moonlight",
@@ -725,7 +810,8 @@ const Oscar_STATIC = [
     "year": 2016,
     "tmdbID": 376867,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/vs9MwlKz8PQogR7t9IHn7fZ6K2m.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/vs9MwlKz8PQogR7t9IHn7fZ6K2m.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Shape of Water",
@@ -733,7 +819,8 @@ const Oscar_STATIC = [
     "year": 2017,
     "tmdbID": 399055,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/k4FHf0WZ7T30YGH36EMD6qCkkzP.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/k4FHf0WZ7T30YGH36EMD6qCkkzP.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Green Book",
@@ -741,7 +828,8 @@ const Oscar_STATIC = [
     "year": 2018,
     "tmdbID": 490132,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/7k4O6YtaA0bhzWOvzjaLk3TMEpA.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/7k4O6YtaA0bhzWOvzjaLk3TMEpA.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Parasite",
@@ -749,7 +837,8 @@ const Oscar_STATIC = [
     "year": 2019,
     "tmdbID": 496243,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Nomadland",
@@ -757,7 +846,8 @@ const Oscar_STATIC = [
     "year": 2020,
     "tmdbID": 615457,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/66GUmWpTHgAjyp4aBSXy63PZTiC.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/66GUmWpTHgAjyp4aBSXy63PZTiC.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "CODA",
@@ -765,7 +855,8 @@ const Oscar_STATIC = [
     "year": 2021,
     "tmdbID": 744276,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/taDgoLlK66kfxqjnjEUx7TS2mfi.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/taDgoLlK66kfxqjnjEUx7TS2mfi.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Everything Everywhere All at Once",
@@ -773,7 +864,8 @@ const Oscar_STATIC = [
     "year": 2022,
     "tmdbID": 545611,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Oppenheimer",
@@ -781,7 +873,8 @@ const Oscar_STATIC = [
     "year": 2023,
     "tmdbID": 872585,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/ptpr0kGAckfQkJeJIt8st5dglvd.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/ptpr0kGAckfQkJeJIt8st5dglvd.jpg",
+    "category": "最佳影片"
     },    
     {
     "title": "Anora",
@@ -789,9 +882,9 @@ const Oscar_STATIC = [
     "year": 2024,
     "tmdbID": 1064213,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/2dNtTwMvoMGtISS2cTrMB8woqUy.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/2dNtTwMvoMGtISS2cTrMB8woqUy.jpg",
+    "category": "最佳影片"
     },
-  // Add remaining entries here without extra braces
 ];
 
 async function getCollections(params = {}) {
