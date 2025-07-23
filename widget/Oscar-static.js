@@ -16,17 +16,18 @@ WidgetMetadata = {
 
 const Oscar_STATIC = [
     {
-    "title": "Wings",
-    "title_zh": "翅膀",
+    "title": "鐵翼雄風",
+    "type": "tmdb",
     "year": 1929,
     "tmdbID": 339847,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/9ZH2TsycO2OcA5YmtftrLDXk5Jj.jpg",
+    "poster_path": "/zT0GvVwLtPS6LaNz4mrb25XHOe3.jpg",
+    "backdropPath": "/ygmmnABINfDXQzNgeZdZmmm884E.jpg",
     "category": "最佳影片"
     },
     {
-    "title": "The Broadway Melody",
-    "title_zh": "百老匯旋律",
+    "title_zh": "百老汇旋律",
+    "type": "tmdb",
     "year": 1930,
     "tmdbID": 60882,
     "mediaType": "movie",
@@ -36,6 +37,7 @@ const Oscar_STATIC = [
     {
     "title": "All Quiet on the Western Front",
     "title_zh": "西線無戰事",
+    "type": "tmdb",
     "year": 1931,
     "tmdbID": 539,
     "mediaType": "movie",
@@ -45,6 +47,7 @@ const Oscar_STATIC = [
     {
     "title": "Cimarron",
     "title_zh": "西部人",
+    "type": "tmdb",
     "year": 1932,
     "tmdbID": 1935,
     "mediaType": "movie",
@@ -54,6 +57,7 @@ const Oscar_STATIC = [
     {
     "title": "Grand Hotel",
     "title_zh": "大飯店",
+    "type": "tmdb",
     "year": 1933,
     "tmdbID": 1838,
     "mediaType": "movie",
@@ -63,6 +67,7 @@ const Oscar_STATIC = [
     {
     "title": "Cavalcade",
     "title_zh": "騎士進行曲",
+    "type": "tmdb",
     "year": 1934,
     "tmdbID": 55542,
     "mediaType": "movie",
@@ -72,6 +77,7 @@ const Oscar_STATIC = [
     {
     "title": "It Happened One Night",
     "title_zh": "一夜風流",
+    "type": "tmdb",
     "year": 1935,
     "tmdbID": 448,
     "mediaType": "movie",
@@ -81,6 +87,7 @@ const Oscar_STATIC = [
     {
     "title": "Mutiny on the Bounty",
     "title_zh": "叛艦喋血記",
+    "type": "tmdb",
     "year": 1936,
     "tmdbID": 11848,
     "mediaType": "movie",
@@ -90,6 +97,7 @@ const Oscar_STATIC = [
     {
     "title": "The Great Ziegfeld",
     "title_zh": "齊格菲傳",
+    "type": "tmdb",
     "year": 1937,
     "tmdbID": 64804,
     "mediaType": "movie",
@@ -99,6 +107,7 @@ const Oscar_STATIC = [
     {
     "title": "The Life of Emile Zola",
     "title_zh": "左拉傳",
+    "type": "tmdb",
     "year": 1938,
     "tmdbID": 10466,
     "mediaType": "movie",
@@ -108,6 +117,7 @@ const Oscar_STATIC = [
     {
     "title": "You Can't Take It with You",
     "title_zh": "春宵伴佳人",
+    "type": "tmdb",
     "year": 1939,
     "tmdbID": 23794,
     "mediaType": "movie",
@@ -117,6 +127,7 @@ const Oscar_STATIC = [
     {
     "title": "Gone with the Wind",
     "title_zh": "亂世佳人",
+    "type": "tmdb",
     "year": 1940,
     "tmdbID": 64,
     "mediaType": "movie",
@@ -126,6 +137,7 @@ const Oscar_STATIC = [
     {
     "title": "Rebecca",
     "title_zh": "蝴蝶夢",
+    "type": "tmdb",
     "year": 1941,
     "tmdbID": 2219,
     "mediaType": "movie",
@@ -135,6 +147,7 @@ const Oscar_STATIC = [
     {
     "title": "How Green Was My Valley",
     "title_zh": "青山翠谷",
+    "type": "tmdb",
     "year": 1942,
     "tmdbID": 348,
     "mediaType": "movie",
@@ -144,6 +157,7 @@ const Oscar_STATIC = [
     {
     "title": "Mrs. Miniver",
     "title_zh": "敏佛太太",
+    "type": "tmdb",
     "year": 1943,
     "tmdbID": 9692,
     "mediaType": "movie",
@@ -153,6 +167,7 @@ const Oscar_STATIC = [
     {
     "title": "Casablanca",
     "title_zh": "北非諜影",
+    "type": "tmdb",
     "year": 1944,
     "tmdbID": 289,
     "mediaType": "movie",
@@ -162,6 +177,7 @@ const Oscar_STATIC = [
     {
     "title": "Going My Way",
     "title_zh": "我走我路",
+    "type": "tmdb",
     "year": 1945,
     "tmdbID": 25199,
     "mediaType": "movie",
@@ -171,6 +187,7 @@ const Oscar_STATIC = [
     {
     "title": "The Lost Weekend",
     "title_zh": "失去的週末",
+    "type": "tmdb",
     "year": 1946,
     "tmdbID": 10277,
     "mediaType": "movie",
@@ -180,6 +197,7 @@ const Oscar_STATIC = [
     {
     "title": "The Best Years of Our Lives",
     "title_zh": "黃金時代",
+    "type": "tmdb",
     "year": 1947,
     "tmdbID": 11434,
     "mediaType": "movie",
@@ -189,6 +207,7 @@ const Oscar_STATIC = [
     {
     "title": "Gentleman's Agreement",
     "title_zh": "君子協定",
+    "type": "tmdb",
     "year": 1948,
     "tmdbID": 2295,
     "mediaType": "movie",
@@ -198,6 +217,7 @@ const Oscar_STATIC = [
     {
     "title": "Hamlet",
     "title_zh": "哈姆雷特",
+    "type": "tmdb",
     "year": 1949,
     "tmdbID": 457,
     "mediaType": "movie",
@@ -207,6 +227,7 @@ const Oscar_STATIC = [
     {
     "title": "All the King's Men",
     "title_zh": "國王的密使",
+    "type": "tmdb",
     "year": 1950,
     "tmdbID": 20083,
     "mediaType": "movie",
@@ -216,6 +237,7 @@ const Oscar_STATIC = [
     {
     "title": "All About Eve",
     "title_zh": "彗星美人",
+    "type": "tmdb",
     "year": 1951,
     "tmdbID": 478,
     "mediaType": "movie",
@@ -225,6 +247,7 @@ const Oscar_STATIC = [
     {
     "title": "An American in Paris",
     "title_zh": "花都舞影",
+    "type": "tmdb",
     "year": 1952,
     "tmdbID": 12944,
     "mediaType": "movie",
@@ -234,6 +257,7 @@ const Oscar_STATIC = [
     {
     "title": "The Greatest Show on Earth",
     "title_zh": "地球最偉大的表演",
+    "type": "tmdb",
     "year": 1953,
     "tmdbID": 14892,
     "mediaType": "movie",
@@ -243,6 +267,7 @@ const Oscar_STATIC = [
     {
     "title": "From Here to Eternity",
     "title_zh": "亂世忠魂",
+    "type": "tmdb",
     "year": 1954,
     "tmdbID": 14975,
     "mediaType": "movie",
@@ -252,6 +277,7 @@ const Oscar_STATIC = [
     {
     "title": "On the Waterfront",
     "title_zh": "碼頭風雲",
+    "type": "tmdb",
     "year": 1955,
     "tmdbID": 10074,
     "mediaType": "movie",
@@ -261,6 +287,7 @@ const Oscar_STATIC = [
     {
     "title": "Marty",
     "title_zh": "金身美人",
+    "type": "tmdb",
     "year": 1956,
     "tmdbID": 3010,
     "mediaType": "movie",
@@ -270,6 +297,7 @@ const Oscar_STATIC = [
     {
     "title": "Around the World in 80 Days",
     "title_zh": "八十天環遊世界",
+    "type": "tmdb",
     "year": 1957,
     "tmdbID": 516,
     "mediaType": "movie",
@@ -279,6 +307,7 @@ const Oscar_STATIC = [
     {
     "title": "The Bridge on the River Kwai",
     "title_zh": "桂河大橋",
+    "type": "tmdb",
     "year": 1958,
     "tmdbID": 464,
     "mediaType": "movie",
@@ -288,6 +317,7 @@ const Oscar_STATIC = [
     {
     "title": "Gigi",
     "title_zh": "吉姬",
+    "type": "tmdb",
     "year": 1959,
     "tmdbID": 455,
     "mediaType": "movie",
@@ -297,6 +327,7 @@ const Oscar_STATIC = [
     {
     "title": "Ben-Hur",
     "title_zh": "賓漢",
+    "type": "tmdb",
     "year": 1960,
     "tmdbID": 162,
     "mediaType": "movie",
@@ -306,6 +337,7 @@ const Oscar_STATIC = [
     {
     "title": "The Apartment",
     "title_zh": "公寓春光",
+    "type": "tmdb",
     "year": 1961,
     "tmdbID": 1935,
     "mediaType": "movie",
@@ -315,6 +347,7 @@ const Oscar_STATIC = [
     {
     "title": "West Side Story",
     "title_zh": "西城故事",
+    "type": "tmdb",
     "year": 1962,
     "tmdbID": 245,
     "mediaType": "movie",
@@ -324,6 +357,7 @@ const Oscar_STATIC = [
     {
     "title": "Lawrence of Arabia",
     "title_zh": "阿拉伯的勞倫斯",
+    "type": "tmdb",
     "year": 1963,
     "tmdbID": 108,
     "mediaType": "movie",
@@ -333,6 +367,7 @@ const Oscar_STATIC = [
     {
     "title": "Tom Jones",
     "title_zh": "風流奇男子",
+    "type": "tmdb",
     "year": 1964,
     "tmdbID": 23653,
     "mediaType": "movie",
@@ -342,6 +377,7 @@ const Oscar_STATIC = [
     {
     "title": "My Fair Lady",
     "title_zh": "窈窕淑女",
+    "type": "tmdb",
     "year": 1965,
     "tmdbID": 426,
     "mediaType": "movie",
@@ -351,6 +387,7 @@ const Oscar_STATIC = [
     {
     "title": "The Sound of Music",
     "title_zh": "真善美",
+    "type": "tmdb",
     "year": 1966,
     "tmdbID": 240,
     "mediaType": "movie",
@@ -360,6 +397,7 @@ const Oscar_STATIC = [
     {
     "title": "A Man for All Seasons",
     "title_zh": "良相佐國",
+    "type": "tmdb",
     "year": 1967,
     "tmdbID": 25094,
     "mediaType": "movie",
@@ -369,6 +407,7 @@ const Oscar_STATIC = [
     {
     "title": "In the Heat of the Night",
     "title_zh": "炎夜風暴",
+    "type": "tmdb",
     "year": 1968,
     "tmdbID": 815,
     "mediaType": "movie",
@@ -378,6 +417,7 @@ const Oscar_STATIC = [
     {
     "title": "Oliver!",
     "title_zh": "孤雛淚",
+    "type": "tmdb",
     "year": 1969,
     "tmdbID": 421,
     "mediaType": "movie",
@@ -387,6 +427,7 @@ const Oscar_STATIC = [
     {
     "title": "Midnight Cowboy",
     "title_zh": "午夜牛郎",
+    "type": "tmdb",
     "year": 1970,
     "tmdbID": 591,
     "mediaType": "movie",
@@ -396,6 +437,7 @@ const Oscar_STATIC = [
     {
     "title": "Patton",
     "title_zh": "巴頓將軍",
+    "type": "tmdb",
     "year": 1971,
     "tmdbID": 1562,
     "mediaType": "movie",
@@ -405,6 +447,7 @@ const Oscar_STATIC = [
     {
     "title": "The French Connection",
     "title_zh": "霹靂神探",
+    "type": "tmdb",
     "year": 1972,
     "tmdbID": 433,
     "mediaType": "movie",
@@ -414,6 +457,7 @@ const Oscar_STATIC = [
     {
     "title": "The Godfather",
     "title_zh": "教父",
+    "type": "tmdb",
     "year": 1973,
     "tmdbID": 238,
     "mediaType": "movie",
@@ -423,6 +467,7 @@ const Oscar_STATIC = [
     {
     "title": "The Sting",
     "title_zh": "刺激",
+    "type": "tmdb",
     "year": 1974,
     "tmdbID": 621,
     "mediaType": "movie",
@@ -432,6 +477,7 @@ const Oscar_STATIC = [
     {
     "title": "The Godfather Part II",
     "title_zh": "教父續集",
+    "type": "tmdb",
     "year": 1975,
     "tmdbID": 240,
     "mediaType": "movie",
@@ -441,6 +487,7 @@ const Oscar_STATIC = [
     {
     "title": "One Flew Over the Cuckoo's Nest",
     "title_zh": "飛越杜鵑窩",
+    "type": "tmdb",
     "year": 1976,
     "tmdbID": 113,
     "mediaType": "movie",
@@ -450,6 +497,7 @@ const Oscar_STATIC = [
     {
     "title": "Rocky",
     "title_zh": "洛基",
+    "type": "tmdb",
     "year": 1977,
     "tmdbID": 360,
     "mediaType": "movie",
@@ -459,6 +507,7 @@ const Oscar_STATIC = [
     {
     "title": "Annie Hall",
     "title_zh": "安妮霍爾",
+    "type": "tmdb",
     "year": 1978,
     "tmdbID": 162,
     "mediaType": "movie",
@@ -468,6 +517,7 @@ const Oscar_STATIC = [
     {
     "title": "The Deer Hunter",
     "title_zh": "越戰獵鹿人",
+    "type": "tmdb",
     "year": 1979,
     "tmdbID": 668,
     "mediaType": "movie",
@@ -477,6 +527,7 @@ const Oscar_STATIC = [
     {
     "title": "Kramer vs. Kramer",
     "title_zh": "克拉瑪對克拉瑪",
+    "type": "tmdb",
     "year": 1980,
     "tmdbID": 10842,
     "mediaType": "movie",
@@ -486,6 +537,7 @@ const Oscar_STATIC = [
     {
     "title": "Ordinary People",
     "title_zh": "凡夫俗子",
+    "type": "tmdb",
     "year": 1981,
     "tmdbID": 436,
     "mediaType": "movie",
@@ -495,6 +547,7 @@ const Oscar_STATIC = [
     {
     "title": "Chariots of Fire",
     "title_zh": "烈火戰車",
+    "type": "tmdb",
     "year": 1982,
     "tmdbID": 346,
     "mediaType": "movie",
@@ -504,6 +557,7 @@ const Oscar_STATIC = [
     {
     "title": "Gandhi",
     "title_zh": "甘地傳",
+    "type": "tmdb",
     "year": 1983,
     "tmdbID": 282,
     "mediaType": "movie",
@@ -513,6 +567,7 @@ const Oscar_STATIC = [
     {
     "title": "Terms of Endearment",
     "title_zh": "親情難捨",
+    "type": "tmdb",
     "year": 1984,
     "tmdbID": 11323,
     "mediaType": "movie",
@@ -522,6 +577,7 @@ const Oscar_STATIC = [
     {
     "title": "Amadeus",
     "title_zh": "阿瑪迪斯",
+    "type": "tmdb",
     "year": 1985,
     "tmdbID": 1113,
     "mediaType": "movie",
@@ -531,6 +587,7 @@ const Oscar_STATIC = [
     {
     "title": "Out of Africa",
     "title_zh": "走出非洲",
+    "type": "tmdb",
     "year": 1986,
     "tmdbID": 168,
     "mediaType": "movie",
@@ -540,6 +597,7 @@ const Oscar_STATIC = [
     {
     "title": "Platoon",
     "title_zh": "前進高棉",
+    "type": "tmdb",
     "year": 1987,
     "tmdbID": 908,
     "mediaType": "movie",
@@ -549,6 +607,7 @@ const Oscar_STATIC = [
     {
     "title": "The Last Emperor",
     "title_zh": "末代皇帝",
+    "type": "tmdb",
     "year": 1988,
     "tmdbID": 292,
     "mediaType": "movie",
@@ -558,6 +617,7 @@ const Oscar_STATIC = [
     {
     "title": "Rain Man",
     "title_zh": "雨人",
+    "type": "tmdb",
     "year": 1989,
     "tmdbID": 202,
     "mediaType": "movie",
@@ -567,6 +627,7 @@ const Oscar_STATIC = [
     {
     "title": "Driving Miss Daisy",
     "title_zh": "為黛茜小姐開車",
+    "type": "tmdb",
     "year": 1990,
     "tmdbID": 462,
     "mediaType": "movie",
@@ -576,6 +637,7 @@ const Oscar_STATIC = [
     {
     "title": "Dances with Wolves",
     "title_zh": "與狼共舞",
+    "type": "tmdb",
     "year": 1991,
     "tmdbID": 123,
     "mediaType": "movie",
@@ -585,6 +647,7 @@ const Oscar_STATIC = [
     {
     "title": "The Silence of the Lambs",
     "title_zh": "沉默的羔羊",
+    "type": "tmdb",
     "year": 1992,
     "tmdbID": 274,
     "mediaType": "movie",
@@ -594,6 +657,7 @@ const Oscar_STATIC = [
     {
     "title": "Unforgiven",
     "title_zh": "殺無赦",
+    "type": "tmdb",
     "year": 1993,
     "tmdbID": 571,
     "mediaType": "movie",
@@ -603,6 +667,7 @@ const Oscar_STATIC = [
     {
     "title": "Schindler's List",
     "title_zh": "辛德勒的名單",
+    "type": "tmdb",
     "year": 1994,
     "tmdbID": 424,
     "mediaType": "movie",
@@ -612,6 +677,7 @@ const Oscar_STATIC = [
     {
     "title": "Forrest Gump",
     "title_zh": "阿甘正傳",
+    "type": "tmdb",
     "year": 1995,
     "tmdbID": 13,
     "mediaType": "movie",
@@ -621,6 +687,7 @@ const Oscar_STATIC = [
     {
     "title": "Braveheart",
     "title_zh": "梅爾吉勃遜之英雄本色",
+    "type": "tmdb",
     "year": 1996,
     "tmdbID": 424,
     "mediaType": "movie",
@@ -630,6 +697,7 @@ const Oscar_STATIC = [
     {
     "title": "The English Patient",
     "title_zh": "英倫情人",
+    "type": "tmdb",
     "year": 1997,
     "tmdbID": 345,
     "mediaType": "movie",
@@ -639,6 +707,7 @@ const Oscar_STATIC = [
   {
     "title": "Titanic",
     "title_zh": "鐵達尼號",
+    "type": "tmdb",
     "year": 1998,
     "tmdbID": 597,
     "mediaType": "movie",
@@ -648,6 +717,7 @@ const Oscar_STATIC = [
     {
     "title": "Shakespeare in Love",
     "title_zh": "莎翁情史",
+    "type": "tmdb",
     "year": 1999,
     "tmdbID": 203,
     "mediaType": "movie",
@@ -657,6 +727,7 @@ const Oscar_STATIC = [
     {
     "title": "American Beauty",
     "title_zh": "美麗境界",
+    "type": "tmdb",
     "year": 2000,
     "tmdbID": 19995,
     "mediaType": "movie",
@@ -666,6 +737,7 @@ const Oscar_STATIC = [
     {
     "title": "Gladiator",
     "title_zh": "神鬼戰士",
+    "type": "tmdb",
     "year": 2001,
     "tmdbID": 98,
     "mediaType": "movie",
@@ -675,6 +747,7 @@ const Oscar_STATIC = [
     {
     "title": "A Beautiful Mind",
     "title_zh": "美麗境界",
+    "type": "tmdb",
     "year": 2002,
     "tmdbID": 453,
     "mediaType": "movie",
@@ -684,6 +757,7 @@ const Oscar_STATIC = [
     {
     "title": "Chicago",
     "title_zh": "芝加哥",
+    "type": "tmdb",
     "year": 2003,
     "tmdbID": 529,
     "mediaType": "movie",
@@ -693,6 +767,7 @@ const Oscar_STATIC = [
     {
     "title": "The Lord of the Rings: The Return of the King",
     "title_zh": "魔戒三部曲：王者再臨",
+    "type": "tmdb",
     "year": 2004,
     "tmdbID": 122,
     "mediaType": "movie",
@@ -702,6 +777,7 @@ const Oscar_STATIC = [
     {
     "title": "Million Dollar Baby",
     "title_zh": "百萬寶貝",
+    "type": "tmdb",
     "year": 2005,
     "tmdbID": 12162,
     "mediaType": "movie",
@@ -711,6 +787,7 @@ const Oscar_STATIC = [
     {
     "title": "Crash",
     "title_zh": "衝擊效應",
+    "type": "tmdb",
     "year": 2006,
     "tmdbID": 9167,
     "mediaType": "movie",
@@ -720,6 +797,7 @@ const Oscar_STATIC = [
     {
     "title": "The Departed",
     "title_zh": "無間道風雲",
+    "type": "tmdb",
     "year": 2007,
     "tmdbID": 1422,
     "mediaType": "movie",
@@ -729,6 +807,7 @@ const Oscar_STATIC = [
     {
     "title": "No Country for Old Men",
     "title_zh": "險路勿近",
+    "type": "tmdb",
     "year": 2008,
     "tmdbID": 6977,
     "mediaType": "movie",
@@ -738,6 +817,7 @@ const Oscar_STATIC = [
     {
     "title": "Slumdog Millionaire",
     "title_zh": "貧民百萬富翁",
+    "type": "tmdb",
     "year": 2009,
     "tmdbID": 12405,
     "mediaType": "movie",
@@ -747,6 +827,7 @@ const Oscar_STATIC = [
     {
     "title": "The Hurt Locker",
     "title_zh": "拆彈部隊",
+    "type": "tmdb",
     "year": 2010,
     "tmdbID": 12162,
     "mediaType": "movie",
@@ -756,6 +837,7 @@ const Oscar_STATIC = [
     {
     "title": "The King's Speech",
     "title_zh": "王者之聲：宣戰時刻",
+    "type": "tmdb",
     "year": 2011,
     "tmdbID": 45269,
     "mediaType": "movie",
@@ -765,6 +847,7 @@ const Oscar_STATIC = [
     {
     "title": "The Artist",
     "title_zh": "大藝術家",
+    "type": "tmdb",
     "year": 2012,
     "tmdbID": 74643,
     "mediaType": "movie",
@@ -774,6 +857,7 @@ const Oscar_STATIC = [
     {
     "title": "Argo",
     "title_zh": "亞果出任務",
+    "type": "tmdb",
     "year": 2013,
     "tmdbID": 68734,
     "mediaType": "movie",
@@ -783,6 +867,7 @@ const Oscar_STATIC = [
     {
     "title": "12 Years a Slave",
     "title_zh": "自由之心",
+    "type": "tmdb",
     "year": 2014,
     "tmdbID": 76203,
     "mediaType": "movie",
@@ -792,6 +877,7 @@ const Oscar_STATIC = [
     {
     "title": "Birdman",
     "title_zh": "鳥人",
+    "type": "tmdb",
     "year": 2015,
     "tmdbID": 194662,
     "mediaType": "movie",
@@ -801,6 +887,7 @@ const Oscar_STATIC = [
     {
     "title": "Spotlight",
     "title_zh": "驚爆焦點",
+    "type": "tmdb",
     "year": 2016,
     "tmdbID": 314365,
     "mediaType": "movie",
@@ -810,6 +897,7 @@ const Oscar_STATIC = [
     {
     "title": "Moonlight",
     "title_zh": "月光下的藍色男孩",
+    "type": "tmdb",
     "year": 2017,
     "tmdbID": 376867,
     "mediaType": "movie",
@@ -819,6 +907,7 @@ const Oscar_STATIC = [
     {
     "title": "The Shape of Water",
     "title_zh": "水底情深",
+    "type": "tmdb",
     "year": 2018,
     "tmdbID": 399055,
     "mediaType": "movie",
@@ -828,6 +917,7 @@ const Oscar_STATIC = [
     {
     "title": "Green Book",
     "title_zh": "幸福綠皮書",
+    "type": "tmdb",
     "year": 2019,
     "tmdbID": 490132,
     "mediaType": "movie",
@@ -837,6 +927,7 @@ const Oscar_STATIC = [
     {
     "title": "Parasite",
     "title_zh": "寄生上流",
+    "type": "tmdb",
     "year": 2020,
     "tmdbID": 496243,
     "mediaType": "movie",
@@ -846,6 +937,7 @@ const Oscar_STATIC = [
     {
     "title": "Nomadland",
     "title_zh": "游牧人生",
+    "type": "tmdb",
     "year": 2021,
     "tmdbID": 615457,
     "mediaType": "movie",
@@ -855,6 +947,7 @@ const Oscar_STATIC = [
     {
     "title": "CODA",
     "title_zh": "樂動心旋律",
+    "type": "tmdb",
     "year": 2022,
     "tmdbID": 744276,
     "mediaType": "movie",
@@ -864,6 +957,7 @@ const Oscar_STATIC = [
     {
     "title": "Everything Everywhere All at Once",
     "title_zh": "媽的多重宇宙",
+    "type": "tmdb",
     "year": 2023,
     "tmdbID": 545611,
     "mediaType": "movie",
@@ -871,21 +965,23 @@ const Oscar_STATIC = [
     "category": "最佳影片"
     },
     {
-    "title": "Oppenheimer",
-    "title_zh": "奧本海默",
+    "title_zh": "奥本海默",
+    "type": "tmdb",
     "year": 2024,
     "tmdbID": 872585,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/ptpr0kGAckfQkJeJIt8st5dglvd.jpg",
+    "backdropPath": "/neeNHeXjMF5fXoCJRsOmkNGC7q.jpg",
+    "poster_path": "/a6v21Mgz2w6OQL7ezkQxGbGA92W.jpg",
     "category": "最佳影片"
     },    
     {
-    "title": "Anora",
-    "title_zh": "奧本海默",
+    "title": "阿诺拉",
+    "type": "tmdb",
     "year": 2025,
     "tmdbID": 1064213,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/2dNtTwMvoMGtISS2cTrMB8woqUy.jpg",
+    "backdropPath": "/kEYWal656zP5Q2Tohm91aw6orlT.jpg",
+    "poster_path": "/2dNtTwMvoMGtISS2cTrMB8woqUy.jpg",
     "category": "最佳影片"
     },
 ];
