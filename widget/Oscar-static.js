@@ -759,7 +759,8 @@ const Oscar_STATIC = [
     "year": 2010,
     "tmdbID": 45269,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/u7Z9TjEC4sTH5jP9C7Xu93lA9zd.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/u7Z9TjEC4sTH5jP9C7Xu93lA9zd.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "The Artist",
@@ -767,7 +768,8 @@ const Oscar_STATIC = [
     "year": 2011,
     "tmdbID": 74643,
     "mediaType": "movie",
-    "poster_path": "https://image.tmdb.org/t/p/w500/ymQZdmBifjv3tZ9WjrwOyL1EipS.jpg"
+    "poster_path": "https://image.tmdb.org/t/p/w500/ymQZdmBifjv3tZ9WjrwOyL1EipS.jpg",
+    "category": "最佳影片"
     },
     {
     "title": "Argo",
