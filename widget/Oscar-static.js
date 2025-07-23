@@ -791,7 +791,9 @@ const Oscar_STATIC = [
     "mediaType": "movie",
     "poster_path": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/2dNtTwMvoMGtISS2cTrMB8woqUy.jpg"
     },
-]
+  // Add remaining entries here without extra braces
+];
+
 async function getCollections(params = {}) {
     return getRandomArray(Oscar_STATIC);
 }
