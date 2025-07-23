@@ -46,8 +46,8 @@ const Oscar_STATIC = [
     "tmdbID": 1935,
     "mediaType": "movie",
     "poster_path": "https://image.tmdb.org/t/p/w500/pXbguK5MtZHfLKglCpDYjc0NsG7.jpg"
-  },
-  {
+    },
+    {
     "title": "Grand Hotel",
     "title_zh": "大飯店",
     "year": 1932,
@@ -78,16 +78,16 @@ const Oscar_STATIC = [
     "tmdbID": 11848,
     "mediaType": "movie",
     "poster_path": "https://image.tmdb.org/t/p/w500/c9S0iBcv67kzqCExKrVJbnA3yHm.jpg"
-  },
-  {
+    },
+    {
     "title": "The Great Ziegfeld",
     "title_zh": "齊格菲傳",
     "year": 1936,
     "tmdbID": 64804,
     "mediaType": "movie",
     "poster_path": "https://image.tmdb.org/t/p/w500/tKZ0s3G3fq1qss3thOQy39ldrsX.jpg"
-  },
-  {
+    },
+    {
     "title": "The Life of Emile Zola",
     "title_zh": "左拉傳",
     "year": 1937,
@@ -406,8 +406,8 @@ const Oscar_STATIC = [
     "tmdbID": 360,
     "mediaType": "movie",
     "poster_path": "https://image.tmdb.org/t/p/w500/6xKCYgH16UzM77sZx6Tp75j8eyF.jpg"
-  },
-  {
+    },
+    {
     "title": "Annie Hall",
     "title_zh": "安妮霍爾",
     "year": 1977,
@@ -430,16 +430,16 @@ const Oscar_STATIC = [
     "tmdbID": 10842,
     "mediaType": "movie",
     "poster_path": "https://image.tmdb.org/t/p/w500/eGH4rwZVPBknWBeMYdFk2My6exA.jpg"
-  },
-  {
+    },
+    {
     "title": "Ordinary People",
     "title_zh": "凡夫俗子",
     "year": 1980,
     "tmdbID": 436,
     "mediaType": "movie",
     "poster_path": "https://image.tmdb.org/t/p/w500/e22T0VtHeYDwB3Ap2HX3NeomvIq.jpg"
-  },
-  {
+    },
+    {
     "title": "Chariots of Fire",
     "title_zh": "烈火戰車",
     "year": 1981,
