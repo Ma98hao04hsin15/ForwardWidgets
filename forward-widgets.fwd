@@ -76,6 +76,15 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/Oscars.js"
     },
     {
+      "id": "staticExample",
+      "title": "静态示例模块",
+      "description": "这是一个静态内容的 ForwardWidget 模块",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/static.js"
+    },
+    {
       "id": "forward.combined.media.lists",
       "title": "影视榜单",
       "description": "聚合豆瓣、TMDB、IMDB和Bangumi的影视动画榜单",
