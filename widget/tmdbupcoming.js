@@ -1,64 +1,87 @@
 var WidgetMetadata = {
-  id: "tmdb_upcoming",
-  title: "TMDb Upcoming",
-  description: "显示 TMDb 上即将上映的电影列表",
-  author: "Your Name",
-  site: "https://www.themoviedb.org/",
-  version: "1.0.0",
+  id: "tmdbUpcoming",
+  title: "七日內即將上映電影",
+  description: "列出未來 7 天內即將上映的電影",
+  author: "Joey",
+  site: "https://example.com",
+  version: "1.0.1",
   requiredVersion: "0.0.1",
   modules: [
     {
-      title: "Upcoming Movies",
-      description: "Fetch upcoming movies from TMDb",
-      requiresWebView: false,
-      functionName: "getUpcoming",
-      sectionMode: false,
-      cacheDuration: 3600,
-      params: [
-        {
-          name: "page",
-          title: "页面",
-          type: "page",
-          description: "页码（1 起）",
-          value: 1
-        }
-      ]
+      title: "未來 7 天上映",
+      functionName: "getUpcomingMovies",
+      params: []
     }
   ]
 };
-async function getUpcoming(params = {}) {
-  const page = params.page || 1;
-  const apiKey = "f558fc131f70f86049a00ee67fd1f422"; // 请替换为真实 key
-  const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=zh-TW&page=${page}`;
 
-  try {
-    const response = await Widget.http.get(url, {
-      headers: {
-        "User-Agent": "Mozilla/5.0",
-        Referer: "https://themoviedb.org"
-      }
-    });
+const API_KEY = "f558fc131f70f86049a00ee67fd1f422";
 
-    const data = response.data;
-    const results = data.results || [];
+function isWithinNext7Days(dateStr) {
+  if (!dateStr) return false;
+  const today = new Date();
+  const releaseDate = new Date(dateStr);
+  const diff = (releaseDate - today) / (1000 * 60 * 60 * 24);
+  return diff >= 0 && diff <= 7;
+}
 
-    return results.map(item => ({
-      id: `movie.${item.id}`,
-      type: "tmdb",
-      title: item.title,
-      posterPath: `https://image.tmdb.org/t/p/w342${item.poster_path}`,
-      backdropPath: `https://image.tmdb.org/t/p/w780${item.backdrop_path}`,
-      releaseDate: item.release_date,
-      mediaType: "movie",
-      rating: item.vote_average.toFixed(1),
-      genreTitle: "", // 可选：需要额外调用
-      duration: 0,
-      durationText: "",
-      link: `https://www.themoviedb.org/movie/${item.id}`,
-      description: item.overview
-    }));
-  } catch (e) {
-    console.error("TMDb 获取失败：", e);
-    throw e;
-  }
+async function getUpcomingMovies() {
+  const lang = "zh-TW";
+  const region = "TW";
+  const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=${lang}&region=${region}`;
+
+  const res = await Widget.http.get(url);
+  const results = res.data?.results || [];
+
+  // 僅保留 7 天內的電影
+  const filtered = results.filter(m => isWithinNext7Days(m.release_date));
+
+  return filtered.map(movie => ({
+    id: `movie_${movie.id}`,
+    type: "link",
+    title: movie.title || "未命名",
+    description: movie.overview || "（無簡介）",
+    releaseDate: movie.release_date || "",
+    posterPath: movie.poster_path
+      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+      : "",
+    backdropPath: movie.backdrop_path
+      ? `https://image.tmdb.org/t/p/w780${movie.backdrop_path}`
+      : "",
+    rating: movie.vote_average || 0,
+    link: `movie_${movie.id}`
+  }));
+}
+
+async function loadDetail(link) {
+  const [type, id] = link.split("_");
+  const lang = "zh-TW";
+
+  const detailUrl = `https://api.themoviedb.org/3/${type}/${id}?api_key=${API_KEY}&language=${lang}`;
+  const videoUrl = `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${API_KEY}&language=${lang}`;
+
+  const [detailRes, videoRes] = await Promise.all([
+    Widget.http.get(detailUrl),
+    Widget.http.get(videoUrl)
+  ]);
+
+  const detail = detailRes.data || {};
+  const videos = videoRes.data?.results || [];
+
+  const trailer = videos.find(v => v.type === "Trailer" && v.site === "YouTube");
+
+  return {
+    title: detail.title || "未命名",
+    description: detail.overview || "無簡介",
+    videoUrl: trailer ? `https://www.youtube.com/watch?v=${trailer.key}` : "",
+    posterPath: detail.poster_path
+      ? `https://image.tmdb.org/t/p/w500${detail.poster_path}`
+      : "",
+    backdropPath: detail.backdrop_path
+      ? `https://image.tmdb.org/t/p/w780${detail.backdrop_path}`
+      : "",
+    rating: detail.vote_average || 0,
+    releaseDate: detail.release_date || "",
+    link: detail.homepage || `https://www.themoviedb.org/${type}/${id}`
+  };
 }
