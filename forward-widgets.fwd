@@ -50,12 +50,12 @@
     },
     {
       "id": "tmdbPopular",
-      "title": "TMDB 熱門電影",
-      "description": "TMDB 熱門電影",
+      "title": "TMDB 熱門電影與劇集",
+      "description": "TMDB 熱門電影與劇集",
       "requiredVersion": "0.0.1",
       "version": "1.0.4",
       "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdbPopularMovie.js"
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdbPopular.js"
     },
   ]
 }
