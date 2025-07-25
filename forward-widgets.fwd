@@ -49,9 +49,9 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBPerson.js"
     },
     {
-      "id": "tmdbPopular",
-      "title": "TMDB 熱門電影與劇集",
-      "description": "TMDB 熱門電影與劇集",
+      "id": "forward.tmdb",
+      "title": "TMDB upcoming",
+      "description": "获取 TMDB 即將上映的榜单数据",
       "requiredVersion": "0.0.1",
       "version": "1.0.4",
       "author": "Joy",
