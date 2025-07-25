@@ -1,75 +1,52 @@
 var WidgetMetadata = {
   id: "tmdbPopular",
   title: "TMDB 熱門電影",
-  description: "TMDB 熱門電影（可篩選類型）",
-  author: "Joey",
-  site: "https://example.com",
-  version: "1.0.1",
+  description: "TMDB 熱門電影",
+  author: "Joey",                  // 作者
+  site: "https://example.com",            // 网站地址
+  version: "1.0.0",                       // Widget 版本
   requiredVersion: "0.0.1",
   modules: [
     {
       title: "熱門電影",
       functionName: "getPopularMovies",
-      params: [
-        {
-          name: "genre",
-          title: "電影類型",
-          type: "select",
-          options: [], // 程式中自動補上
-          default: ""
-        }
-      ]
+      params: [] // 不需要參數
     }
   ]
 };
 
 const API_KEY = "f558fc131f70f86049a00ee67fd1f422";
-const LANG = "zh-TW";
 
-async function getPopularMovies(params = {}) {
-  const genre = params.genre || "";
-  const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=${LANG}&sort_by=popularity.desc${genre ? `&with_genres=${genre}` : ""}`;
+async function getPopularTv() {
+  const lang = "zh-TW";
+  const url = `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=${lang}`;
 
   const res = await Widget.http.get(url);
   const results = res.data?.results || [];
 
-  return results.map(movie => ({
-    id: `movie_${movie.id}`,
+  return results.map(tv => ({
+    id: `tv_${tv.id}`,
     type: "link",
-    title: movie.title || "未命名",
-    description: movie.overview || "（無簡介）",
-    releaseDate: movie.release_date || "",
-    posterPath: movie.poster_path
-      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    title: tv.title || "未命名",
+    description: tv.overview || "（無簡介）",
+    releaseDate: tv.release_date || "",
+    posterPath: tv.poster_path
+      ? `https://image.tmdb.org/t/p/w500${tv.poster_path}`
       : "",
-    backdropPath: movie.backdrop_path
-      ? `https://image.tmdb.org/t/p/w780${movie.backdrop_path}`
+    backdropPath: tv.backdrop_path
+      ? `https://image.tmdb.org/t/p/w780${tv.backdrop_path}`
       : "",
-    rating: movie.vote_average || 0,
-    link: `movie_${movie.id}`
+    rating: tv.vote_average || 0,
+    link: `movie_${tv.id}`
   }));
 }
 
-// genre 下拉選單動態設定
-Widget.onInit = async () => {
-  const genreUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=${LANG}`;
-  const res = await Widget.http.get(genreUrl);
-  const genres = res.data?.genres || [];
-
-  const module = WidgetMetadata.modules[0];
-  const genreParam = module.params.find(p => p.name === "genre");
-  if (genreParam) {
-    genreParam.options = [
-      { title: "全部", value: "" },
-      ...genres.map(g => ({ title: g.name, value: String(g.id) }))
-    ];
-  }
-};
-
 async function loadDetail(link) {
   const [type, id] = link.split("_");
-  const detailUrl = `https://api.themoviedb.org/3/${type}/${id}?api_key=${API_KEY}&language=${LANG}`;
-  const videoUrl = `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${API_KEY}&language=${LANG}`;
+  const lang = "zh-TW";
+
+  const detailUrl = `https://api.themoviedb.org/3/${type}/${id}?api_key=${API_KEY}&language=${lang}`;
+  const videoUrl = `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${API_KEY}&language=${lang}`;
 
   const [detailRes, videoRes] = await Promise.all([
     Widget.http.get(detailUrl),
