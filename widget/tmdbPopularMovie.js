@@ -9,7 +9,7 @@ var WidgetMetadata = {
   modules: [
     {
       title: "熱門電影",
-      functionName: "getPopularMovies",
+      functionName: "getPopularTv",
       params: [] // 不需要參數
     }
   ]
