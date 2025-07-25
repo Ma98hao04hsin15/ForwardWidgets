@@ -31,9 +31,9 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbList.js"
     },
     {
-      "id": "forward.tmdb",
-      "title": "TMDB upcoming",
-      "description": "获取 TMDB 即將上映的榜单数据",
+      "id": "tmdb_upcoming",
+      "title": "TMDb Upcoming",
+      "description": "显示 TMDb 上即将上映的电影列表",
       "requiredVersion": "0.0.1",
       "version": "1.0.4",
       "author": "Joy",
