@@ -4,33 +4,6 @@
   "icon": "https://assets.vvebo.vip/scripts/icon.png",
   "widgets": [
     {
-      "id": "forward.imdb",
-      "title": "IMDb 工具集",
-      "description": "IMDb 榜單與放映日曆工具+時間分類",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.11",
-      "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdbtime.js"
-    },
-    {
-      "id": "forward.tmdb",
-      "title": "TMDB平台筛选模块",
-      "description": "获取 TMDB 平台筛选模块",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.4",
-      "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdbnetwork.js"
-    },
-    {
-      "id": "forward.tmdb",
-      "title": "TMDB upcoming",
-      "description": "获取 TMDB 即將上映的榜单数据",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.4",
-      "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdbupcoming.js"
-    },
-    {
       "id": "forward.combined.media.lists",
       "title": "Forw​​ardWidget影视榜单",
       "description": "基于Forw​​ardWidget架构导入影视模块",
@@ -40,13 +13,13 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/ForwardWidgets.js"
     },
     {
-      "id": "forward.tmdb",
-      "title": "TMDB 趋势",
-      "description": "获取 TMDB 的趋势榜单数据",
+      "id": "forward.imdb",
+      "title": "IMDb 工具集",
+      "description": "IMDb 榜單與放映日曆工具+時間分類",
       "requiredVersion": "0.0.1",
-      "version": "1.0.4",
+      "version": "1.0.11",
       "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBtrending.js"
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/imdbtime.js"
     },
     {
       "id": "ImdbListOnly",
@@ -58,6 +31,24 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbList.js"
     },
     {
+      "id": "forward.tmdb",
+      "title": "TMDB upcoming",
+      "description": "获取 TMDB 即將上映的榜单数据",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.4",
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdbupcoming.js"
+    },
+    {
+      "id": "forward.tmdb",
+      "title": "TMDB 趋势",
+      "description": "获取 TMDB 的趋势榜单数据",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.4",
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBtrending.js"
+    },
+    {
       "id": "person.movie.tmdb",
       "title": "TMDB人物影视作品",
       "description": "获取 TMDB 的人物影视榜单数据",
@@ -65,6 +56,15 @@
       "version": "1.0.4",
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/TMDBPerson.js"
+    },
+    {
+      "id": "tmdbPopular",
+      "title": "TMDB 熱門電影",
+      "description": "TMDB 熱門電影（可篩選類型）",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.4",
+      "author": "Joy",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdbPopularMovie.js"
     },
   ]
 }
