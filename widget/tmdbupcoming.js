@@ -2,7 +2,7 @@ var WidgetMetadata = {
   id: "tmdbUpcoming",
   title: "七日內即將上映電影",
   description: "列出未來 7 天內即將上映的電影",
-  author: "Joey",
+  author: "Joy",
   site: "https://example.com",
   version: "1.0.1",
   requiredVersion: "0.0.1",
