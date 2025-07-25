@@ -31,15 +31,6 @@
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/IMDbList.js"
     },
     {
-      "id": "tmdb_upcoming",
-      "title": "TMDb Upcoming",
-      "description": "显示 TMDb 上即将上映的电影列表",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.4",
-      "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdbupcoming.js"
-    },
-    {
       "id": "forward.tmdb",
       "title": "TMDB 趋势",
       "description": "获取 TMDB 的趋势榜单数据",
@@ -60,7 +51,7 @@
     {
       "id": "tmdbPopular",
       "title": "TMDB 熱門電影",
-      "description": "TMDB 熱門電影（可篩選類型）",
+      "description": "TMDB 熱門電影",
       "requiredVersion": "0.0.1",
       "version": "1.0.4",
       "author": "Joy",
