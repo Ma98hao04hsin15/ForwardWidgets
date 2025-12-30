@@ -8,7 +8,7 @@ var WidgetMetadata = {
     title: "Letterboxd 片單助手",
     description: "解析並顯示 Letterboxd 上的任意公開片單",
     author: "Gemini",
-    version: "1.1.0",
+    version: "0.0.1",
     requiredVersion: "0.0.1",
     detailCacheDuration: 3600,
     modules: [
