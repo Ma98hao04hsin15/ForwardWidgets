@@ -57,5 +57,14 @@
       "author": "Joy",
       "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdbupcoming.js"
     },
+    {
+      "id": "letterboxd_list_viewer",
+      "title": "Letterboxd 片單助手",
+      "description": "解析並顯示 Letterboxd 上的任意公開片單",
+      "requiredVersion": "1.1.0"",
+      "version": "0.0.1",
+      "author": "Gemini",
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/LetterboxdList.js"
+    },
   ]
 }
