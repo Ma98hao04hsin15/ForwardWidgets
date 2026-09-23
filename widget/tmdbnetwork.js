@@ -195,6 +195,14 @@ WidgetMetadata = {
               value: "2",
             },
             {
+              title: "Pixar",
+              value: "3",
+            },
+            {
+              title: "派拉蒙影业",
+              value: "4",
+            },
+            {
               title: "华纳兄弟",
               value: "174",
             },
@@ -211,16 +219,16 @@ WidgetMetadata = {
               value: "33",
             },
             {
-              title: "派拉蒙影业",
-              value: "4",
-            },
-            {
               title: "二十世纪影业",
               value: "25",
             },
             {
               title: "Marvel",
               value: "420",
+            },
+            {
+              title: "Studio Ghibli",
+              value: "10342",
             },
           ]
         },
