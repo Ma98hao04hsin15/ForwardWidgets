@@ -2,7 +2,7 @@
 WidgetMetadata = {
   id: "forward.tmdb.trending-daily",
   title: "TMDB X 單日榜單",
-  version: "1.8.2",
+  version: "1.8.6",
   requiredVersion: "0.0.1",
   description: "TMDB 單日熱門、高分、熱映、即將上映、最近上映、類型、串流平台、電影出品公司、地區劇集及北美日票房榜單。This product uses the TMDB API but is not endorsed or certified by TMDB.",
   author: "Custom ForwardWidget",
@@ -177,7 +177,7 @@ WidgetMetadata = {
       ]
     },
     {
-      id: "companyMovies", title: "電影出品公司", description: "依 TMDB 電影出品公司篩選電影榜單", functionName: "companyMovies",
+      id: "companyMovies", title: "電影出品公司", description: "依 TMDB 電影出品公司篩選單日電影榜單", functionName: "companyMovies",
       cacheDuration: 3600,
       params: [
         { name: "companyId", title: "出品公司", type: "enumeration", value: "2", enumOptions: companyOptions() },
@@ -208,6 +208,37 @@ WidgetMetadata = {
       ]
     },
     {
+      id: "todayTvPremieres", title: "今日即將上映劇集", description: "今天首播的新劇，或今天有播出集數的劇集", functionName: "todayTvPremieres",
+      cacheDuration: 3600,
+      params: [
+        {
+          name: "airType",
+          title: "播出類型",
+          type: "enumeration",
+          value: "premiere",
+          enumOptions: [
+            { title: "新劇首播", value: "premiere" },
+            { title: "今日播出（含續集）", value: "airing" }
+          ]
+        },
+        {
+          name: "regionType",
+          title: "劇集地區",
+          type: "enumeration",
+          value: "all",
+          enumOptions: [
+            { title: "全部", value: "all" },
+            { title: "韓劇", value: "KR" },
+            { title: "歐美劇", value: "US|GB|CA|AU|IE|NZ" },
+            { title: "日劇", value: "JP" },
+            { title: "陸劇", value: "CN" },
+            { title: "台劇", value: "TW" }
+          ]
+        },
+        { name: "language", title: "語言", type: "input", value: "zh-TW" }
+      ]
+    },
+    {
       id: "boxOfficeDaily", title: "北美日票房", description: "Box Office Mojo 單日票房排行", functionName: "loadDaily",
       cacheDuration: 3600,
       params: [
@@ -229,7 +260,7 @@ function chartOptions() {
   return [{ title: "熱門", value: "popular" }, { title: "高分", value: "topRated" }, { title: "今日上映／播出", value: "airing" }, { title: "類型榜單", value: "genre" }];
 }
 function companyChartOptions() {
-  return [{ title: "熱門", value: "popular" }, { title: "高分", value: "topRated" }, { title: "本週上映", value: "airing" }];
+  return [{ title: "熱門", value: "popular" }, { title: "高分", value: "topRated" }, { title: "今日上映", value: "airing" }];
 }
 function genreOptions() {
   return [
@@ -318,7 +349,7 @@ async function nowPlayingWeek(params) { params = params || {}; var type = params
 async function genreWeek(params) { params = params || {}; var genre = String(params.genreId || "28"), type = params.mediaType === "movie" || params.mediaType === "tv" ? params.mediaType : "all", language = String(params.language || "zh-TW"), count = intValue(params.count,20,1,20), all=[]; for(var p=1;p<=5;p++){var d=await trendingData(type,language,p,"day"); all=all.concat(d.results||[]);} var seen={}; all=all.filter(function(x){var k=String(x.media_type)+":"+x.id;if(!x.id||!Array.isArray(x.genre_ids)||(genre!=="all"&&x.genre_ids.indexOf(Number(genre))<0)||seen[k])return false;seen[k]=1;return true;}); all.sort(function(a,b){return Number(b.popularity||0)-Number(a.popularity||0);}); return all.slice(0,count).map(makeItem); }
 async function discover(type, opts) { var path = type === "tv" ? "/discover/tv" : "/discover/movie", q = {api_key:TMDB_API_KEY,language:opts.language,watch_region:opts.region,with_watch_providers:opts.provider,with_watch_monetization_types:"flatrate",page:1,include_adult:false,sort_by:opts.chart === "topRated" ? "vote_average.desc" : "popularity.desc"}; if(opts.chart === "topRated")q["vote_count.gte"]=100;if(opts.chart === "genre"&&opts.genre!=="all")q.with_genres=opts.genre;if(opts.chart === "airing"){var today=localDate(0);if(type === "tv"){q["air_date.gte"]=today;q["air_date.lte"]=today;}else{q["primary_release_date.gte"]=today;q["primary_release_date.lte"]=today;}}return getJSON(TMDB_BASE_URL+path,q); }
 async function streamingWeek(params) { params=params||{};var provider=String(params.providerId||"8"),chart=["popular","topRated","airing","genre"].indexOf(params.chartType)>=0?params.chartType:"popular",type=params.mediaType==="movie"||params.mediaType==="tv"?params.mediaType:"all",opts={provider:provider,chart:chart,genre:String(params.genreId||"all"),region:String(params.region||"TW").toUpperCase(),language:String(params.language||"zh-TW")},count=intValue(params.count,20,1,20),types=type==="all"?["movie","tv"]:[type],out=[];for(var i=0;i<types.length;i++){var d=await discover(types[i],opts);(d.results||[]).forEach(function(x){x.media_type=types[i];out.push(x);});}out.sort(function(a,b){return chart==="topRated"?Number(b.vote_average||0)-Number(a.vote_average||0):Number(b.popularity||0)-Number(a.popularity||0);});return out.slice(0,count).map(makeItem);}
-async function companyMovies(params) { params=params||{};var company=String(params.companyId||"2").replace(/^id:/i,""),chart=params.chartType==="topRated"||params.chartType==="airing"?params.chartType:"popular",language=String(params.language||"zh-TW"),count=intValue(params.count,20,1,20),q={api_key:TMDB_API_KEY,language:language,with_companies:company,page:1,include_adult:false,sort_by:chart==="topRated"?"vote_average.desc":"popularity.desc"};if(chart==="topRated")q["vote_count.gte"]=50;if(chart==="airing"){var r=weekRange();q["primary_release_date.gte"]=r.start;q["primary_release_date.lte"]=r.end;}var d=await getJSON(TMDB_BASE_URL+"/discover/movie",q);return (d.results||[]).slice(0,count).map(function(x){x.media_type="movie";return makeItem(x);});}
+async function companyMovies(params) { params=params||{};var company=String(params.companyId||"2").replace(/^id:/i,""),chart=params.chartType==="topRated"||params.chartType==="airing"?params.chartType:"popular",language=String(params.language||"zh-TW"),count=intValue(params.count,20,1,20),q={api_key:TMDB_API_KEY,language:language,with_companies:company,page:1,include_adult:false,sort_by:chart==="topRated"?"vote_average.desc":"popularity.desc"};if(chart==="topRated")q["vote_count.gte"]=50;if(chart==="airing"){var today=localDate(0);q["primary_release_date.gte"]=today;q["primary_release_date.lte"]=today;}var d=await getJSON(TMDB_BASE_URL+"/discover/movie",q);return (d.results||[]).slice(0,count).map(function(x){x.media_type="movie";return makeItem(x);});}
 async function regionalTvWeek(params) { params=params||{};var group=String(params.regionType||"KR"),language=String(params.language||"zh-TW"),count=intValue(params.count,20,1,20),countries=group.split("|"),all=[];for(var p=1;p<=5;p++){var d=await trendingData("tv",language,p,"day");all=all.concat(d.results||[]);}var seen={};all=all.filter(function(x){var key=String(x.id);if(!x.id||seen[key]||!Array.isArray(x.origin_country)||!countries.some(function(c){return x.origin_country.indexOf(c)>=0;}))return false;seen[key]=1;return true;});all.sort(function(a,b){return Number(b.popularity||0)-Number(a.popularity||0);});return all.slice(0,count).map(function(x){x.media_type="tv";return makeItem(x);});}
 // ---------- 即將上映（對應 Simkl「Upcoming Theater and Digital Premieres」，範圍改為未來 1 天） ----------
 const TZ_OFFSET_HOURS = 8; // 台北時間
@@ -448,6 +479,34 @@ async function mapLimit(items, limit, fn) {
     })
   );
   return out;
+}
+
+// ---------- 今日即將上映劇集 ----------
+async function todayTvPremieres(params) {
+  params = params || {};
+  var airType = params.airType === "airing" ? "airing" : "premiere",
+    group = String(params.regionType || "all"),
+    language = String(params.language || "zh-TW"),
+    today = localDate(0),
+    q = { api_key: TMDB_API_KEY, language: language, include_adult: false, sort_by: "popularity.desc", timezone: "Asia/Taipei" };
+  if (airType === "premiere") { q["first_air_date.gte"] = today; q["first_air_date.lte"] = today; }
+  else { q["air_date.gte"] = today; q["air_date.lte"] = today; }
+  if (group !== "all") q.with_origin_country = group;
+  // 不限數量：抓完所有頁數（最多 50 頁防止過量請求）
+  var maxPages = 50;
+  var all = [], seen = {};
+  for (var p = 1; p <= maxPages; p++) {
+    q.page = p;
+    var d = await getJSON(TMDB_BASE_URL + "/discover/tv", q);
+    (d.results || []).forEach(function (x) { if (x.id && !seen[x.id]) { seen[x.id] = 1; all.push(x); } });
+    if (!d.total_pages || p >= d.total_pages) break;
+  }
+  return all.map(function (x) {
+    x.media_type = "tv";
+    var item = makeItem(x);
+    item.genreTitle = airType === "premiere" ? "首播 " + today.slice(5).replace("-", "/") : "今日播出";
+    return item;
+  });
 }
 
 // ---------- 北美日票房（Box Office Mojo） ----------
