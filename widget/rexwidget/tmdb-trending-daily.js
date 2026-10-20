@@ -2,9 +2,9 @@
 WidgetMetadata = {
   id: "forward.tmdb.trending-daily",
   title: "TMDB X 單日榜單",
-  version: "1.8.6",
+  version: "1.9.1",
   requiredVersion: "0.0.1",
-  description: "TMDB 單日熱門、高分、熱映、即將上映、最近上映、類型、串流平台、電影出品公司、地區劇集及北美日票房榜單。This product uses the TMDB API but is not endorsed or certified by TMDB.",
+  description: "TMDB 單日熱門、飆升榜、Trakt 即時趨勢、高分、熱映、即將上映、最近上映、類型、串流平台、電影出品公司、地區劇集及北美日票房榜單。This product uses the TMDB API but is not endorsed or certified by TMDB.",
   author: "Custom ForwardWidget",
   site: "https://www.themoviedb.org/",
   detailCacheDuration: 3600,
@@ -16,6 +16,24 @@ WidgetMetadata = {
         { name: "mediaType", title: "內容類型", type: "enumeration", value: "all", enumOptions: mediaTypes() },
         { name: "language", title: "語言", type: "input", value: "zh-TW" },
         { name: "page", title: "頁碼", type: "page", value: "1" },
+        { name: "count", title: "顯示數量", type: "count", value: "20" }
+      ]
+    },
+    {
+      id: "risingToday", title: "飆升榜", description: "比較今日與本週熱門排名，列出今天排名衝最快的電影／劇集", functionName: "risingToday",
+      cacheDuration: 3600,
+      params: [
+        { name: "mediaType", title: "內容類型", type: "enumeration", value: "all", enumOptions: mediaTypes() },
+        { name: "language", title: "語言", type: "input", value: "zh-TW" },
+        { name: "count", title: "顯示數量", type: "count", value: "20" }
+      ]
+    },
+    {
+      id: "traktTrending", title: "Trakt 即時趨勢", description: "依 Trakt 上「現在正在看」的人數排序", functionName: "traktTrending",
+      cacheDuration: 900,
+      params: [
+        { name: "mediaType", title: "內容類型", type: "enumeration", value: "all", enumOptions: mediaTypes() },
+        { name: "language", title: "語言", type: "input", value: "zh-TW" },
         { name: "count", title: "顯示數量", type: "count", value: "20" }
       ]
     },
@@ -479,6 +497,86 @@ async function mapLimit(items, limit, fn) {
     })
   );
   return out;
+}
+
+// ---------- 飆升榜（今日 vs 本週排名） ----------
+async function risingToday(params) {
+  params = params || {};
+  var type = params.mediaType === "movie" || params.mediaType === "tv" ? params.mediaType : "all",
+    language = String(params.language || "zh-TW"),
+    count = intValue(params.count, 20, 1, 50),
+    pages = [1, 2, 3, 4, 5];
+  var lists = await Promise.all([
+    mapLimit(pages, 5, function (p) { return trendingData(type, language, p, "day"); }),
+    mapLimit(pages, 5, function (p) { return trendingData(type, language, p, "week"); })
+  ]);
+  var flatten = function (arr) { var out = []; arr.forEach(function (d) { out = out.concat((d && d.results) || []); }); return out; };
+  var keyOf = function (x) { return (x.media_type || type) + ":" + x.id; };
+  var day = flatten(lists[0]), week = flatten(lists[1]);
+  var weekRank = {};
+  week.forEach(function (x, i) { var k = keyOf(x); if (!(k in weekRank)) weekRank[k] = i + 1; });
+  var NOT_IN_WEEK = week.length + 1, seen = {}, rows = [];
+  day.forEach(function (x, i) {
+    var k = keyOf(x);
+    if (!x.id || seen[k]) return;
+    seen[k] = 1;
+    var dRank = i + 1, wRank = weekRank[k], isNew = !wRank;
+    var jump = (wRank || NOT_IN_WEEK) - dRank;
+    if (jump <= 0) return; // 只保留排名上升的
+    rows.push({ x: x, dRank: dRank, wRank: wRank, jump: jump, isNew: isNew });
+  });
+  rows.sort(function (a, b) { return b.jump - a.jump || a.dRank - b.dRank; });
+  return rows.slice(0, count).map(function (r) {
+    if (type !== "all") r.x.media_type = type;
+    var item = makeItem(r.x);
+    item.genreTitle = r.isNew ? "新上榜 #" + r.dRank : "↑" + r.jump + " #" + r.dRank;
+    item.description = (r.isNew ? "今日第 " + r.dRank + " 名（本週前 " + week.length + " 名外新上榜）" : "今日第 " + r.dRank + " 名，本週第 " + r.wRank + " 名，上升 " + r.jump + " 名") + "\n" + (item.description || "");
+    return item;
+  });
+}
+
+// ---------- Trakt 即時趨勢 ----------
+var TRAKT_BASE_URL = "https://api.trakt.tv";
+var TRAKT_CLIENT_ID = "jUkuura2mHCEe3_Jh0NUOTbIAwwowlFy9-xkowcSM6U";
+async function traktGet(path, clientId, query) {
+  var r = await Widget.http.get(TRAKT_BASE_URL + path, {
+    headers: { "Content-Type": "application/json", "trakt-api-version": "2", "trakt-api-key": clientId },
+    params: query
+  });
+  if (!r || r.data === undefined || r.data === null) throw new Error("Trakt 沒有回傳資料，請確認 Client ID 是否正確");
+  var d = typeof r.data === "string" ? JSON.parse(r.data) : r.data;
+  if (!Array.isArray(d)) throw new Error("Trakt API 錯誤：" + (d && (d.error_description || d.error) || "回傳格式不正確"));
+  return d;
+}
+async function traktTrending(params) {
+  params = params || {};
+  var clientId = TRAKT_CLIENT_ID;
+  var type = params.mediaType === "movie" || params.mediaType === "tv" ? params.mediaType : "all",
+    language = String(params.language || "zh-TW"),
+    count = intValue(params.count, 20, 1, 50),
+    types = type === "all" ? ["movie", "tv"] : [type];
+  var rows = [];
+  for (var i = 0; i < types.length; i++) {
+    var t = types[i], list = await traktGet(t === "tv" ? "/shows/trending" : "/movies/trending", clientId, { page: 1, limit: count });
+    list.forEach(function (e) {
+      var obj = t === "tv" ? e.show : e.movie;
+      if (obj && obj.ids && obj.ids.tmdb) rows.push({ type: t, tmdb: obj.ids.tmdb, watchers: Number(e.watchers || 0), title: obj.title, year: obj.year });
+    });
+  }
+  rows.sort(function (a, b) { return b.watchers - a.watchers; });
+  rows = rows.slice(0, count);
+  // 補上 TMDB 中文標題、海報與評分
+  var details = await mapLimit(rows, 8, function (r) {
+    return getJSON(TMDB_BASE_URL + "/" + r.type + "/" + r.tmdb, { api_key: TMDB_API_KEY, language: language });
+  });
+  return rows.map(function (r, idx) {
+    var d = details[idx] || { id: r.tmdb, title: r.title, name: r.title };
+    d.media_type = r.type;
+    var item = makeItem(d);
+    item.genreTitle = r.watchers + " 人正在看";
+    item.description = "Trakt 即時：" + r.watchers + " 人正在看\n" + (item.description || "");
+    return item;
+  });
 }
 
 // ---------- 今日即將上映劇集 ----------
