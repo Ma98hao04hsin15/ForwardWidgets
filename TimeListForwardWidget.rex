@@ -1,5 +1,5 @@
 {
-  "title": "TMDB X 日/月/年榜",
+  "title": "TMDB X 日/周/月榜",
   "description": "A Collection of widgets created by Joy",
   "icon": "https://emby-icon.vercel.app/icons/REX1.png",
   "widgets": [
@@ -10,7 +10,7 @@
       "requiredVersion": "0.0.1",
       "version": "1.8.2",
       "author": "Joy",
-      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/tmdb-trending-daily.js"
+      "url": "https://raw.githubusercontent.com/Ma98hao04hsin15/ForwardWidgets/refs/heads/main/widget/rexwidget/tmdb-trending-daily.js"
     },
   ]
 }
